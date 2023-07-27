@@ -1,0 +1,65 @@
+DIRECTIVES and PSEUDOINTRUCTIONS
+====================================
+
+* ALIGN
+---------
+Align the code to the next multiple value of the parameter. For instance, if
+the current PC in the cide is 9 and you use align 2, the PC is modified to
+become 10 ( the next multiple of 2 after 9 is 10 ). 
+
+   ALIGN 10; Change the PC to next multiplie of 10 
+
+
+* DEFS (DS)
+-----------
+Define space: It sets num bytes in compilation time  with an specified byte or 0 if
+not given given. The command can be either DEFS or DS
+
+   DS 10   ; This will set 10 consecutive bytes with value 0
+   DS 10,0 ; This is the same as before
+   DEFS 10,0x7 ; This sets 10 bytes witgh value 0x07
+   
+
+* DEFB (DB)
+------------
+Define Byte: It sets bytes with the specified values in compilation time.
+The comand can be either DEFB or DB
+
+  DB 10,34,0x34 ; This sets 3 consecutive bytes with the values 10, 34 and 0x34
+  DEFB 0 ; This sets one single byte with value 0, it would be synomyn to DS 1
+  
+* DEFM (DM)
+------------
+Define Message. Sets ASCII values of a given string in compliation time. The
+comand can be either DEFM or DM
+
+  DM "This is a message" ; This will set one byte for each ASCII value or each letter of the message
+    
+  
+
+* ORG
+=======
+Origin. It sets the initial value of the PC. By default the PC is 0, with
+ORG you can define a different starting value. If exists, it must be the
+first code line otherwise will throw an error
+
+	ORG &4000 ; This will set the initial PC in the hex value 0x4000
+
+* LIMIT
+========
+* Controlling the size of the binary ouput. If you want to control
+the size of the output or the start/end you can use the Assembler directives
+ORG and LIMIT and use , perhaps the switch -p. For instance, imagine you
+have in your code
+ ORG &4000 
+ LIMIT &5000
+ ...
+So, when you compile with 
+lxzasm program.asm
+you will get a 4096 bytes file that will contain from the address 4000 up to
+the 5000 ( hexadecimal ).
+
+However, if you want to have a flat file starting always from byte 0 , 
+disregarding the ORG directive, you can use the switch -p. This will create
+a file with 0 until the 4000 address.
+
