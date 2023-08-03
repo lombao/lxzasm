@@ -1,0 +1,9 @@
+		ORG &1000
+		DI
+LABELBIN: 	INCLUDEBIN "blob.bin"
+		DEC BC
+
+LABEL1: 
+	LD A,3
+	XOR A
+	LD DE,LABEL1
