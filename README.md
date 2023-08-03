@@ -9,7 +9,7 @@ Why not. what kind of question is this ?
 
 ## The build requirements are:
 - flex and bison
-- any non-prehistoric glibc will suffice
+- any non-prehistoric glibc & gcc  will suffice
 
 ## How to build ?
 ``` 
@@ -79,6 +79,18 @@ This is a collection of online sources of info I've found about the Z80
 ```
    LD A,00010000b
 ```
+
+
+## Directives and Pseudo instructions
+Please in the folder doc a more detailed description, this is just a list of
+the existent options
+* ALIGN
+* DEFB ( DW )
+* DEFM ( DM )
+* DEFW ( DW )
+* EQU
+* ORG
+* INCLUDEBIN ( INCBIN )
 
 
 
