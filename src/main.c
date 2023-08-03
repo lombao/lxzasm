@@ -24,7 +24,6 @@
 
 #include "preproc.h"
 #include "symbols.h"
-#include "lines.h"
 #include "code.h"
 
 //----------------------------------------------------------------------
@@ -53,7 +52,9 @@ void showUsage() {
 	 fprintf(stderr,"Usage: lxzasm [-v] [ -h] [ -l]  inputfile \n");
 	 fprintf(stderr,"	v:  Show Version\n");
 	 fprintf(stderr,"	h:  Show Help ( this help )\n");	
-	 fprintf(stderr,"	l:  Dump all Labels\n");	
+	 fprintf(stderr,"	d:  Dump all Labels\n");
+	 fprintf(stderr,"	l:  Generate List report\n");
+	 	
 	  
 }
 
@@ -76,7 +77,8 @@ int main(int argc, char *argv[]) {
 	}
   
     int opt;
-    int dumpLabels = FALSE;
+    int printLabels = FALSE;
+    int printList 	= FALSE;
 	while ((opt = getopt(argc, argv, "o:lvh")) != -1) {
 		switch (opt) {
 			case 'v':
@@ -87,8 +89,11 @@ int main(int argc, char *argv[]) {
 				showUsage();
 				exit(EXIT_SUCCESS);
 				break;
+			case 't': 
+				printLabels = TRUE;
+				break;
 			case 'l': 
-				dumpLabels = TRUE;
+				printList = TRUE;
 				break;
 			default: /* '?' */
 				fprintf(stderr,"Unknown option %i",opt); 
@@ -125,7 +130,13 @@ int main(int argc, char *argv[]) {
 	
 	/* print the codeptr */
 //	printf("**** Second pass complete\n");
-	if ( dumpLabels ==  TRUE ) {
+	if ( printList ==  TRUE ) {
+		showVersion();
+		list_print();
+		sym_dumplabels();
+	}
+
+	if ( printLabels ==  TRUE ) {
 		showVersion();
 		sym_dumplabels();
 	}

@@ -35,8 +35,15 @@ comand can be either DEFM or DM
 
   DM "This is a message" ; This will set one byte for each ASCII value or each letter of the message
     
-  
 
+* DEFW ( DW )
+-------------
+Define Word. This wiill declare a word ( 2 bytes ) , note LSB will be first, MSB second.
+
+	DW &7800
+		
+    
+  
 * ORG
 =======
 Origin. It sets the initial value of the PC. By default the PC is 0, with
@@ -47,7 +54,7 @@ first code line otherwise will throw an error
 
 * LIMIT
 ========
-* Controlling the size of the binary ouput. If you want to control
+Controlling the size of the binary ouput. If you want to control
 the size of the output or the start/end you can use the Assembler directives
 ORG and LIMIT and use , perhaps the switch -p. For instance, imagine you
 have in your code
@@ -63,3 +70,10 @@ However, if you want to have a flat file starting always from byte 0 ,
 disregarding the ORG directive, you can use the switch -p. This will create
 a file with 0 until the 4000 address.
 
+
+* INCLUDEBIN (INCBIN)
+========================
+This allows you to include some binary file content into the code.
+
+    INLCUDEBIN "image.8bit"
+    

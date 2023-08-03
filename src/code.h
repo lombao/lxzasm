@@ -31,8 +31,16 @@ extern int code_putword(const int value);
 extern int code_output(char * file);
 
 
+extern int line_increase();
+extern int line_get();
+extern int line_reset();
+
 extern int pc_init(const int value);
 extern int pc_inc(const int increase);
 extern int pc_get();
+extern int pc_get_last();
+
+
+extern int list_print();
 
 #endif

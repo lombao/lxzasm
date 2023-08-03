@@ -18,7 +18,7 @@
 
 
 #include "parseerrors.h"
-#include "lines.h"
+#include "code.h"
 #include "preproc.h"
 
 //----------------------------------------------------------------------
@@ -26,11 +26,13 @@
 
 void firstpasserror(const char *str)
 {
+	printf("first pass\n");
 	generalerror(str);
 } 
 
 void secondpasserror(const char *str)
 {
+	printf("second pass\n");
 	generalerror(str);
 } 
 

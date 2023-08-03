@@ -5,8 +5,8 @@
 #include "defs.h"
 #include "parseerrors.h"
 #include "symbols.h" 
-#include "lines.h"
 #include "code.h"
+#include "preproc.h"
    
 }
 
@@ -33,12 +33,15 @@
 /* Definte types of non terminals */
 %type <normal>   	expression expression2
 %type <normal>  	expritem
-
+%type <normal>		listexpr
 
 /* tokens */
 
-%token EQU ORG ALIGN END
-%token DEFS DS DEFB DB DEFM DM
+%token ENTER
+
+%token EQU ORG ALIGN END INCBIN
+%token DEFS DEFB DEFM DEFW
+
 
 %token IXH IXL IYH IYL
 %token AF BC DE HL IX IY SP AFPLUS
@@ -52,11 +55,13 @@
 %token DI EI LD
 %token HALT NOP
 
-%token XOR AND OR
+%token XOR AND OR NEG
 
 %token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA
 
 %token BIT SET RES
+
+%token LDI LDIR
 
 %token PUSH POP
 
@@ -65,6 +70,7 @@
 
 %token EX EXX
 
+%token SCF
 %token CCF
 
 %token COMMA
@@ -86,23 +92,27 @@
 %%
     program:  	lines			{	}
     ;
-    lines:  line         	{   	}
-		|	lines line   	{ 	 	}
+    lines:  line         	{   line_increase();	}
+		|	lines line   	{ 	line_increase(); 	}
 	;	
-    line: instruction						{ }
-		| directive							{ }
-		| LABEL instruction					{ sym_addlabel($1,pc_get()); }
-		| LABEL directive					{ sym_addlabel($1,pc_get()); }
-		| LABEL EQU	expression				{ sym_addlabel($1,$3); }
-		
+    line: instruction ENTER						{ }
+		| directive ENTER						{ }
+		| LITERAL ENTER							{ firstpasserror("Syntax Error: Unknown instruction"); }
+		| LABEL instruction ENTER				{ sym_addlabel($1,pc_get_last()); }
+		| LABEL directive ENTER					{ sym_addlabel($1,pc_get_last()); }
+		| LABEL EQU	expression ENTER			{ sym_addlabel($1,$3); }	
+		| LABEL ENTER							{ sym_addlabel($1,pc_get()); }
+		| ENTER									{ }	
 	;
 	directive: 		END									{ return 0;}
 			|	DEFS	expression						{ pc_inc($2); }
 			| 	DEFS	expression COMMA expression		{ pc_inc($2); }
-			|   DEFB	listexpr
-			|   DEFM	STRING							{ pc_inc( strlen($2)); }	
+			|   DEFB	listexpr						{ pc_inc($2); }
+			|   DEFM	STRING							{ pc_inc( strlen($2)); }
+			|	DEFW	expression						{ pc_inc(2); }	
 			|   LITERAL EQU expression					{ sym_addlabel($1,$3); }
 			|	ORG	INTEGER								{ pc_init($2); }
+			|	INCBIN	STRING							{ pc_inc( preproc_include_bin($2,NULL)); }
 			|   ALIGN   expression	{ 
 										int pc = pc_get();
 										int k = ((( pc / $2)+1)*$2); 
@@ -110,7 +120,6 @@
 											pc_inc(1); 
 										} 
 									}
-
 	;
 	instruction: NOP 					{ pc_inc(1); } 
 				| DI 					{ pc_inc(1); } 
@@ -138,6 +147,10 @@
 				| OUTD					{ pc_inc(2); }
 				| OTDR					{ pc_inc(2); }	
 				| RET condflag			{ pc_inc(1); }	
+				| SCF 					{ pc_inc(1); }
+				| LDI					{ pc_inc(2); }
+				| LDIR					{ pc_inc(2); }
+				| NEG					{ pc_inc(2); }
 				| LD  ldcommand			{ }
 				| OR orcommand			{ }
 				| XOR orcommand			{ } /* same pattern as or */
@@ -163,6 +176,7 @@
 				| SET bitcommand		{ } /* same pattern as bit */
 				| SLA slacommand		{ }
 				| SRA slacommand		{ } /* sra and sla are the same pattern */
+				| SRL slacommand		{ } /* sra and sla are the same pattern */
 				| RL  slacommand		{ } /* same pattern as sla */
 				| RR  slacommand		{ } /* same pattern as sla */
 				| RRC slacommand		{ } /* same pattern as sla */
@@ -332,8 +346,10 @@
 		|	PARLEFT expression2 PARRIGHT OPMUL PARLEFT expression2 PARRIGHT			{ $$ = $2 * $6; }
 		|	PARLEFT expression2 PARRIGHT OPDIV PARLEFT expression2 PARRIGHT			{ $$ = $2 / $6; }
 	;
-	listexpr:	expritem
-		|		listexpr COMMA expritem
+	listexpr:	expritem						{ $$ = ($1 > 0xFF)?2:1; }
+		|		STRING							{ $$ = strlen($1); }
+		|		listexpr COMMA expritem			{ $$ = $1 + (($3 > 0xFF)?2:1); }
+		|		listexpr COMMA STRING			{ $$ = $1 + strlen($3); }
 	;
 	expritem:	INTEGER				{	$$ = $1; }
 		|		LITERAL				{	

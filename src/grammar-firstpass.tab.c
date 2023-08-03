@@ -104,16 +104,16 @@ enum yysymbol_kind_t
   YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
-  YYSYMBOL_EQU = 3,                        /* EQU  */
-  YYSYMBOL_ORG = 4,                        /* ORG  */
-  YYSYMBOL_ALIGN = 5,                      /* ALIGN  */
-  YYSYMBOL_END = 6,                        /* END  */
-  YYSYMBOL_DEFS = 7,                       /* DEFS  */
-  YYSYMBOL_DS = 8,                         /* DS  */
-  YYSYMBOL_DEFB = 9,                       /* DEFB  */
-  YYSYMBOL_DB = 10,                        /* DB  */
+  YYSYMBOL_ENTER = 3,                      /* ENTER  */
+  YYSYMBOL_EQU = 4,                        /* EQU  */
+  YYSYMBOL_ORG = 5,                        /* ORG  */
+  YYSYMBOL_ALIGN = 6,                      /* ALIGN  */
+  YYSYMBOL_END = 7,                        /* END  */
+  YYSYMBOL_INCBIN = 8,                     /* INCBIN  */
+  YYSYMBOL_DEFS = 9,                       /* DEFS  */
+  YYSYMBOL_DEFB = 10,                      /* DEFB  */
   YYSYMBOL_DEFM = 11,                      /* DEFM  */
-  YYSYMBOL_DM = 12,                        /* DM  */
+  YYSYMBOL_DEFW = 12,                      /* DEFW  */
   YYSYMBOL_IXH = 13,                       /* IXH  */
   YYSYMBOL_IXL = 14,                       /* IXL  */
   YYSYMBOL_IYH = 15,                       /* IYH  */
@@ -158,92 +158,96 @@ enum yysymbol_kind_t
   YYSYMBOL_XOR = 54,                       /* XOR  */
   YYSYMBOL_AND = 55,                       /* AND  */
   YYSYMBOL_OR = 56,                        /* OR  */
-  YYSYMBOL_RLCA = 57,                      /* RLCA  */
-  YYSYMBOL_RRCA = 58,                      /* RRCA  */
-  YYSYMBOL_RLA = 59,                       /* RLA  */
-  YYSYMBOL_RLC = 60,                       /* RLC  */
-  YYSYMBOL_SLA = 61,                       /* SLA  */
-  YYSYMBOL_SLL = 62,                       /* SLL  */
-  YYSYMBOL_SRL = 63,                       /* SRL  */
-  YYSYMBOL_RR = 64,                        /* RR  */
-  YYSYMBOL_RL = 65,                        /* RL  */
-  YYSYMBOL_RRC = 66,                       /* RRC  */
-  YYSYMBOL_SRA = 67,                       /* SRA  */
-  YYSYMBOL_BIT = 68,                       /* BIT  */
-  YYSYMBOL_SET = 69,                       /* SET  */
-  YYSYMBOL_RES = 70,                       /* RES  */
-  YYSYMBOL_PUSH = 71,                      /* PUSH  */
-  YYSYMBOL_POP = 72,                       /* POP  */
-  YYSYMBOL_CP = 73,                        /* CP  */
-  YYSYMBOL_CPI = 74,                       /* CPI  */
-  YYSYMBOL_CPIR = 75,                      /* CPIR  */
-  YYSYMBOL_CPD = 76,                       /* CPD  */
-  YYSYMBOL_CPDR = 77,                      /* CPDR  */
-  YYSYMBOL_EX = 78,                        /* EX  */
-  YYSYMBOL_EXX = 79,                       /* EXX  */
-  YYSYMBOL_CCF = 80,                       /* CCF  */
-  YYSYMBOL_COMMA = 81,                     /* COMMA  */
-  YYSYMBOL_NZ = 82,                        /* NZ  */
-  YYSYMBOL_Z = 83,                         /* Z  */
-  YYSYMBOL_NC = 84,                        /* NC  */
-  YYSYMBOL_PO = 85,                        /* PO  */
-  YYSYMBOL_PE = 86,                        /* PE  */
-  YYSYMBOL_P = 87,                         /* P  */
-  YYSYMBOL_M = 88,                         /* M  */
-  YYSYMBOL_IN = 89,                        /* IN  */
-  YYSYMBOL_OUT = 90,                       /* OUT  */
-  YYSYMBOL_INI = 91,                       /* INI  */
-  YYSYMBOL_INIR = 92,                      /* INIR  */
-  YYSYMBOL_IND = 93,                       /* IND  */
-  YYSYMBOL_INDR = 94,                      /* INDR  */
-  YYSYMBOL_OUTI = 95,                      /* OUTI  */
-  YYSYMBOL_OUTD = 96,                      /* OUTD  */
-  YYSYMBOL_OTIR = 97,                      /* OTIR  */
-  YYSYMBOL_OTDR = 98,                      /* OTDR  */
-  YYSYMBOL_LABEL = 99,                     /* LABEL  */
-  YYSYMBOL_LITERAL = 100,                  /* LITERAL  */
-  YYSYMBOL_INTEGER = 101,                  /* INTEGER  */
-  YYSYMBOL_STRING = 102,                   /* STRING  */
-  YYSYMBOL_PARLEFT = 103,                  /* PARLEFT  */
-  YYSYMBOL_PARRIGHT = 104,                 /* PARRIGHT  */
-  YYSYMBOL_OPADD = 105,                    /* OPADD  */
-  YYSYMBOL_OPSUB = 106,                    /* OPSUB  */
-  YYSYMBOL_OPMUL = 107,                    /* OPMUL  */
-  YYSYMBOL_OPDIV = 108,                    /* OPDIV  */
-  YYSYMBOL_YYACCEPT = 109,                 /* $accept  */
-  YYSYMBOL_program = 110,                  /* program  */
-  YYSYMBOL_lines = 111,                    /* lines  */
-  YYSYMBOL_line = 112,                     /* line  */
-  YYSYMBOL_directive = 113,                /* directive  */
-  YYSYMBOL_instruction = 114,              /* instruction  */
-  YYSYMBOL_slacommand = 115,               /* slacommand  */
-  YYSYMBOL_bitcommand = 116,               /* bitcommand  */
-  YYSYMBOL_incommand = 117,                /* incommand  */
-  YYSYMBOL_outcommand = 118,               /* outcommand  */
-  YYSYMBOL_ldcommand = 119,                /* ldcommand  */
-  YYSYMBOL_orcommand = 120,                /* orcommand  */
-  YYSYMBOL_inccommand = 121,               /* inccommand  */
-  YYSYMBOL_deccommand = 122,               /* deccommand  */
-  YYSYMBOL_adccommand = 123,               /* adccommand  */
-  YYSYMBOL_addcommand = 124,               /* addcommand  */
-  YYSYMBOL_subcommand = 125,               /* subcommand  */
-  YYSYMBOL_sbccommand = 126,               /* sbccommand  */
-  YYSYMBOL_excommand = 127,                /* excommand  */
-  YYSYMBOL_djnzcommand = 128,              /* djnzcommand  */
-  YYSYMBOL_jrcommand = 129,                /* jrcommand  */
-  YYSYMBOL_jpcommand = 130,                /* jpcommand  */
-  YYSYMBOL_callcommand = 131,              /* callcommand  */
-  YYSYMBOL_pushcommand = 132,              /* pushcommand  */
-  YYSYMBOL_popcommand = 133,               /* popcommand  */
-  YYSYMBOL_reg8 = 134,                     /* reg8  */
-  YYSYMBOL_reg16 = 135,                    /* reg16  */
-  YYSYMBOL_expression = 136,               /* expression  */
-  YYSYMBOL_expression2 = 137,              /* expression2  */
-  YYSYMBOL_listexpr = 138,                 /* listexpr  */
-  YYSYMBOL_expritem = 139,                 /* expritem  */
-  YYSYMBOL_indexreg = 140,                 /* indexreg  */
-  YYSYMBOL_index8reg = 141,                /* index8reg  */
-  YYSYMBOL_condflag = 142                  /* condflag  */
+  YYSYMBOL_NEG = 57,                       /* NEG  */
+  YYSYMBOL_RLCA = 58,                      /* RLCA  */
+  YYSYMBOL_RRCA = 59,                      /* RRCA  */
+  YYSYMBOL_RLA = 60,                       /* RLA  */
+  YYSYMBOL_RLC = 61,                       /* RLC  */
+  YYSYMBOL_SLA = 62,                       /* SLA  */
+  YYSYMBOL_SLL = 63,                       /* SLL  */
+  YYSYMBOL_SRL = 64,                       /* SRL  */
+  YYSYMBOL_RR = 65,                        /* RR  */
+  YYSYMBOL_RL = 66,                        /* RL  */
+  YYSYMBOL_RRC = 67,                       /* RRC  */
+  YYSYMBOL_SRA = 68,                       /* SRA  */
+  YYSYMBOL_BIT = 69,                       /* BIT  */
+  YYSYMBOL_SET = 70,                       /* SET  */
+  YYSYMBOL_RES = 71,                       /* RES  */
+  YYSYMBOL_LDI = 72,                       /* LDI  */
+  YYSYMBOL_LDIR = 73,                      /* LDIR  */
+  YYSYMBOL_PUSH = 74,                      /* PUSH  */
+  YYSYMBOL_POP = 75,                       /* POP  */
+  YYSYMBOL_CP = 76,                        /* CP  */
+  YYSYMBOL_CPI = 77,                       /* CPI  */
+  YYSYMBOL_CPIR = 78,                      /* CPIR  */
+  YYSYMBOL_CPD = 79,                       /* CPD  */
+  YYSYMBOL_CPDR = 80,                      /* CPDR  */
+  YYSYMBOL_EX = 81,                        /* EX  */
+  YYSYMBOL_EXX = 82,                       /* EXX  */
+  YYSYMBOL_SCF = 83,                       /* SCF  */
+  YYSYMBOL_CCF = 84,                       /* CCF  */
+  YYSYMBOL_COMMA = 85,                     /* COMMA  */
+  YYSYMBOL_NZ = 86,                        /* NZ  */
+  YYSYMBOL_Z = 87,                         /* Z  */
+  YYSYMBOL_NC = 88,                        /* NC  */
+  YYSYMBOL_PO = 89,                        /* PO  */
+  YYSYMBOL_PE = 90,                        /* PE  */
+  YYSYMBOL_P = 91,                         /* P  */
+  YYSYMBOL_M = 92,                         /* M  */
+  YYSYMBOL_IN = 93,                        /* IN  */
+  YYSYMBOL_OUT = 94,                       /* OUT  */
+  YYSYMBOL_INI = 95,                       /* INI  */
+  YYSYMBOL_INIR = 96,                      /* INIR  */
+  YYSYMBOL_IND = 97,                       /* IND  */
+  YYSYMBOL_INDR = 98,                      /* INDR  */
+  YYSYMBOL_OUTI = 99,                      /* OUTI  */
+  YYSYMBOL_OUTD = 100,                     /* OUTD  */
+  YYSYMBOL_OTIR = 101,                     /* OTIR  */
+  YYSYMBOL_OTDR = 102,                     /* OTDR  */
+  YYSYMBOL_LABEL = 103,                    /* LABEL  */
+  YYSYMBOL_LITERAL = 104,                  /* LITERAL  */
+  YYSYMBOL_INTEGER = 105,                  /* INTEGER  */
+  YYSYMBOL_STRING = 106,                   /* STRING  */
+  YYSYMBOL_PARLEFT = 107,                  /* PARLEFT  */
+  YYSYMBOL_PARRIGHT = 108,                 /* PARRIGHT  */
+  YYSYMBOL_OPADD = 109,                    /* OPADD  */
+  YYSYMBOL_OPSUB = 110,                    /* OPSUB  */
+  YYSYMBOL_OPMUL = 111,                    /* OPMUL  */
+  YYSYMBOL_OPDIV = 112,                    /* OPDIV  */
+  YYSYMBOL_YYACCEPT = 113,                 /* $accept  */
+  YYSYMBOL_program = 114,                  /* program  */
+  YYSYMBOL_lines = 115,                    /* lines  */
+  YYSYMBOL_line = 116,                     /* line  */
+  YYSYMBOL_directive = 117,                /* directive  */
+  YYSYMBOL_instruction = 118,              /* instruction  */
+  YYSYMBOL_slacommand = 119,               /* slacommand  */
+  YYSYMBOL_bitcommand = 120,               /* bitcommand  */
+  YYSYMBOL_incommand = 121,                /* incommand  */
+  YYSYMBOL_outcommand = 122,               /* outcommand  */
+  YYSYMBOL_ldcommand = 123,                /* ldcommand  */
+  YYSYMBOL_orcommand = 124,                /* orcommand  */
+  YYSYMBOL_inccommand = 125,               /* inccommand  */
+  YYSYMBOL_deccommand = 126,               /* deccommand  */
+  YYSYMBOL_adccommand = 127,               /* adccommand  */
+  YYSYMBOL_addcommand = 128,               /* addcommand  */
+  YYSYMBOL_subcommand = 129,               /* subcommand  */
+  YYSYMBOL_sbccommand = 130,               /* sbccommand  */
+  YYSYMBOL_excommand = 131,                /* excommand  */
+  YYSYMBOL_djnzcommand = 132,              /* djnzcommand  */
+  YYSYMBOL_jrcommand = 133,                /* jrcommand  */
+  YYSYMBOL_jpcommand = 134,                /* jpcommand  */
+  YYSYMBOL_callcommand = 135,              /* callcommand  */
+  YYSYMBOL_pushcommand = 136,              /* pushcommand  */
+  YYSYMBOL_popcommand = 137,               /* popcommand  */
+  YYSYMBOL_reg8 = 138,                     /* reg8  */
+  YYSYMBOL_reg16 = 139,                    /* reg16  */
+  YYSYMBOL_expression = 140,               /* expression  */
+  YYSYMBOL_expression2 = 141,              /* expression2  */
+  YYSYMBOL_listexpr = 142,                 /* listexpr  */
+  YYSYMBOL_expritem = 143,                 /* expritem  */
+  YYSYMBOL_indexreg = 144,                 /* indexreg  */
+  YYSYMBOL_index8reg = 145,                /* index8reg  */
+  YYSYMBOL_condflag = 146                  /* condflag  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -569,21 +573,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  197
+#define YYFINAL  212
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1020
+#define YYLAST   1044
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  109
+#define YYNTOKENS  113
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  34
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  226
+#define YYNRULES  238
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  437
+#define YYNSTATES  458
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   363
+#define YYMAXUTOK   367
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -633,36 +637,37 @@ static const yytype_int8 yytranslate[] =
       75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
       85,    86,    87,    88,    89,    90,    91,    92,    93,    94,
       95,    96,    97,    98,    99,   100,   101,   102,   103,   104,
-     105,   106,   107,   108
+     105,   106,   107,   108,   109,   110,   111,   112
 };
 
 #if FIRSTPASSDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    87,    87,    89,    90,    92,    93,    94,    95,    96,
-      99,   100,   101,   102,   103,   104,   105,   106,   115,   116,
-     117,   118,   119,   120,   121,   122,   123,   124,   125,   126,
-     127,   128,   129,   130,   131,   132,   133,   134,   135,   136,
-     137,   138,   139,   140,   141,   142,   143,   144,   145,   146,
-     147,   148,   149,   150,   151,   152,   153,   154,   155,   156,
-     157,   158,   159,   160,   161,   162,   163,   164,   165,   166,
-     167,   168,   169,   172,   173,   174,   176,   177,   178,   180,
-     181,   182,   184,   185,   186,   188,   189,   190,   191,   192,
-     193,   194,   195,   196,   197,   198,   199,   200,   201,   202,
-     203,   204,   205,   206,   207,   208,   209,   210,   211,   212,
-     213,   214,   219,   220,   221,   222,   223,   225,   226,   227,
-     228,   229,   230,   232,   233,   234,   235,   236,   237,   239,
-     240,   241,   242,   243,   244,   246,   247,   248,   249,   250,
-     251,   252,   254,   255,   256,   257,   258,   260,   261,   262,
-     263,   264,   265,   267,   268,   269,   270,   272,   274,   275,
-     277,   278,   279,   280,   282,   283,   285,   286,   287,   289,
-     290,   291,   293,   294,   295,   296,   297,   298,   299,   300,
-     301,   302,   305,   306,   307,   308,   310,   311,   312,   313,
-     314,   315,   317,   318,   319,   320,   321,   322,   323,   324,
-     325,   326,   327,   328,   329,   330,   331,   332,   333,   335,
-     336,   338,   339,   348,   349,   351,   352,   353,   354,   356,
-     357,   358,   359,   360,   361,   362,   363
+       0,    93,    93,    95,    96,    98,    99,   100,   101,   102,
+     103,   104,   105,   107,   108,   109,   110,   111,   112,   113,
+     114,   115,   116,   124,   125,   126,   127,   128,   129,   130,
+     131,   132,   133,   134,   135,   136,   137,   138,   139,   140,
+     141,   142,   143,   144,   145,   146,   147,   148,   149,   150,
+     151,   152,   153,   154,   155,   156,   157,   158,   159,   160,
+     161,   162,   163,   164,   165,   166,   167,   168,   169,   170,
+     171,   172,   173,   174,   175,   176,   177,   178,   179,   180,
+     181,   182,   183,   186,   187,   188,   190,   191,   192,   194,
+     195,   196,   198,   199,   200,   202,   203,   204,   205,   206,
+     207,   208,   209,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     227,   228,   233,   234,   235,   236,   237,   239,   240,   241,
+     242,   243,   244,   246,   247,   248,   249,   250,   251,   253,
+     254,   255,   256,   257,   258,   260,   261,   262,   263,   264,
+     265,   266,   268,   269,   270,   271,   272,   274,   275,   276,
+     277,   278,   279,   281,   282,   283,   284,   286,   288,   289,
+     291,   292,   293,   294,   296,   297,   299,   300,   301,   303,
+     304,   305,   307,   308,   309,   310,   311,   312,   313,   314,
+     315,   316,   319,   320,   321,   322,   324,   325,   326,   327,
+     328,   329,   331,   332,   333,   334,   335,   336,   337,   338,
+     339,   340,   341,   342,   343,   344,   345,   346,   347,   349,
+     350,   351,   352,   354,   355,   364,   365,   367,   368,   369,
+     370,   372,   373,   374,   375,   376,   377,   378,   379
 };
 #endif
 
@@ -678,24 +683,25 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "EQU", "ORG", "ALIGN",
-  "END", "DEFS", "DS", "DEFB", "DB", "DEFM", "DM", "IXH", "IXL", "IYH",
-  "IYL", "AF", "BC", "DE", "HL", "IX", "IY", "SP", "AFPLUS", "A", "F", "B",
-  "C", "D", "E", "H", "L", "I", "R", "INC", "DEC", "ADC", "ADD", "SUB",
-  "SBC", "DJNZ", "JR", "RET", "RETN", "RETI", "RST", "JP", "CALL", "DI",
-  "EI", "LD", "HALT", "NOP", "XOR", "AND", "OR", "RLCA", "RRCA", "RLA",
-  "RLC", "SLA", "SLL", "SRL", "RR", "RL", "RRC", "SRA", "BIT", "SET",
-  "RES", "PUSH", "POP", "CP", "CPI", "CPIR", "CPD", "CPDR", "EX", "EXX",
-  "CCF", "COMMA", "NZ", "Z", "NC", "PO", "PE", "P", "M", "IN", "OUT",
-  "INI", "INIR", "IND", "INDR", "OUTI", "OUTD", "OTIR", "OTDR", "LABEL",
-  "LITERAL", "INTEGER", "STRING", "PARLEFT", "PARRIGHT", "OPADD", "OPSUB",
-  "OPMUL", "OPDIV", "$accept", "program", "lines", "line", "directive",
-  "instruction", "slacommand", "bitcommand", "incommand", "outcommand",
-  "ldcommand", "orcommand", "inccommand", "deccommand", "adccommand",
-  "addcommand", "subcommand", "sbccommand", "excommand", "djnzcommand",
-  "jrcommand", "jpcommand", "callcommand", "pushcommand", "popcommand",
-  "reg8", "reg16", "expression", "expression2", "listexpr", "expritem",
-  "indexreg", "index8reg", "condflag", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "ENTER", "EQU", "ORG",
+  "ALIGN", "END", "INCBIN", "DEFS", "DEFB", "DEFM", "DEFW", "IXH", "IXL",
+  "IYH", "IYL", "AF", "BC", "DE", "HL", "IX", "IY", "SP", "AFPLUS", "A",
+  "F", "B", "C", "D", "E", "H", "L", "I", "R", "INC", "DEC", "ADC", "ADD",
+  "SUB", "SBC", "DJNZ", "JR", "RET", "RETN", "RETI", "RST", "JP", "CALL",
+  "DI", "EI", "LD", "HALT", "NOP", "XOR", "AND", "OR", "NEG", "RLCA",
+  "RRCA", "RLA", "RLC", "SLA", "SLL", "SRL", "RR", "RL", "RRC", "SRA",
+  "BIT", "SET", "RES", "LDI", "LDIR", "PUSH", "POP", "CP", "CPI", "CPIR",
+  "CPD", "CPDR", "EX", "EXX", "SCF", "CCF", "COMMA", "NZ", "Z", "NC", "PO",
+  "PE", "P", "M", "IN", "OUT", "INI", "INIR", "IND", "INDR", "OUTI",
+  "OUTD", "OTIR", "OTDR", "LABEL", "LITERAL", "INTEGER", "STRING",
+  "PARLEFT", "PARRIGHT", "OPADD", "OPSUB", "OPMUL", "OPDIV", "$accept",
+  "program", "lines", "line", "directive", "instruction", "slacommand",
+  "bitcommand", "incommand", "outcommand", "ldcommand", "orcommand",
+  "inccommand", "deccommand", "adccommand", "addcommand", "subcommand",
+  "sbccommand", "excommand", "djnzcommand", "jrcommand", "jpcommand",
+  "callcommand", "pushcommand", "popcommand", "reg8", "reg16",
+  "expression", "expression2", "listexpr", "expritem", "indexreg",
+  "index8reg", "condflag", YY_NULLPTR
 };
 
 static const char *
@@ -705,7 +711,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-99)
+#define YYPACT_NINF (-98)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -719,50 +725,52 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     615,   -98,    77,   -99,    77,   -55,   -89,    66,   124,    -4,
-      89,   393,    11,    77,   354,   424,   -99,   -99,   -99,   814,
-     354,   -99,   -99,   497,   -99,   -99,   454,   454,   454,   -99,
-     -99,   -99,   782,   782,   782,   782,   782,   782,   -73,   -73,
-     -73,    39,   349,   454,   -99,   -99,   -99,   -99,    10,   -99,
-     -99,   804,   846,   -99,   -99,   -99,   -99,   -99,   -99,   -99,
-     -99,   538,    27,    71,   615,   -99,   -99,   -99,   -99,   -99,
-     -99,    77,    13,   -99,   -38,   -44,   -99,   -99,   -99,   -99,
-     -99,   -99,   -99,   -99,   -99,   -99,   -99,   -99,   -99,   -99,
-     -99,   -99,   -99,   -99,   -99,   -99,   -99,   -99,   214,   -99,
-     -99,   -99,   -99,   -99,   223,   -99,   -99,   -99,   -99,   -99,
-      -9,    -6,   -99,     2,     9,   -99,    23,    81,   -99,   -99,
-      13,   -99,    26,    31,   -99,   -99,    13,   -99,   -99,   -99,
-     -99,   -99,   -99,   -99,   -99,   -99,    13,    45,   -99,    95,
-     -99,    13,    46,   -99,    13,    50,   102,   104,   106,   109,
-     111,   112,    29,   -99,   116,   103,   -99,   -99,    13,   -99,
-     -99,   -99,   248,   -99,   -99,   -99,   -99,   -99,   -99,   -99,
-     126,   -99,   -99,   -99,   -99,   -99,   -99,   -99,   -99,   -99,
-     -99,   -99,   -99,   137,   138,   125,   -99,   134,   -99,   143,
-     142,   -99,   145,    77,   -99,   -99,    77,   -99,   -99,    67,
-     -55,   -55,   -55,   -55,    77,   -55,   101,   117,   147,   123,
-     141,   703,   141,   725,   141,   155,   136,   141,   747,    77,
-     156,   174,    77,    77,   154,   184,   197,   202,   250,   292,
-     329,   177,   169,   -99,   144,   371,   190,   178,   200,   191,
-     861,   205,   287,   206,   209,   219,   220,   227,    13,    13,
-     -99,   -99,   -99,   -99,   -99,    13,   -99,   -99,    77,   -99,
-      77,   -99,   179,   -99,    13,   -99,   -99,   192,   -99,    13,
-     -99,   -99,   -99,    77,   -99,   211,   -99,    13,   -99,    13,
-     -99,   -99,    13,    13,   329,    28,   329,    28,   329,    28,
-     329,    28,   329,    28,   329,    28,   212,   228,   234,   389,
-     437,   450,   464,    77,    29,   -99,    28,   -99,    77,   -99,
-      77,   268,   -99,   -99,   -99,   245,   -99,   -27,   -99,     5,
-     238,   428,   243,   247,   251,   252,   455,   254,   258,   535,
-     540,   592,   616,   638,   660,    60,   757,   900,   329,   -99,
-     329,   -99,   329,   -99,   329,   -99,   713,   255,   748,   259,
-     758,   805,   270,   271,   312,   276,   831,   286,   836,   -99,
-     -99,   -99,    77,   -99,    77,   -99,   -99,    77,    60,    60,
-      60,    60,    60,    60,   740,   781,   803,   845,   -99,    28,
-     -99,   -99,   -99,   -99,   -99,   -99,   847,   852,   862,   867,
-     334,   -99,    60,    77,   -99,   -99,   -99,   329,   -99,   -99,
-     -99,   -99,   -99,   -99,   872,   877,   882,   329,   -99,   329,
-     -99,   329,   -99,   329,   -99,   -99,   -99,   -99,   -99,   767,
-     887,   892,   -99,   -99,   -99,   897,   902,   907,   912,   -99,
-      13,   -99,   -99,   -99,   -99,   -99,   -99
+     562,   -98,   -97,   169,   -98,   -96,   169,   156,   -90,   169,
+      67,   108,   -13,   151,   165,    -2,   169,   472,   371,   -98,
+     -98,   -98,   830,   472,   -98,   -98,   518,   -98,   -98,   413,
+     413,   413,   -98,   -98,   -98,   -98,   660,   660,   660,   660,
+     660,   660,   660,   -74,   -74,   -74,   -98,   -98,   288,   460,
+     413,   -98,   -98,   -98,   -98,    13,   -98,   -98,   -98,   808,
+     818,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   664,
+      74,    29,   562,   -98,    40,    43,   -98,   -98,   -98,   169,
+     102,   -98,   -98,   -76,   -98,   -37,   -98,   -98,   102,   -98,
+     -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,
+     -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   276,
+     -98,   -98,   -98,   -98,   -98,   513,   -98,   -98,   -98,   -98,
+     -98,   -34,   -25,   -98,    20,    22,   -98,    58,    52,   -98,
+     -98,   102,   -98,    62,    70,   -98,   -98,   102,   -98,   -98,
+     -98,   -98,   -98,   -98,   -98,   -98,   -98,   102,    73,   -98,
+      82,   -98,   102,    83,   -98,   102,    84,    90,    99,   103,
+     131,   135,   141,    44,   -98,   145,   124,   -98,   -98,   102,
+     -98,   -98,   -98,   632,   -98,   -98,   -98,   -98,   -98,   -98,
+     -98,   -98,   149,   -98,   -98,   -98,   -98,   -98,   -98,   -98,
+     -98,   -98,   -98,   -98,   -98,   150,   153,    61,   -98,    63,
+     -98,   157,   122,   -98,   158,   -98,   169,   148,   109,   160,
+     -98,   169,   -98,   -98,   -98,   -98,     6,   -36,   -36,   -36,
+     -36,   169,   578,   101,   143,   132,   176,   187,   477,   187,
+     756,   187,   142,   179,   187,   778,   169,   163,   184,   169,
+     169,   248,   266,   286,   345,   349,   380,   481,   186,   207,
+     -98,   192,   390,   204,   217,   205,   225,   839,   229,   238,
+     234,   236,   180,   240,   239,    -1,   -98,   -98,   102,   -98,
+     -98,   -98,   -98,   -98,   102,   -98,   -98,   -98,   169,   -98,
+     169,   -98,   140,   -98,   102,   -98,   -98,   144,   -98,   102,
+     -98,   -98,   -98,   169,   -98,   282,   -98,   102,   -98,   102,
+     -98,   -98,   102,   102,   481,   155,   481,   155,   481,   155,
+     481,   155,   481,   155,   481,   155,   221,   265,   269,   591,
+     913,   917,   921,   169,    44,   -98,   155,   -98,   169,   -98,
+     169,   734,   -98,   -98,   -98,   275,   -98,    78,   -98,    97,
+     -98,   228,   255,   264,   268,   267,   272,   404,   270,   274,
+     420,   445,   539,   569,   641,   665,   212,   788,   922,   481,
+     -98,   481,   -98,   481,   -98,   481,   -98,   687,   280,   745,
+     283,   766,   779,   287,   292,   758,   289,   789,   302,   799,
+     -98,   -98,   -98,   169,   -98,   169,   -98,   -98,   169,   212,
+     212,   212,   212,   212,   212,   925,   929,   933,   937,   -98,
+     155,   -98,   -98,   -98,   -98,   -98,   -98,   819,   849,   854,
+     859,   299,   -98,   212,   169,   -98,   -98,   -98,   481,   -98,
+     -98,   -98,   -98,   -98,   -98,   864,   869,   874,   481,   -98,
+     481,   -98,   481,   -98,   481,   -98,   -98,   -98,   -98,   -98,
+     798,   879,   884,   -98,   -98,   -98,   889,   894,   899,   904,
+     -98,   102,   -98,   -98,   -98,   -98,   -98,   -98
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -770,68 +778,70 @@ static const yytype_int16 yypact[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,    10,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    30,    31,    32,    33,     0,
-       0,    19,    20,     0,    21,    18,     0,     0,     0,    22,
-      23,    24,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    27,    26,    29,    28,     0,    34,
-      25,     0,     0,    35,    36,    37,    38,    39,    41,    40,
-      42,     0,     0,     0,     2,     3,     6,     5,    16,   212,
-     211,     0,    17,   186,    11,    13,   209,    14,   215,   216,
-     217,   218,   183,   184,   182,   213,   214,   185,   172,   173,
-     174,   175,   176,   177,   178,   179,   180,   181,     0,    49,
-     117,   118,   121,   122,     0,    50,   123,   124,   127,   128,
-       0,     0,    51,     0,     0,    52,     0,     0,    53,   142,
-     143,   146,     0,     0,    54,    55,   157,   222,   219,   220,
-     221,   223,   224,   225,   226,    56,   158,     0,    43,     0,
-      57,   160,     0,    58,   164,     0,     0,     0,     0,     0,
-       0,     0,     0,    44,     0,     0,    46,   112,   113,   116,
-      47,    45,     0,    72,    73,    67,    70,    69,    71,    68,
-       0,    64,    66,    65,   168,    60,   166,   167,   171,    61,
-     169,   170,    48,     0,     0,     0,    59,     0,    62,     0,
-       0,    63,     0,     0,     8,     7,     0,     1,     4,     0,
+       0,    12,     0,     0,    13,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    35,    36,
+      37,    38,     0,     0,    24,    25,     0,    26,    23,     0,
+       0,     0,    52,    27,    28,    29,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,    50,    51,     0,     0,
+       0,    32,    31,    34,    33,     0,    39,    49,    30,     0,
+       0,    40,    41,    42,    43,    44,    46,    45,    47,     0,
+       0,     0,     2,     3,     0,     0,    20,   224,   223,     0,
+      22,   196,    21,    14,   220,    16,   219,    17,    18,   227,
+     228,   229,   230,   193,   194,   192,   225,   226,   195,   182,
+     183,   184,   185,   186,   187,   188,   189,   190,   191,     0,
+      58,   127,   128,   131,   132,     0,    59,   133,   134,   137,
+     138,     0,     0,    60,     0,     0,    61,     0,     0,    62,
+     152,   153,   156,     0,     0,    63,    64,   167,   234,   231,
+     232,   233,   235,   236,   237,   238,    65,   168,     0,    48,
+       0,    66,   170,     0,    67,   174,     0,     0,     0,     0,
+       0,     0,     0,     0,    53,     0,     0,    55,   122,   123,
+     126,    56,    54,     0,    82,    83,    76,    78,    80,    79,
+      81,    77,     0,    73,    75,    74,   178,    69,   176,   177,
+     181,    70,   179,   180,    57,     0,     0,     0,    68,     0,
+      71,     0,     0,    72,     0,    11,     0,     0,     0,     0,
+       7,     0,     1,     4,     6,     5,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,   192,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     9,    15,
-     191,   187,   188,   189,   190,    12,   210,   119,     0,   125,
-       0,   134,     0,   130,   129,   131,   140,     0,   136,   135,
-     137,   141,   144,     0,   152,     0,   148,   147,   149,   159,
-     162,   163,   161,   165,     0,    99,     0,   100,     0,    98,
-       0,   102,     0,   103,     0,   101,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    85,    86,   114,     0,    74,
-       0,     0,    76,   153,   155,     0,    81,     0,    84,     0,
+     202,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     9,     8,    19,   201,
+     197,   198,   199,   200,    15,   222,   221,   129,     0,   135,
+       0,   144,     0,   140,   139,   141,   150,     0,   146,   145,
+     147,   151,   154,     0,   162,     0,   158,   157,   159,   169,
+     172,   173,   171,   175,     0,   109,     0,   110,     0,   108,
+       0,   112,     0,   113,     0,   111,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    95,    96,   124,     0,    84,
+       0,     0,    86,   163,   165,     0,    91,     0,    94,     0,
+      10,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,   193,
-       0,   194,     0,   195,     0,   196,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,   120,
-     126,   132,     0,   138,     0,   145,   150,     0,    94,    93,
-      92,    96,    97,    95,     0,     0,     0,     0,    90,    91,
-     109,   110,   108,   111,   106,   107,     0,     0,     0,     0,
-       0,    87,    88,     0,   115,    75,    77,     0,   154,   156,
-      79,    80,    83,    82,     0,     0,     0,     0,   201,     0,
-     202,     0,   203,     0,   204,   197,   198,   199,   200,     0,
-       0,     0,   133,   139,   151,     0,     0,     0,     0,   105,
-     104,    89,    78,   205,   206,   207,   208
+     203,     0,   204,     0,   205,     0,   206,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     130,   136,   142,     0,   148,     0,   155,   160,     0,   104,
+     103,   102,   106,   107,   105,     0,     0,     0,     0,   100,
+     101,   119,   120,   118,   121,   116,   117,     0,     0,     0,
+       0,     0,    97,    98,     0,   125,    85,    87,     0,   164,
+     166,    89,    90,    93,    92,     0,     0,     0,     0,   211,
+       0,   212,     0,   213,     0,   214,   207,   208,   209,   210,
+       0,     0,     0,   143,   149,   161,     0,     0,     0,     0,
+     115,   114,    99,    88,   215,   216,   217,   218
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -99,   -99,   -99,   346,   355,   367,   425,    14,   -99,   -99,
-     -99,   -21,   -99,   -99,   -99,   -99,   -99,   -99,   -99,   -99,
-     -99,   -99,   -99,   -99,   -99,    12,    36,    -2,   159,   -99,
-      37,    24,    -3,    -5
+     -98,   -98,   -98,   340,   344,   356,    17,   178,   -98,   -98,
+     -98,   -26,   -98,   -98,   -98,   -98,   -98,   -98,   -98,   -98,
+     -98,   -98,   -98,   -98,   -98,    11,   -10,    -3,   162,   -98,
+      37,     4,    65,    27
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_uint8 yydefgoto[] =
 {
-       0,    63,    64,    65,    66,    67,   163,   171,   188,   191,
-     153,   156,    99,   105,   112,   115,   118,   124,   186,   125,
-     135,   140,   143,   175,   179,   164,   101,   199,   232,    75,
-      73,   102,   159,   137
+       0,    71,    72,    73,    74,    75,   174,   183,   200,   203,
+     164,   167,   110,   116,   123,   126,   129,   135,   198,   136,
+     146,   151,   154,   187,   191,   175,   112,   216,   249,    85,
+      81,   113,   170,   148
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -839,303 +849,311 @@ static const yytype_uint8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      72,   355,    74,    68,   103,   109,   160,   161,   121,   120,
-     138,   126,   136,    77,   142,   145,   110,   141,   144,   100,
-     106,   111,   182,   119,   158,   158,   158,   183,   170,   184,
-     196,   122,   108,   357,   116,   154,   123,   205,   157,   157,
-     157,   158,    76,   204,   107,    69,    70,    82,    83,    84,
-      85,    86,    87,   172,   173,   157,   174,    82,    83,    84,
-      85,    86,    87,   189,   192,   177,   181,   200,   201,   202,
-     203,   197,   210,    69,    70,   211,   230,   176,   180,    78,
-      79,    80,    81,   212,    82,    83,    84,    85,    86,    87,
-     213,    88,    89,    90,    91,    92,    93,    94,    95,    96,
-      97,   215,    85,    86,   214,    69,    70,   217,   230,   113,
-      85,    86,   218,   185,   114,   220,    85,    86,   200,   201,
-     202,   203,   207,   236,    85,    86,   219,   222,   209,    69,
-      70,   223,   230,   299,   300,   301,   302,    78,    79,    80,
-      81,   216,    82,    83,    84,    85,    86,    87,   243,    88,
-      89,    90,    91,    92,    93,    94,    95,    96,    97,    82,
-      83,    84,   244,   221,    87,   374,   375,   376,   377,    98,
-     246,   250,   200,   201,   202,   203,   234,    69,    70,   237,
-      71,    69,    70,   224,    71,   225,   239,   226,   231,   233,
-     227,   248,   228,   229,   249,    69,    70,   235,    71,   322,
-      85,    86,   255,    69,    70,   257,    71,   240,   265,   264,
-     270,   269,   324,    85,    86,   278,   277,   279,   241,   242,
-     282,   283,   258,   263,   245,   268,   247,   104,   260,   313,
-     276,   327,    85,    86,   206,    85,    86,   251,   252,   253,
-     254,   273,   256,   208,    85,    86,   261,   305,   266,   303,
-     271,   259,   312,   274,    69,    70,   320,   284,   321,   272,
-     280,   233,   233,   233,   233,   233,   233,   233,   238,    85,
-      86,   326,   233,   298,   299,   300,   301,   302,   281,    69,
-      70,   297,    71,   308,    69,    70,   323,   286,   352,    85,
-      86,   325,    69,    70,   307,    71,   310,    69,    70,   328,
-     288,   346,    69,    70,   309,   290,   350,   314,   351,   336,
-     315,    69,    70,   316,    71,   337,   335,   299,   300,   301,
-     302,   233,   317,   233,   318,   233,   354,   233,   349,   233,
-     319,   233,   398,    85,    86,   353,   339,   341,   343,   345,
-     347,   233,   359,   200,   201,   202,   203,   361,   378,   384,
-      69,    70,   362,   292,   233,   363,   233,   364,   366,   391,
-     404,   385,   405,   367,   393,   406,   178,    82,    83,    84,
-      85,    86,    87,   233,   396,   233,   397,   233,   399,   233,
-     400,   233,   127,   285,   287,   289,   291,   293,   295,   296,
-     402,   420,    69,    70,   306,   294,    88,    89,    90,    91,
-      92,    93,    94,    95,    96,    97,    78,    79,    80,    81,
-     198,   408,   410,   412,   414,   419,   194,   430,    88,    89,
-      90,    91,    92,    93,    94,    95,    96,    97,   195,    69,
-      70,   429,   230,     0,   233,     0,   128,   129,   130,   131,
-     132,   133,   134,   329,   233,   330,   233,   331,   233,   332,
-     233,   333,   127,   334,    69,    70,     0,    71,   165,   166,
-     167,   168,   169,   348,     0,     0,     0,    78,    79,    80,
-      81,    69,    70,     0,   304,     0,   356,     0,   358,    88,
-      89,    90,    91,    92,    93,    94,    95,    96,    97,    69,
-      70,     0,   338,    69,    70,   379,   117,   386,     0,   387,
-       0,   388,     0,   389,     0,     0,   128,   129,   130,   131,
-     132,   133,   134,     0,     0,   146,   147,   148,   149,   150,
-     151,     0,    88,    89,    90,    91,    92,    93,    94,    95,
-      96,    97,   360,   200,   201,   202,   203,    69,    70,     0,
-     340,   193,     1,     2,     3,     4,     0,     5,     0,     6,
-      69,    70,     0,   342,    69,    70,   421,   155,     0,   365,
-     200,   201,   202,   203,    69,    70,   425,   344,   426,     0,
-     427,     0,   428,     7,     8,     9,    10,    11,    12,    13,
-      14,    15,    16,    17,    18,    19,    20,    21,    22,    23,
-      24,    25,    26,    27,    28,    29,    30,    31,    32,    33,
-     152,     0,    34,    35,    36,    37,    38,    39,    40,    41,
-      42,    43,    44,    45,    46,    47,    48,    49,    50,     1,
-       2,     3,     4,     0,     5,     0,     6,    51,    52,    53,
-      54,    55,    56,    57,    58,    59,    60,     0,    62,   368,
-     299,   300,   301,   302,   369,   299,   300,   301,   302,     0,
-       7,     8,     9,    10,    11,    12,    13,    14,    15,    16,
-      17,    18,    19,    20,    21,    22,    23,    24,    25,    26,
-      27,    28,    29,    30,    31,    32,    33,     0,     0,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48,    49,    50,   370,   299,   300,   301,
-     302,     0,     0,     0,    51,    52,    53,    54,    55,    56,
-      57,    58,    59,    60,    61,    62,    78,    79,    80,    81,
-     371,   299,   300,   301,   302,     0,     0,     0,    88,    89,
-      90,    91,    92,    93,    94,    95,    96,    97,    78,    79,
-      80,    81,   372,   299,   300,   301,   302,     0,     0,     0,
-      88,    89,    90,    91,    92,    93,    94,    95,    96,    97,
-      78,    79,    80,    81,   373,   299,   300,   301,   302,     0,
-       0,     0,    88,    89,    90,    91,    92,    93,    94,    95,
-      96,    97,    88,    89,    90,    91,    92,    93,    94,    95,
-      96,    97,    88,    89,    90,    91,    92,    93,    94,    95,
-      96,    97,     0,    69,    70,     0,   262,    88,    89,    90,
-      91,    92,    93,    94,    95,    96,    97,   390,   200,   201,
-     202,   203,     0,     0,     0,    69,    70,     0,   267,    88,
-      89,    90,    91,    92,    93,    94,    95,    96,    97,     0,
-      69,    70,   127,   407,     0,     0,     0,    69,    70,     0,
-     275,     0,   392,   299,   300,   301,   302,    69,    70,     0,
-     230,     0,   394,   200,   201,   202,   203,    69,    70,     0,
-      71,    88,    89,    90,    91,    92,    93,    94,    95,    96,
-      97,    69,    70,     0,   409,   162,    88,    89,    90,    91,
-      92,    93,    94,    95,    96,    97,   128,   129,   130,   131,
-     132,   133,   134,    69,    70,     0,   411,   187,     0,   395,
-     200,   201,   202,   203,    69,    70,     0,   139,   380,   381,
-     382,    85,    86,   383,     0,    88,    89,    90,    91,    92,
-      93,    94,    95,    96,    97,   401,   299,   300,   301,   302,
-     403,   299,   300,   301,   302,    69,    70,     0,   413,   190,
-       0,   415,   299,   300,   301,   302,   416,   299,   300,   301,
-     302,     0,     0,     0,   311,     0,   417,   299,   300,   301,
-     302,   418,   299,   300,   301,   302,   422,   200,   201,   202,
-     203,   423,   200,   201,   202,   203,   424,   200,   201,   202,
-     203,   431,   200,   201,   202,   203,   432,   299,   300,   301,
-     302,   433,   299,   300,   301,   302,   434,   299,   300,   301,
-     302,   435,   299,   300,   301,   302,   436,   299,   300,   301,
-     302
+      80,   118,   340,    83,   171,   172,    88,   121,    76,   221,
+      82,   131,   122,   137,   147,   119,    87,   127,   133,   152,
+     155,   111,   117,   134,   194,   130,   169,   169,   169,   212,
+     195,   182,   196,   217,   218,   219,   220,   165,   188,   192,
+     168,   168,   168,   214,    86,   149,   215,   169,   222,   153,
+     156,   227,   189,   193,   176,   177,   178,   179,   180,   181,
+     228,   168,    93,    94,    95,    96,    97,    98,    77,    78,
+     201,   204,   232,    96,    97,   114,   120,   210,   211,   132,
+      89,    90,    91,    92,   260,    93,    94,    95,    96,    97,
+      98,   261,    99,   100,   101,   102,   103,   104,   105,   106,
+     107,   108,   237,    96,    97,   229,   376,   230,   217,   218,
+     219,   220,   266,   224,   269,   217,   218,   219,   220,   226,
+     197,    89,    90,    91,    92,   378,    93,    94,    95,    96,
+      97,    98,   233,    99,   100,   101,   102,   103,   104,   105,
+     106,   107,   108,   231,   253,    96,    97,   234,    77,    78,
+     263,   247,   211,   248,   238,   235,    77,    78,   236,    79,
+     343,    96,    97,   267,   345,    96,    97,   251,   239,   240,
+     254,   124,    96,    97,   109,   241,   125,   256,    89,    90,
+      91,    92,    77,    78,   242,   247,    77,    78,   243,    79,
+      99,   100,   101,   102,   103,   104,   105,   106,   107,   108,
+     250,    77,    78,   265,   247,    93,    94,    95,   268,   277,
+      98,   217,   218,   219,   220,   115,   244,   281,   274,   286,
+     245,   291,   184,   185,   294,   284,   246,   289,    77,    78,
+     252,    79,   297,   299,   257,   258,   302,   303,   259,   283,
+     279,   288,   262,   264,    77,    78,   296,    79,    77,    78,
+     292,    79,   278,   333,   270,   271,   272,   273,   334,   276,
+      77,    78,    84,   325,   319,   320,   321,   322,   332,    77,
+      78,   300,   128,    77,    78,   341,    79,   342,   250,   250,
+     250,   250,   250,   250,   250,   280,   344,   337,   293,   250,
+     347,   346,   301,   285,   317,   290,   223,    96,    97,   349,
+     298,   323,   348,    96,    97,   186,    93,    94,    95,    96,
+      97,    98,   327,   329,   368,   318,   319,   320,   321,   322,
+     367,   395,   396,   397,   398,   371,   328,   372,   370,   356,
+     319,   320,   321,   322,   330,   374,   380,   217,   218,   219,
+     220,   250,   335,   250,   336,   250,   339,   250,   338,   250,
+     357,   250,    77,    78,   358,   304,   360,   362,   364,   366,
+     375,   250,   406,   381,   217,   218,   219,   220,   399,   405,
+      77,    78,   382,   306,   250,   384,   250,   383,   387,   420,
+     425,   385,   426,   388,   440,   427,    77,    78,   412,    79,
+      77,    78,   414,   308,   250,   417,   250,   421,   250,   138,
+     250,   418,   250,   305,   307,   309,   311,   313,   315,   316,
+     423,   441,   213,   208,   326,    99,   100,   101,   102,   103,
+     104,   105,   106,   107,   108,   209,    89,    90,    91,    92,
+       0,     0,   429,   431,   433,   435,     0,   451,    99,   100,
+     101,   102,   103,   104,   105,   106,   107,   108,     0,    77,
+      78,   450,   310,    77,    78,   250,   312,   139,   140,   141,
+     142,   143,   144,   145,     0,   250,   350,   250,   351,   250,
+     352,   250,   353,     0,   354,     0,   355,   190,    93,    94,
+      95,    96,    97,    98,    77,    78,   369,   314,     0,     0,
+      89,    90,    91,    92,    77,    78,     0,   324,     0,   377,
+     138,   379,    99,   100,   101,   102,   103,   104,   105,   106,
+     107,   108,   386,   217,   218,   219,   220,    77,    78,   400,
+     166,   407,     0,   408,     0,   409,     0,   410,   389,   319,
+     320,   321,   322,   225,    96,    97,   157,   158,   159,   160,
+     161,   162,     0,    99,   100,   101,   102,   103,   104,   105,
+     106,   107,   108,   390,   319,   320,   321,   322,   139,   140,
+     141,   142,   143,   144,   145,     1,     0,     2,     3,     4,
+       5,     6,     7,     8,     9,     0,    77,    78,     0,    79,
+     442,    77,    78,     0,   282,    77,    78,     0,   247,     0,
+     446,     0,   447,     0,   448,     0,   449,    10,    11,    12,
+      13,    14,    15,    16,    17,    18,    19,    20,    21,    22,
+      23,    24,    25,    26,    27,    28,    29,    30,    31,    32,
+      33,    34,    35,    36,    37,   163,    38,    39,    40,    41,
+      42,    43,    44,    45,    46,    47,    48,    49,    50,    51,
+      52,    53,    54,    55,    56,    57,    58,   391,   319,   320,
+     321,   322,   255,    96,    97,    59,    60,    61,    62,    63,
+      64,    65,    66,    67,    68,    69,    70,   205,   206,     2,
+       3,     4,     5,     6,     7,     8,     9,   392,   319,   320,
+     321,   322,    77,    78,   275,    99,   100,   101,   102,   103,
+     104,   105,   106,   107,   108,    77,    78,     0,   359,    10,
+      11,    12,    13,    14,    15,    16,    17,    18,    19,    20,
+      21,    22,    23,    24,    25,    26,    27,    28,    29,    30,
+      31,    32,    33,    34,    35,    36,    37,     0,    38,    39,
+      40,    41,    42,    43,    44,    45,    46,    47,    48,    49,
+      50,    51,    52,    53,    54,    55,    56,    57,    58,   393,
+     319,   320,   321,   322,   373,    96,    97,    59,    60,    61,
+      62,    63,    64,    65,    66,    67,    68,   173,   207,    89,
+      90,    91,    92,   394,   319,   320,   321,   322,   419,    96,
+      97,    99,   100,   101,   102,   103,   104,   105,   106,   107,
+     108,    89,    90,    91,    92,   411,   217,   218,   219,   220,
+       0,     0,     0,    99,   100,   101,   102,   103,   104,   105,
+     106,   107,   108,    99,   100,   101,   102,   103,   104,   105,
+     106,   107,   108,    99,   100,   101,   102,   103,   104,   105,
+     106,   107,   108,    99,   100,   101,   102,   103,   104,   105,
+     106,   107,   108,    99,   100,   101,   102,   103,   104,   105,
+     106,   107,   108,   413,   319,   320,   321,   322,   138,     0,
+      77,    78,     0,   287,    99,   100,   101,   102,   103,   104,
+     105,   106,   107,   108,   415,   217,   218,   219,   220,     0,
+       0,     0,    77,    78,     0,   295,     0,   416,   217,   218,
+     219,   220,    77,    78,     0,   247,     0,   422,   319,   320,
+     321,   322,    77,    78,     0,    79,     0,   424,   319,   320,
+     321,   322,     0,     0,     0,   199,   139,   140,   141,   142,
+     143,   144,   145,     0,     0,   202,     0,   436,   319,   320,
+     321,   322,     0,     0,    77,    78,     0,   150,     0,     0,
+     401,   402,   403,    96,    97,   404,   331,    99,   100,   101,
+     102,   103,   104,   105,   106,   107,   108,   437,   319,   320,
+     321,   322,   438,   319,   320,   321,   322,   439,   319,   320,
+     321,   322,   443,   217,   218,   219,   220,   444,   217,   218,
+     219,   220,   445,   217,   218,   219,   220,   452,   217,   218,
+     219,   220,   453,   319,   320,   321,   322,   454,   319,   320,
+     321,   322,   455,   319,   320,   321,   322,   456,   319,   320,
+     321,   322,   457,   319,   320,   321,   322,    77,    78,     0,
+     361,    77,    78,     0,   363,    77,    78,     0,   365,    77,
+      78,     0,   428,    77,    78,     0,   430,    77,    78,     0,
+     432,    77,    78,     0,   434
 };
 
 static const yytype_int16 yycheck[] =
 {
-       2,    28,     4,   101,     7,     8,    27,    28,    11,    11,
-      15,    13,    14,   102,    19,    20,    20,    19,    20,     7,
-       8,    25,    43,    11,    26,    27,    28,    17,   101,    19,
-       3,    20,     8,    28,    10,    23,    25,    81,    26,    27,
-      28,    43,     5,    81,     8,   100,   101,    18,    19,    20,
-      21,    22,    23,    39,    40,    43,    17,    18,    19,    20,
-      21,    22,    23,    51,    52,    41,    42,   105,   106,   107,
-     108,     0,    81,   100,   101,    81,   103,    41,    42,    13,
-      14,    15,    16,    81,    18,    19,    20,    21,    22,    23,
-      81,    25,    26,    27,    28,    29,    30,    31,    32,    33,
-      34,    20,    21,    22,    81,   100,   101,    81,   103,    20,
-      21,    22,    81,   103,    25,    20,    21,    22,   105,   106,
-     107,   108,    98,    20,    21,    22,    81,    81,   104,   100,
-     101,    81,   103,   105,   106,   107,   108,    13,    14,    15,
-      16,   117,    18,    19,    20,    21,    22,    23,    23,    25,
-      26,    27,    28,    29,    30,    31,    32,    33,    34,    18,
-      19,    20,    28,   139,    23,   105,   106,   107,   108,   103,
-      28,   104,   105,   106,   107,   108,   152,   100,   101,   155,
-     103,   100,   101,    81,   103,    81,   162,    81,   152,   152,
-      81,   193,    81,    81,   196,   100,   101,    81,   103,    20,
-      21,    22,   204,   100,   101,   104,   103,    81,   211,   211,
-     213,   213,    20,    21,    22,   218,   218,   219,    81,    81,
-     222,   223,   105,   211,    81,   213,    81,   103,   105,    24,
-     218,    20,    21,    22,    20,    21,    22,   200,   201,   202,
-     203,   105,   205,    20,    21,    22,   210,   235,   212,   105,
-     214,   104,   240,   217,   100,   101,   258,   103,   260,   104,
-     104,   224,   225,   226,   227,   228,   229,   230,    20,    21,
-      22,   273,   235,   104,   105,   106,   107,   108,   104,   100,
-     101,   104,   103,   105,   100,   101,   262,   103,    20,    21,
-      22,   267,   100,   101,   104,   103,   105,   100,   101,   275,
-     103,   303,   100,   101,   104,   103,   308,    20,   310,    81,
-     104,   100,   101,   104,   103,    81,   104,   105,   106,   107,
-     108,   284,   103,   286,   104,   288,    81,   290,   304,   292,
-     103,   294,    20,    21,    22,   311,   299,   300,   301,   302,
-     304,   304,   104,   105,   106,   107,   108,   104,   336,   337,
-     100,   101,   105,   103,   317,   104,   319,   105,   104,   104,
-     362,   337,   364,   105,   105,   367,    17,    18,    19,    20,
-      21,    22,    23,   336,   104,   338,   105,   340,   354,   342,
-     104,   344,    28,   224,   225,   226,   227,   228,   229,   230,
-     104,   393,   100,   101,   235,   103,    25,    26,    27,    28,
-      29,    30,    31,    32,    33,    34,    13,    14,    15,    16,
-      64,   374,   375,   376,   377,    81,    61,   419,    25,    26,
-      27,    28,    29,    30,    31,    32,    33,    34,    61,   100,
-     101,   419,   103,    -1,   397,    -1,    82,    83,    84,    85,
-      86,    87,    88,   284,   407,   286,   409,   288,   411,   290,
-     413,   292,    28,   294,   100,   101,    -1,   103,    33,    34,
-      35,    36,    37,   304,    -1,    -1,    -1,    13,    14,    15,
-      16,   100,   101,    -1,   103,    -1,   317,    -1,   319,    25,
-      26,    27,    28,    29,    30,    31,    32,    33,    34,   100,
-     101,    -1,   103,   100,   101,   336,   103,   338,    -1,   340,
-      -1,   342,    -1,   344,    -1,    -1,    82,    83,    84,    85,
-      86,    87,    88,    -1,    -1,    18,    19,    20,    21,    22,
-      23,    -1,    25,    26,    27,    28,    29,    30,    31,    32,
-      33,    34,   104,   105,   106,   107,   108,   100,   101,    -1,
-     103,     3,     4,     5,     6,     7,    -1,     9,    -1,    11,
-     100,   101,    -1,   103,   100,   101,   397,   103,    -1,   104,
-     105,   106,   107,   108,   100,   101,   407,   103,   409,    -1,
-     411,    -1,   413,    35,    36,    37,    38,    39,    40,    41,
-      42,    43,    44,    45,    46,    47,    48,    49,    50,    51,
-      52,    53,    54,    55,    56,    57,    58,    59,    60,    61,
-     103,    -1,    64,    65,    66,    67,    68,    69,    70,    71,
-      72,    73,    74,    75,    76,    77,    78,    79,    80,     4,
-       5,     6,     7,    -1,     9,    -1,    11,    89,    90,    91,
-      92,    93,    94,    95,    96,    97,    98,    -1,   100,   104,
-     105,   106,   107,   108,   104,   105,   106,   107,   108,    -1,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
-      55,    56,    57,    58,    59,    60,    61,    -1,    -1,    64,
-      65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
-      75,    76,    77,    78,    79,    80,   104,   105,   106,   107,
-     108,    -1,    -1,    -1,    89,    90,    91,    92,    93,    94,
-      95,    96,    97,    98,    99,   100,    13,    14,    15,    16,
-     104,   105,   106,   107,   108,    -1,    -1,    -1,    25,    26,
-      27,    28,    29,    30,    31,    32,    33,    34,    13,    14,
-      15,    16,   104,   105,   106,   107,   108,    -1,    -1,    -1,
+       3,    11,     3,     6,    30,    31,     9,    20,   105,    85,
+     106,    14,    25,    16,    17,    11,   106,    13,    20,    22,
+      23,    10,    11,    25,    50,    14,    29,    30,    31,     0,
+      17,   105,    19,   109,   110,   111,   112,    26,    48,    49,
+      29,    30,    31,     3,     7,    18,     3,    50,    85,    22,
+      23,    85,    48,    49,    37,    38,    39,    40,    41,    42,
+      85,    50,    18,    19,    20,    21,    22,    23,   104,   105,
+      59,    60,    20,    21,    22,    10,    11,     3,     4,    14,
+      13,    14,    15,    16,    23,    18,    19,    20,    21,    22,
+      23,    28,    25,    26,    27,    28,    29,    30,    31,    32,
+      33,    34,    20,    21,    22,    85,    28,    85,   109,   110,
+     111,   112,     3,   109,   108,   109,   110,   111,   112,   115,
+     107,    13,    14,    15,    16,    28,    18,    19,    20,    21,
+      22,    23,   128,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    34,    85,    20,    21,    22,    85,   104,   105,
+      28,   107,     4,   163,   150,    85,   104,   105,    85,   107,
+      20,    21,    22,     3,    20,    21,    22,   163,    85,    85,
+     166,    20,    21,    22,   107,    85,    25,   173,    13,    14,
+      15,    16,   104,   105,    85,   107,   104,   105,    85,   107,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      13,    14,    15,    16,   104,   105,   106,   107,   108,    -1,
-      -1,    -1,    25,    26,    27,    28,    29,    30,    31,    32,
-      33,    34,    25,    26,    27,    28,    29,    30,    31,    32,
-      33,    34,    25,    26,    27,    28,    29,    30,    31,    32,
-      33,    34,    -1,   100,   101,    -1,   103,    25,    26,    27,
-      28,    29,    30,    31,    32,    33,    34,   104,   105,   106,
-     107,   108,    -1,    -1,    -1,   100,   101,    -1,   103,    25,
-      26,    27,    28,    29,    30,    31,    32,    33,    34,    -1,
-     100,   101,    28,   103,    -1,    -1,    -1,   100,   101,    -1,
-     103,    -1,   104,   105,   106,   107,   108,   100,   101,    -1,
-     103,    -1,   104,   105,   106,   107,   108,   100,   101,    -1,
-     103,    25,    26,    27,    28,    29,    30,    31,    32,    33,
-      34,   100,   101,    -1,   103,   103,    25,    26,    27,    28,
-      29,    30,    31,    32,    33,    34,    82,    83,    84,    85,
-      86,    87,    88,   100,   101,    -1,   103,   103,    -1,   104,
-     105,   106,   107,   108,   100,   101,    -1,   103,    18,    19,
-      20,    21,    22,    23,    -1,    25,    26,    27,    28,    29,
-      30,    31,    32,    33,    34,   104,   105,   106,   107,   108,
-     104,   105,   106,   107,   108,   100,   101,    -1,   103,   103,
-      -1,   104,   105,   106,   107,   108,   104,   105,   106,   107,
-     108,    -1,    -1,    -1,   103,    -1,   104,   105,   106,   107,
-     108,   104,   105,   106,   107,   108,   104,   105,   106,   107,
-     108,   104,   105,   106,   107,   108,   104,   105,   106,   107,
-     108,   104,   105,   106,   107,   108,   104,   105,   106,   107,
-     108,   104,   105,   106,   107,   108,   104,   105,   106,   107,
-     108,   104,   105,   106,   107,   108,   104,   105,   106,   107,
-     108
+     163,   104,   105,   206,   107,    18,    19,    20,   211,   108,
+      23,   109,   110,   111,   112,   107,    85,   227,   221,   229,
+      85,   231,    44,    45,   234,   228,    85,   230,   104,   105,
+      85,   107,   235,   236,    85,    85,   239,   240,    85,   228,
+     108,   230,    85,    85,   104,   105,   235,   107,   104,   105,
+     108,   107,   109,    24,   217,   218,   219,   220,    20,   222,
+     104,   105,   106,   252,   109,   110,   111,   112,   257,   104,
+     105,   108,   107,   104,   105,   278,   107,   280,   241,   242,
+     243,   244,   245,   246,   247,   109,   282,   107,   109,   252,
+     293,   287,   108,   228,   108,   230,    20,    21,    22,   295,
+     235,   109,    20,    21,    22,    17,    18,    19,    20,    21,
+      22,    23,   108,   108,   324,   108,   109,   110,   111,   112,
+     323,   109,   110,   111,   112,   328,   109,   330,   324,   108,
+     109,   110,   111,   112,   109,   331,   108,   109,   110,   111,
+     112,   304,   108,   306,   108,   308,   107,   310,   108,   312,
+      85,   314,   104,   105,    85,   107,   319,   320,   321,   322,
+      85,   324,   358,   108,   109,   110,   111,   112,   357,   358,
+     104,   105,   108,   107,   337,   108,   339,   109,   108,   375,
+     383,   109,   385,   109,    85,   388,   104,   105,   108,   107,
+     104,   105,   109,   107,   357,   108,   359,   108,   361,    28,
+     363,   109,   365,   241,   242,   243,   244,   245,   246,   247,
+     108,   414,    72,    69,   252,    25,    26,    27,    28,    29,
+      30,    31,    32,    33,    34,    69,    13,    14,    15,    16,
+      -1,    -1,   395,   396,   397,   398,    -1,   440,    25,    26,
+      27,    28,    29,    30,    31,    32,    33,    34,    -1,   104,
+     105,   440,   107,   104,   105,   418,   107,    86,    87,    88,
+      89,    90,    91,    92,    -1,   428,   304,   430,   306,   432,
+     308,   434,   310,    -1,   312,    -1,   314,    17,    18,    19,
+      20,    21,    22,    23,   104,   105,   324,   107,    -1,    -1,
+      13,    14,    15,    16,   104,   105,    -1,   107,    -1,   337,
+      28,   339,    25,    26,    27,    28,    29,    30,    31,    32,
+      33,    34,   108,   109,   110,   111,   112,   104,   105,   357,
+     107,   359,    -1,   361,    -1,   363,    -1,   365,   108,   109,
+     110,   111,   112,    20,    21,    22,    18,    19,    20,    21,
+      22,    23,    -1,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    34,   108,   109,   110,   111,   112,    86,    87,
+      88,    89,    90,    91,    92,     3,    -1,     5,     6,     7,
+       8,     9,    10,    11,    12,    -1,   104,   105,    -1,   107,
+     418,   104,   105,    -1,   107,   104,   105,    -1,   107,    -1,
+     428,    -1,   430,    -1,   432,    -1,   434,    35,    36,    37,
+      38,    39,    40,    41,    42,    43,    44,    45,    46,    47,
+      48,    49,    50,    51,    52,    53,    54,    55,    56,    57,
+      58,    59,    60,    61,    62,   107,    64,    65,    66,    67,
+      68,    69,    70,    71,    72,    73,    74,    75,    76,    77,
+      78,    79,    80,    81,    82,    83,    84,   108,   109,   110,
+     111,   112,    20,    21,    22,    93,    94,    95,    96,    97,
+      98,    99,   100,   101,   102,   103,   104,     3,     4,     5,
+       6,     7,     8,     9,    10,    11,    12,   108,   109,   110,
+     111,   112,   104,   105,   106,    25,    26,    27,    28,    29,
+      30,    31,    32,    33,    34,   104,   105,    -1,   107,    35,
+      36,    37,    38,    39,    40,    41,    42,    43,    44,    45,
+      46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
+      56,    57,    58,    59,    60,    61,    62,    -1,    64,    65,
+      66,    67,    68,    69,    70,    71,    72,    73,    74,    75,
+      76,    77,    78,    79,    80,    81,    82,    83,    84,   108,
+     109,   110,   111,   112,    20,    21,    22,    93,    94,    95,
+      96,    97,    98,    99,   100,   101,   102,   107,   104,    13,
+      14,    15,    16,   108,   109,   110,   111,   112,    20,    21,
+      22,    25,    26,    27,    28,    29,    30,    31,    32,    33,
+      34,    13,    14,    15,    16,   108,   109,   110,   111,   112,
+      -1,    -1,    -1,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    34,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    34,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    34,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    34,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    34,   108,   109,   110,   111,   112,    28,    -1,
+     104,   105,    -1,   107,    25,    26,    27,    28,    29,    30,
+      31,    32,    33,    34,   108,   109,   110,   111,   112,    -1,
+      -1,    -1,   104,   105,    -1,   107,    -1,   108,   109,   110,
+     111,   112,   104,   105,    -1,   107,    -1,   108,   109,   110,
+     111,   112,   104,   105,    -1,   107,    -1,   108,   109,   110,
+     111,   112,    -1,    -1,    -1,   107,    86,    87,    88,    89,
+      90,    91,    92,    -1,    -1,   107,    -1,   108,   109,   110,
+     111,   112,    -1,    -1,   104,   105,    -1,   107,    -1,    -1,
+      18,    19,    20,    21,    22,    23,   107,    25,    26,    27,
+      28,    29,    30,    31,    32,    33,    34,   108,   109,   110,
+     111,   112,   108,   109,   110,   111,   112,   108,   109,   110,
+     111,   112,   108,   109,   110,   111,   112,   108,   109,   110,
+     111,   112,   108,   109,   110,   111,   112,   108,   109,   110,
+     111,   112,   108,   109,   110,   111,   112,   108,   109,   110,
+     111,   112,   108,   109,   110,   111,   112,   108,   109,   110,
+     111,   112,   108,   109,   110,   111,   112,   104,   105,    -1,
+     107,   104,   105,    -1,   107,   104,   105,    -1,   107,   104,
+     105,    -1,   107,   104,   105,    -1,   107,   104,   105,    -1,
+     107,   104,   105,    -1,   107
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     4,     5,     6,     7,     9,    11,    35,    36,    37,
-      38,    39,    40,    41,    42,    43,    44,    45,    46,    47,
-      48,    49,    50,    51,    52,    53,    54,    55,    56,    57,
-      58,    59,    60,    61,    64,    65,    66,    67,    68,    69,
-      70,    71,    72,    73,    74,    75,    76,    77,    78,    79,
-      80,    89,    90,    91,    92,    93,    94,    95,    96,    97,
-      98,    99,   100,   110,   111,   112,   113,   114,   101,   100,
-     101,   103,   136,   139,   136,   138,   139,   102,    13,    14,
-      15,    16,    18,    19,    20,    21,    22,    23,    25,    26,
-      27,    28,    29,    30,    31,    32,    33,    34,   103,   121,
-     134,   135,   140,   141,   103,   122,   134,   135,   140,   141,
-      20,    25,   123,    20,    25,   124,   140,   103,   125,   134,
-     136,   141,    20,    25,   126,   128,   136,    28,    82,    83,
-      84,    85,    86,    87,    88,   129,   136,   142,   142,   103,
-     130,   136,   142,   131,   136,   142,    18,    19,    20,    21,
-      22,    23,   103,   119,   134,   103,   120,   134,   136,   141,
-     120,   120,   103,   115,   134,   115,   115,   115,   115,   115,
-     101,   116,   116,   116,    17,   132,   135,   140,    17,   133,
-     135,   140,   120,    17,    19,   103,   127,   103,   117,   134,
-     103,   118,   134,     3,   113,   114,     3,     0,   112,   136,
-     105,   106,   107,   108,    81,    81,    20,   140,    20,   140,
-      81,    81,    81,    81,    81,    20,   140,    81,    81,    81,
-      20,   140,    81,    81,    81,    81,    81,    81,    81,    81,
-     103,   135,   137,   139,   140,    81,    20,   140,    20,   140,
-      81,    81,    81,    23,    28,    81,    28,    81,   136,   136,
-     104,   139,   139,   139,   139,   136,   139,   104,   105,   104,
-     105,   135,   103,   134,   136,   141,   135,   103,   134,   136,
-     141,   135,   104,   105,   135,   103,   134,   136,   141,   136,
-     104,   104,   136,   136,   103,   137,   103,   137,   103,   137,
-     103,   137,   103,   137,   103,   137,   137,   104,   104,   105,
-     106,   107,   108,   105,   103,   134,   137,   104,   105,   104,
-     105,   103,   134,    24,    20,   104,   104,   103,   104,   103,
-     136,   136,    20,   140,    20,   140,   136,    20,   140,   137,
-     137,   137,   137,   137,   137,   104,    81,    81,   103,   139,
-     103,   139,   103,   139,   103,   139,   136,   135,   137,   140,
-     136,   136,    20,   140,    81,    28,   137,    28,   137,   104,
-     104,   104,   105,   104,   105,   104,   104,   105,   104,   104,
-     104,   104,   104,   104,   105,   106,   107,   108,   134,   137,
-      18,    19,    20,    23,   134,   140,   137,   137,   137,   137,
-     104,   104,   104,   105,   104,   104,   104,   105,    20,   140,
-     104,   104,   104,   104,   136,   136,   136,   103,   139,   103,
-     139,   103,   139,   103,   139,   104,   104,   104,   104,    81,
-     136,   137,   104,   104,   104,   137,   137,   137,   137,   134,
-     136,   104,   104,   104,   104,   104,   104
+       0,     3,     5,     6,     7,     8,     9,    10,    11,    12,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    58,    59,    60,    61,    62,    64,    65,
+      66,    67,    68,    69,    70,    71,    72,    73,    74,    75,
+      76,    77,    78,    79,    80,    81,    82,    83,    84,    93,
+      94,    95,    96,    97,    98,    99,   100,   101,   102,   103,
+     104,   114,   115,   116,   117,   118,   105,   104,   105,   107,
+     140,   143,   106,   140,   106,   142,   143,   106,   140,    13,
+      14,    15,    16,    18,    19,    20,    21,    22,    23,    25,
+      26,    27,    28,    29,    30,    31,    32,    33,    34,   107,
+     125,   138,   139,   144,   145,   107,   126,   138,   139,   144,
+     145,    20,    25,   127,    20,    25,   128,   144,   107,   129,
+     138,   140,   145,    20,    25,   130,   132,   140,    28,    86,
+      87,    88,    89,    90,    91,    92,   133,   140,   146,   146,
+     107,   134,   140,   146,   135,   140,   146,    18,    19,    20,
+      21,    22,    23,   107,   123,   138,   107,   124,   138,   140,
+     145,   124,   124,   107,   119,   138,   119,   119,   119,   119,
+     119,   119,   105,   120,   120,   120,    17,   136,   139,   144,
+      17,   137,   139,   144,   124,    17,    19,   107,   131,   107,
+     121,   138,   107,   122,   138,     3,     4,   104,   117,   118,
+       3,     4,     0,   116,     3,     3,   140,   109,   110,   111,
+     112,    85,    85,    20,   144,    20,   144,    85,    85,    85,
+      85,    85,    20,   144,    85,    85,    85,    20,   144,    85,
+      85,    85,    85,    85,    85,    85,    85,   107,   139,   141,
+     143,   144,    85,    20,   144,    20,   144,    85,    85,    85,
+      23,    28,    85,    28,    85,   140,     3,     3,   140,   108,
+     143,   143,   143,   143,   140,   106,   143,   108,   109,   108,
+     109,   139,   107,   138,   140,   145,   139,   107,   138,   140,
+     145,   139,   108,   109,   139,   107,   138,   140,   145,   140,
+     108,   108,   140,   140,   107,   141,   107,   141,   107,   141,
+     107,   141,   107,   141,   107,   141,   141,   108,   108,   109,
+     110,   111,   112,   109,   107,   138,   141,   108,   109,   108,
+     109,   107,   138,    24,    20,   108,   108,   107,   108,   107,
+       3,   140,   140,    20,   144,    20,   144,   140,    20,   144,
+     141,   141,   141,   141,   141,   141,   108,    85,    85,   107,
+     143,   107,   143,   107,   143,   107,   143,   140,   139,   141,
+     144,   140,   140,    20,   144,    85,    28,   141,    28,   141,
+     108,   108,   108,   109,   108,   109,   108,   108,   109,   108,
+     108,   108,   108,   108,   108,   109,   110,   111,   112,   138,
+     141,    18,    19,    20,    23,   138,   144,   141,   141,   141,
+     141,   108,   108,   108,   109,   108,   108,   108,   109,    20,
+     144,   108,   108,   108,   108,   140,   140,   140,   107,   143,
+     107,   143,   107,   143,   107,   143,   108,   108,   108,   108,
+      85,   140,   141,   108,   108,   108,   141,   141,   141,   141,
+     138,   140,   108,   108,   108,   108,   108,   108
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,   109,   110,   111,   111,   112,   112,   112,   112,   112,
-     113,   113,   113,   113,   113,   113,   113,   113,   114,   114,
-     114,   114,   114,   114,   114,   114,   114,   114,   114,   114,
-     114,   114,   114,   114,   114,   114,   114,   114,   114,   114,
-     114,   114,   114,   114,   114,   114,   114,   114,   114,   114,
-     114,   114,   114,   114,   114,   114,   114,   114,   114,   114,
-     114,   114,   114,   114,   114,   114,   114,   114,   114,   114,
-     114,   114,   114,   115,   115,   115,   116,   116,   116,   117,
-     117,   117,   118,   118,   118,   119,   119,   119,   119,   119,
-     119,   119,   119,   119,   119,   119,   119,   119,   119,   119,
-     119,   119,   119,   119,   119,   119,   119,   119,   119,   119,
-     119,   119,   120,   120,   120,   120,   120,   121,   121,   121,
-     121,   121,   121,   122,   122,   122,   122,   122,   122,   123,
-     123,   123,   123,   123,   123,   124,   124,   124,   124,   124,
-     124,   124,   125,   125,   125,   125,   125,   126,   126,   126,
-     126,   126,   126,   127,   127,   127,   127,   128,   129,   129,
-     130,   130,   130,   130,   131,   131,   132,   132,   132,   133,
-     133,   133,   134,   134,   134,   134,   134,   134,   134,   134,
-     134,   134,   135,   135,   135,   135,   136,   136,   136,   136,
-     136,   136,   137,   137,   137,   137,   137,   137,   137,   137,
-     137,   137,   137,   137,   137,   137,   137,   137,   137,   138,
-     138,   139,   139,   140,   140,   141,   141,   141,   141,   142,
-     142,   142,   142,   142,   142,   142,   142
+       0,   113,   114,   115,   115,   116,   116,   116,   116,   116,
+     116,   116,   116,   117,   117,   117,   117,   117,   117,   117,
+     117,   117,   117,   118,   118,   118,   118,   118,   118,   118,
+     118,   118,   118,   118,   118,   118,   118,   118,   118,   118,
+     118,   118,   118,   118,   118,   118,   118,   118,   118,   118,
+     118,   118,   118,   118,   118,   118,   118,   118,   118,   118,
+     118,   118,   118,   118,   118,   118,   118,   118,   118,   118,
+     118,   118,   118,   118,   118,   118,   118,   118,   118,   118,
+     118,   118,   118,   119,   119,   119,   120,   120,   120,   121,
+     121,   121,   122,   122,   122,   123,   123,   123,   123,   123,
+     123,   123,   123,   123,   123,   123,   123,   123,   123,   123,
+     123,   123,   123,   123,   123,   123,   123,   123,   123,   123,
+     123,   123,   124,   124,   124,   124,   124,   125,   125,   125,
+     125,   125,   125,   126,   126,   126,   126,   126,   126,   127,
+     127,   127,   127,   127,   127,   128,   128,   128,   128,   128,
+     128,   128,   129,   129,   129,   129,   129,   130,   130,   130,
+     130,   130,   130,   131,   131,   131,   131,   132,   133,   133,
+     134,   134,   134,   134,   135,   135,   136,   136,   136,   137,
+     137,   137,   138,   138,   138,   138,   138,   138,   138,   138,
+     138,   138,   139,   139,   139,   139,   140,   140,   140,   140,
+     140,   140,   141,   141,   141,   141,   141,   141,   141,   141,
+     141,   141,   141,   141,   141,   141,   141,   141,   141,   142,
+     142,   142,   142,   143,   143,   144,   144,   145,   145,   145,
+     145,   146,   146,   146,   146,   146,   146,   146,   146
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     1,     2,     1,     1,     2,     2,     3,
-       1,     2,     4,     2,     2,     3,     2,     2,     1,     1,
+       0,     2,     1,     1,     2,     2,     2,     2,     3,     3,
+       4,     2,     1,     1,     2,     4,     2,     2,     2,     3,
+       2,     2,     2,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     2,     1,
        1,     1,     1,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1153,8 +1171,8 @@ static const yytype_int8 yyr2[] =
        1,     1,     1,     1,     1,     1,     1,     3,     3,     3,
        3,     3,     1,     3,     3,     3,     3,     5,     5,     5,
        5,     5,     5,     5,     5,     7,     7,     7,     7,     1,
-       3,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1
+       1,     3,     3,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1
 };
 
 
@@ -1888,91 +1906,127 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: lines  */
-#line 87 "grammar-firstpass.y"
+#line 93 "grammar-firstpass.y"
                                         {	}
-#line 1894 "grammar-firstpass.tab.c"
-    break;
-
-  case 3: /* lines: line  */
-#line 89 "grammar-firstpass.y"
-                                {   	}
-#line 1900 "grammar-firstpass.tab.c"
-    break;
-
-  case 4: /* lines: lines line  */
-#line 90 "grammar-firstpass.y"
-                                        { 	 	}
-#line 1906 "grammar-firstpass.tab.c"
-    break;
-
-  case 5: /* line: instruction  */
-#line 92 "grammar-firstpass.y"
-                                                                { }
 #line 1912 "grammar-firstpass.tab.c"
     break;
 
-  case 6: /* line: directive  */
-#line 93 "grammar-firstpass.y"
-                                                                                { }
+  case 3: /* lines: line  */
+#line 95 "grammar-firstpass.y"
+                                {   line_increase();	}
 #line 1918 "grammar-firstpass.tab.c"
     break;
 
-  case 7: /* line: LABEL instruction  */
-#line 94 "grammar-firstpass.y"
-                                                                        { sym_addlabel((yyvsp[-1].literal),pc_get()); }
+  case 4: /* lines: lines line  */
+#line 96 "grammar-firstpass.y"
+                                        { 	line_increase(); 	}
 #line 1924 "grammar-firstpass.tab.c"
     break;
 
-  case 8: /* line: LABEL directive  */
-#line 95 "grammar-firstpass.y"
-                                                                        { sym_addlabel((yyvsp[-1].literal),pc_get()); }
+  case 5: /* line: instruction ENTER  */
+#line 98 "grammar-firstpass.y"
+                                                                        { }
 #line 1930 "grammar-firstpass.tab.c"
     break;
 
-  case 9: /* line: LABEL EQU expression  */
-#line 96 "grammar-firstpass.y"
-                                                                        { sym_addlabel((yyvsp[-2].literal),(yyvsp[0].normal)); }
+  case 6: /* line: directive ENTER  */
+#line 99 "grammar-firstpass.y"
+                                                                                { }
 #line 1936 "grammar-firstpass.tab.c"
     break;
 
-  case 10: /* directive: END  */
-#line 99 "grammar-firstpass.y"
-                                                                                                        { return 0;}
+  case 7: /* line: LITERAL ENTER  */
+#line 100 "grammar-firstpass.y"
+                                                                                { firstpasserror("Syntax Error: Unknown instruction"); }
 #line 1942 "grammar-firstpass.tab.c"
     break;
 
-  case 11: /* directive: DEFS expression  */
-#line 100 "grammar-firstpass.y"
-                                                                                                { pc_inc((yyvsp[0].normal)); }
+  case 8: /* line: LABEL instruction ENTER  */
+#line 101 "grammar-firstpass.y"
+                                                                        { sym_addlabel((yyvsp[-2].literal),pc_get_last()); }
 #line 1948 "grammar-firstpass.tab.c"
     break;
 
-  case 12: /* directive: DEFS expression COMMA expression  */
-#line 101 "grammar-firstpass.y"
-                                                                                { pc_inc((yyvsp[-2].normal)); }
+  case 9: /* line: LABEL directive ENTER  */
+#line 102 "grammar-firstpass.y"
+                                                                        { sym_addlabel((yyvsp[-2].literal),pc_get_last()); }
 #line 1954 "grammar-firstpass.tab.c"
     break;
 
-  case 14: /* directive: DEFM STRING  */
+  case 10: /* line: LABEL EQU expression ENTER  */
 #line 103 "grammar-firstpass.y"
-                                                                                                { pc_inc( strlen((yyvsp[0].literal))); }
+                                                                        { sym_addlabel((yyvsp[-3].literal),(yyvsp[-1].normal)); }
 #line 1960 "grammar-firstpass.tab.c"
     break;
 
-  case 15: /* directive: LITERAL EQU expression  */
+  case 11: /* line: LABEL ENTER  */
 #line 104 "grammar-firstpass.y"
-                                                                                        { sym_addlabel((yyvsp[-2].literal),(yyvsp[0].normal)); }
+                                                                                { sym_addlabel((yyvsp[-1].literal),pc_get()); }
 #line 1966 "grammar-firstpass.tab.c"
     break;
 
-  case 16: /* directive: ORG INTEGER  */
+  case 12: /* line: ENTER  */
 #line 105 "grammar-firstpass.y"
-                                                                                                        { pc_init((yyvsp[0].normal)); }
+                                                                                        { }
 #line 1972 "grammar-firstpass.tab.c"
     break;
 
-  case 17: /* directive: ALIGN expression  */
-#line 106 "grammar-firstpass.y"
+  case 13: /* directive: END  */
+#line 107 "grammar-firstpass.y"
+                                                                                                        { return 0;}
+#line 1978 "grammar-firstpass.tab.c"
+    break;
+
+  case 14: /* directive: DEFS expression  */
+#line 108 "grammar-firstpass.y"
+                                                                                                { pc_inc((yyvsp[0].normal)); }
+#line 1984 "grammar-firstpass.tab.c"
+    break;
+
+  case 15: /* directive: DEFS expression COMMA expression  */
+#line 109 "grammar-firstpass.y"
+                                                                                { pc_inc((yyvsp[-2].normal)); }
+#line 1990 "grammar-firstpass.tab.c"
+    break;
+
+  case 16: /* directive: DEFB listexpr  */
+#line 110 "grammar-firstpass.y"
+                                                                                                { pc_inc((yyvsp[0].normal)); }
+#line 1996 "grammar-firstpass.tab.c"
+    break;
+
+  case 17: /* directive: DEFM STRING  */
+#line 111 "grammar-firstpass.y"
+                                                                                                { pc_inc( strlen((yyvsp[0].literal))); }
+#line 2002 "grammar-firstpass.tab.c"
+    break;
+
+  case 18: /* directive: DEFW expression  */
+#line 112 "grammar-firstpass.y"
+                                                                                                { pc_inc(2); }
+#line 2008 "grammar-firstpass.tab.c"
+    break;
+
+  case 19: /* directive: LITERAL EQU expression  */
+#line 113 "grammar-firstpass.y"
+                                                                                        { sym_addlabel((yyvsp[-2].literal),(yyvsp[0].normal)); }
+#line 2014 "grammar-firstpass.tab.c"
+    break;
+
+  case 20: /* directive: ORG INTEGER  */
+#line 114 "grammar-firstpass.y"
+                                                                                                        { pc_init((yyvsp[0].normal)); }
+#line 2020 "grammar-firstpass.tab.c"
+    break;
+
+  case 21: /* directive: INCBIN STRING  */
+#line 115 "grammar-firstpass.y"
+                                                                                                { pc_inc( preproc_include_bin((yyvsp[0].literal),NULL)); }
+#line 2026 "grammar-firstpass.tab.c"
+    break;
+
+  case 22: /* directive: ALIGN expression  */
+#line 116 "grammar-firstpass.y"
                                                 { 
 										int pc = pc_get();
 										int k = ((( pc / (yyvsp[0].normal))+1)*(yyvsp[0].normal)); 
@@ -1980,1079 +2034,1133 @@ yyreduce:
 											pc_inc(1); 
 										} 
 									}
-#line 1984 "grammar-firstpass.tab.c"
-    break;
-
-  case 18: /* instruction: NOP  */
-#line 115 "grammar-firstpass.y"
-                                                                { pc_inc(1); }
-#line 1990 "grammar-firstpass.tab.c"
-    break;
-
-  case 19: /* instruction: DI  */
-#line 116 "grammar-firstpass.y"
-                                                                        { pc_inc(1); }
-#line 1996 "grammar-firstpass.tab.c"
-    break;
-
-  case 20: /* instruction: EI  */
-#line 117 "grammar-firstpass.y"
-                                                                        { pc_inc(1); }
-#line 2002 "grammar-firstpass.tab.c"
-    break;
-
-  case 21: /* instruction: HALT  */
-#line 118 "grammar-firstpass.y"
-                                                                        { pc_inc(1); }
-#line 2008 "grammar-firstpass.tab.c"
-    break;
-
-  case 22: /* instruction: RLCA  */
-#line 119 "grammar-firstpass.y"
-                                                                        { pc_inc(1); }
-#line 2014 "grammar-firstpass.tab.c"
-    break;
-
-  case 23: /* instruction: RRCA  */
-#line 120 "grammar-firstpass.y"
-                                                                        { pc_inc(1); }
-#line 2020 "grammar-firstpass.tab.c"
-    break;
-
-  case 24: /* instruction: RLA  */
-#line 121 "grammar-firstpass.y"
-                                                                        { pc_inc(1); }
-#line 2026 "grammar-firstpass.tab.c"
-    break;
-
-  case 25: /* instruction: CCF  */
-#line 122 "grammar-firstpass.y"
-                                                                        { pc_inc(1); }
-#line 2032 "grammar-firstpass.tab.c"
-    break;
-
-  case 26: /* instruction: CPIR  */
-#line 123 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
 #line 2038 "grammar-firstpass.tab.c"
     break;
 
-  case 27: /* instruction: CPI  */
+  case 23: /* instruction: NOP  */
 #line 124 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
+                                                                { pc_inc(1); }
 #line 2044 "grammar-firstpass.tab.c"
     break;
 
-  case 28: /* instruction: CPDR  */
+  case 24: /* instruction: DI  */
 #line 125 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
+                                                                        { pc_inc(1); }
 #line 2050 "grammar-firstpass.tab.c"
     break;
 
-  case 29: /* instruction: CPD  */
+  case 25: /* instruction: EI  */
 #line 126 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
+                                                                        { pc_inc(1); }
 #line 2056 "grammar-firstpass.tab.c"
     break;
 
-  case 30: /* instruction: RET  */
+  case 26: /* instruction: HALT  */
 #line 127 "grammar-firstpass.y"
                                                                         { pc_inc(1); }
 #line 2062 "grammar-firstpass.tab.c"
     break;
 
-  case 31: /* instruction: RETN  */
+  case 27: /* instruction: RLCA  */
 #line 128 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
+                                                                        { pc_inc(1); }
 #line 2068 "grammar-firstpass.tab.c"
     break;
 
-  case 32: /* instruction: RETI  */
+  case 28: /* instruction: RRCA  */
 #line 129 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
+                                                                        { pc_inc(1); }
 #line 2074 "grammar-firstpass.tab.c"
     break;
 
-  case 33: /* instruction: RST  */
+  case 29: /* instruction: RLA  */
 #line 130 "grammar-firstpass.y"
                                                                         { pc_inc(1); }
 #line 2080 "grammar-firstpass.tab.c"
     break;
 
-  case 34: /* instruction: EXX  */
+  case 30: /* instruction: CCF  */
 #line 131 "grammar-firstpass.y"
                                                                         { pc_inc(1); }
 #line 2086 "grammar-firstpass.tab.c"
     break;
 
-  case 35: /* instruction: INI  */
+  case 31: /* instruction: CPIR  */
 #line 132 "grammar-firstpass.y"
                                                                         { pc_inc(2); }
 #line 2092 "grammar-firstpass.tab.c"
     break;
 
-  case 36: /* instruction: INIR  */
+  case 32: /* instruction: CPI  */
 #line 133 "grammar-firstpass.y"
                                                                         { pc_inc(2); }
 #line 2098 "grammar-firstpass.tab.c"
     break;
 
-  case 37: /* instruction: IND  */
+  case 33: /* instruction: CPDR  */
 #line 134 "grammar-firstpass.y"
                                                                         { pc_inc(2); }
 #line 2104 "grammar-firstpass.tab.c"
     break;
 
-  case 38: /* instruction: INDR  */
+  case 34: /* instruction: CPD  */
 #line 135 "grammar-firstpass.y"
                                                                         { pc_inc(2); }
 #line 2110 "grammar-firstpass.tab.c"
     break;
 
-  case 39: /* instruction: OUTI  */
+  case 35: /* instruction: RET  */
 #line 136 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
+                                                                        { pc_inc(1); }
 #line 2116 "grammar-firstpass.tab.c"
     break;
 
-  case 40: /* instruction: OTIR  */
+  case 36: /* instruction: RETN  */
 #line 137 "grammar-firstpass.y"
                                                                         { pc_inc(2); }
 #line 2122 "grammar-firstpass.tab.c"
     break;
 
-  case 41: /* instruction: OUTD  */
+  case 37: /* instruction: RETI  */
 #line 138 "grammar-firstpass.y"
                                                                         { pc_inc(2); }
 #line 2128 "grammar-firstpass.tab.c"
     break;
 
-  case 42: /* instruction: OTDR  */
+  case 38: /* instruction: RST  */
 #line 139 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
+                                                                        { pc_inc(1); }
 #line 2134 "grammar-firstpass.tab.c"
     break;
 
-  case 43: /* instruction: RET condflag  */
+  case 39: /* instruction: EXX  */
 #line 140 "grammar-firstpass.y"
-                                                                { pc_inc(1); }
+                                                                        { pc_inc(1); }
 #line 2140 "grammar-firstpass.tab.c"
     break;
 
-  case 44: /* instruction: LD ldcommand  */
+  case 40: /* instruction: INI  */
 #line 141 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2146 "grammar-firstpass.tab.c"
     break;
 
-  case 45: /* instruction: OR orcommand  */
+  case 41: /* instruction: INIR  */
 #line 142 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2152 "grammar-firstpass.tab.c"
     break;
 
-  case 46: /* instruction: XOR orcommand  */
+  case 42: /* instruction: IND  */
 #line 143 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2158 "grammar-firstpass.tab.c"
     break;
 
-  case 47: /* instruction: AND orcommand  */
+  case 43: /* instruction: INDR  */
 #line 144 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2164 "grammar-firstpass.tab.c"
     break;
 
-  case 48: /* instruction: CP orcommand  */
+  case 44: /* instruction: OUTI  */
 #line 145 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2170 "grammar-firstpass.tab.c"
     break;
 
-  case 49: /* instruction: INC inccommand  */
+  case 45: /* instruction: OTIR  */
 #line 146 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2176 "grammar-firstpass.tab.c"
     break;
 
-  case 50: /* instruction: DEC deccommand  */
+  case 46: /* instruction: OUTD  */
 #line 147 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2182 "grammar-firstpass.tab.c"
     break;
 
-  case 51: /* instruction: ADC adccommand  */
+  case 47: /* instruction: OTDR  */
 #line 148 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2188 "grammar-firstpass.tab.c"
     break;
 
-  case 52: /* instruction: ADD addcommand  */
+  case 48: /* instruction: RET condflag  */
 #line 149 "grammar-firstpass.y"
-                                                                { }
+                                                                { pc_inc(1); }
 #line 2194 "grammar-firstpass.tab.c"
     break;
 
-  case 53: /* instruction: SUB subcommand  */
+  case 49: /* instruction: SCF  */
 #line 150 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(1); }
 #line 2200 "grammar-firstpass.tab.c"
     break;
 
-  case 54: /* instruction: SBC sbccommand  */
+  case 50: /* instruction: LDI  */
 #line 151 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2206 "grammar-firstpass.tab.c"
     break;
 
-  case 55: /* instruction: DJNZ djnzcommand  */
+  case 51: /* instruction: LDIR  */
 #line 152 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2212 "grammar-firstpass.tab.c"
     break;
 
-  case 56: /* instruction: JR jrcommand  */
+  case 52: /* instruction: NEG  */
 #line 153 "grammar-firstpass.y"
-                                                                { }
+                                                                        { pc_inc(2); }
 #line 2218 "grammar-firstpass.tab.c"
     break;
 
-  case 57: /* instruction: JP jpcommand  */
+  case 53: /* instruction: LD ldcommand  */
 #line 154 "grammar-firstpass.y"
                                                                 { }
 #line 2224 "grammar-firstpass.tab.c"
     break;
 
-  case 58: /* instruction: CALL callcommand  */
+  case 54: /* instruction: OR orcommand  */
 #line 155 "grammar-firstpass.y"
                                                                 { }
 #line 2230 "grammar-firstpass.tab.c"
     break;
 
-  case 59: /* instruction: EX excommand  */
+  case 55: /* instruction: XOR orcommand  */
 #line 156 "grammar-firstpass.y"
                                                                 { }
 #line 2236 "grammar-firstpass.tab.c"
     break;
 
-  case 60: /* instruction: PUSH pushcommand  */
+  case 56: /* instruction: AND orcommand  */
 #line 157 "grammar-firstpass.y"
                                                                 { }
 #line 2242 "grammar-firstpass.tab.c"
     break;
 
-  case 61: /* instruction: POP popcommand  */
+  case 57: /* instruction: CP orcommand  */
 #line 158 "grammar-firstpass.y"
                                                                 { }
 #line 2248 "grammar-firstpass.tab.c"
     break;
 
-  case 62: /* instruction: IN incommand  */
+  case 58: /* instruction: INC inccommand  */
 #line 159 "grammar-firstpass.y"
                                                                 { }
 #line 2254 "grammar-firstpass.tab.c"
     break;
 
-  case 63: /* instruction: OUT outcommand  */
+  case 59: /* instruction: DEC deccommand  */
 #line 160 "grammar-firstpass.y"
                                                                 { }
 #line 2260 "grammar-firstpass.tab.c"
     break;
 
-  case 64: /* instruction: BIT bitcommand  */
+  case 60: /* instruction: ADC adccommand  */
 #line 161 "grammar-firstpass.y"
                                                                 { }
 #line 2266 "grammar-firstpass.tab.c"
     break;
 
-  case 65: /* instruction: RES bitcommand  */
+  case 61: /* instruction: ADD addcommand  */
 #line 162 "grammar-firstpass.y"
                                                                 { }
 #line 2272 "grammar-firstpass.tab.c"
     break;
 
-  case 66: /* instruction: SET bitcommand  */
+  case 62: /* instruction: SUB subcommand  */
 #line 163 "grammar-firstpass.y"
                                                                 { }
 #line 2278 "grammar-firstpass.tab.c"
     break;
 
-  case 67: /* instruction: SLA slacommand  */
+  case 63: /* instruction: SBC sbccommand  */
 #line 164 "grammar-firstpass.y"
                                                                 { }
 #line 2284 "grammar-firstpass.tab.c"
     break;
 
-  case 68: /* instruction: SRA slacommand  */
+  case 64: /* instruction: DJNZ djnzcommand  */
 #line 165 "grammar-firstpass.y"
                                                                 { }
 #line 2290 "grammar-firstpass.tab.c"
     break;
 
-  case 69: /* instruction: RL slacommand  */
+  case 65: /* instruction: JR jrcommand  */
 #line 166 "grammar-firstpass.y"
                                                                 { }
 #line 2296 "grammar-firstpass.tab.c"
     break;
 
-  case 70: /* instruction: RR slacommand  */
+  case 66: /* instruction: JP jpcommand  */
 #line 167 "grammar-firstpass.y"
                                                                 { }
 #line 2302 "grammar-firstpass.tab.c"
     break;
 
-  case 71: /* instruction: RRC slacommand  */
+  case 67: /* instruction: CALL callcommand  */
 #line 168 "grammar-firstpass.y"
                                                                 { }
 #line 2308 "grammar-firstpass.tab.c"
     break;
 
-  case 72: /* instruction: RLC slacommand  */
+  case 68: /* instruction: EX excommand  */
 #line 169 "grammar-firstpass.y"
                                                                 { }
 #line 2314 "grammar-firstpass.tab.c"
     break;
 
-  case 73: /* slacommand: reg8  */
-#line 172 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 69: /* instruction: PUSH pushcommand  */
+#line 170 "grammar-firstpass.y"
+                                                                { }
 #line 2320 "grammar-firstpass.tab.c"
     break;
 
-  case 74: /* slacommand: PARLEFT HL PARRIGHT  */
-#line 173 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 70: /* instruction: POP popcommand  */
+#line 171 "grammar-firstpass.y"
+                                                                { }
 #line 2326 "grammar-firstpass.tab.c"
     break;
 
-  case 75: /* slacommand: PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 174 "grammar-firstpass.y"
-                                                                                                { pc_inc(4); }
+  case 71: /* instruction: IN incommand  */
+#line 172 "grammar-firstpass.y"
+                                                                { }
 #line 2332 "grammar-firstpass.tab.c"
     break;
 
-  case 76: /* bitcommand: INTEGER COMMA reg8  */
-#line 176 "grammar-firstpass.y"
-                                                                                                                { pc_inc(2); }
+  case 72: /* instruction: OUT outcommand  */
+#line 173 "grammar-firstpass.y"
+                                                                { }
 #line 2338 "grammar-firstpass.tab.c"
     break;
 
-  case 77: /* bitcommand: INTEGER COMMA PARLEFT HL PARRIGHT  */
-#line 177 "grammar-firstpass.y"
-                                                                                                        { pc_inc(2); }
+  case 73: /* instruction: BIT bitcommand  */
+#line 174 "grammar-firstpass.y"
+                                                                { }
 #line 2344 "grammar-firstpass.tab.c"
     break;
 
-  case 78: /* bitcommand: INTEGER COMMA PARLEFT indexreg OPADD expression2 PARRIGHT  */
-#line 178 "grammar-firstpass.y"
-                                                                                          { pc_inc(4); }
+  case 74: /* instruction: RES bitcommand  */
+#line 175 "grammar-firstpass.y"
+                                                                { }
 #line 2350 "grammar-firstpass.tab.c"
     break;
 
-  case 79: /* incommand: reg8 COMMA PARLEFT C PARRIGHT  */
-#line 180 "grammar-firstpass.y"
-                                                                                {  pc_inc(2); }
+  case 75: /* instruction: SET bitcommand  */
+#line 176 "grammar-firstpass.y"
+                                                                { }
 #line 2356 "grammar-firstpass.tab.c"
     break;
 
-  case 80: /* incommand: reg8 COMMA PARLEFT expression2 PARRIGHT  */
-#line 181 "grammar-firstpass.y"
-                                                                                        {  pc_inc(2); }
+  case 76: /* instruction: SLA slacommand  */
+#line 177 "grammar-firstpass.y"
+                                                                { }
 #line 2362 "grammar-firstpass.tab.c"
     break;
 
-  case 81: /* incommand: PARLEFT C PARRIGHT  */
-#line 182 "grammar-firstpass.y"
-                                                                                                                {  pc_inc(2); }
+  case 77: /* instruction: SRA slacommand  */
+#line 178 "grammar-firstpass.y"
+                                                                { }
 #line 2368 "grammar-firstpass.tab.c"
     break;
 
-  case 82: /* outcommand: reg8 COMMA PARLEFT expression2 PARRIGHT  */
-#line 184 "grammar-firstpass.y"
-                                                                        { pc_inc(2); }
+  case 78: /* instruction: SRL slacommand  */
+#line 179 "grammar-firstpass.y"
+                                                                { }
 #line 2374 "grammar-firstpass.tab.c"
     break;
 
-  case 83: /* outcommand: reg8 COMMA PARLEFT C PARRIGHT  */
-#line 185 "grammar-firstpass.y"
-                                                                                        { pc_inc(2); }
+  case 79: /* instruction: RL slacommand  */
+#line 180 "grammar-firstpass.y"
+                                                                { }
 #line 2380 "grammar-firstpass.tab.c"
     break;
 
-  case 84: /* outcommand: PARLEFT C PARRIGHT  */
-#line 186 "grammar-firstpass.y"
-                                                                                                        { pc_inc(2); }
+  case 80: /* instruction: RR slacommand  */
+#line 181 "grammar-firstpass.y"
+                                                                { }
 #line 2386 "grammar-firstpass.tab.c"
     break;
 
-  case 85: /* ldcommand: reg8 COMMA reg8  */
-#line 188 "grammar-firstpass.y"
-                                                                                                                { pc_inc(1); }
+  case 81: /* instruction: RRC slacommand  */
+#line 182 "grammar-firstpass.y"
+                                                                { }
 #line 2392 "grammar-firstpass.tab.c"
     break;
 
-  case 86: /* ldcommand: reg8 COMMA expression2  */
-#line 189 "grammar-firstpass.y"
-                                                                                                                { pc_inc(2); }
+  case 82: /* instruction: RLC slacommand  */
+#line 183 "grammar-firstpass.y"
+                                                                { }
 #line 2398 "grammar-firstpass.tab.c"
     break;
 
-  case 87: /* ldcommand: reg8 COMMA PARLEFT reg16 PARRIGHT  */
-#line 190 "grammar-firstpass.y"
-                                                                                                { pc_inc(1); }
+  case 83: /* slacommand: reg8  */
+#line 186 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2404 "grammar-firstpass.tab.c"
     break;
 
-  case 88: /* ldcommand: reg8 COMMA PARLEFT expression2 PARRIGHT  */
-#line 191 "grammar-firstpass.y"
-                                                                                                { pc_inc(3); }
+  case 84: /* slacommand: PARLEFT HL PARRIGHT  */
+#line 187 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2410 "grammar-firstpass.tab.c"
     break;
 
-  case 89: /* ldcommand: reg8 COMMA PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 192 "grammar-firstpass.y"
-                                                                                        { pc_inc(3); }
+  case 85: /* slacommand: PARLEFT indexreg OPADD expression PARRIGHT  */
+#line 188 "grammar-firstpass.y"
+                                                                                                { pc_inc(4); }
 #line 2416 "grammar-firstpass.tab.c"
     break;
 
-  case 90: /* ldcommand: PARLEFT reg16 PARRIGHT COMMA reg8  */
-#line 193 "grammar-firstpass.y"
-                                                                                                        { pc_inc(1); }
+  case 86: /* bitcommand: INTEGER COMMA reg8  */
+#line 190 "grammar-firstpass.y"
+                                                                                                                { pc_inc(2); }
 #line 2422 "grammar-firstpass.tab.c"
     break;
 
-  case 91: /* ldcommand: PARLEFT reg16 PARRIGHT COMMA expression2  */
-#line 194 "grammar-firstpass.y"
-                                                                                                { pc_inc(2); }
+  case 87: /* bitcommand: INTEGER COMMA PARLEFT HL PARRIGHT  */
+#line 191 "grammar-firstpass.y"
+                                                                                                        { pc_inc(2); }
 #line 2428 "grammar-firstpass.tab.c"
     break;
 
-  case 92: /* ldcommand: HL COMMA PARLEFT expression2 PARRIGHT  */
-#line 195 "grammar-firstpass.y"
-                                                                                                { pc_inc(3); }
+  case 88: /* bitcommand: INTEGER COMMA PARLEFT indexreg OPADD expression2 PARRIGHT  */
+#line 192 "grammar-firstpass.y"
+                                                                                          { pc_inc(4); }
 #line 2434 "grammar-firstpass.tab.c"
     break;
 
-  case 93: /* ldcommand: DE COMMA PARLEFT expression2 PARRIGHT  */
-#line 196 "grammar-firstpass.y"
-                                                                                                { pc_inc(4); }
+  case 89: /* incommand: reg8 COMMA PARLEFT C PARRIGHT  */
+#line 194 "grammar-firstpass.y"
+                                                                                {  pc_inc(2); }
 #line 2440 "grammar-firstpass.tab.c"
     break;
 
-  case 94: /* ldcommand: BC COMMA PARLEFT expression2 PARRIGHT  */
-#line 197 "grammar-firstpass.y"
-                                                                                                { pc_inc(4); }
+  case 90: /* incommand: reg8 COMMA PARLEFT expression2 PARRIGHT  */
+#line 195 "grammar-firstpass.y"
+                                                                                        {  pc_inc(2); }
 #line 2446 "grammar-firstpass.tab.c"
     break;
 
-  case 95: /* ldcommand: SP COMMA PARLEFT expression2 PARRIGHT  */
-#line 198 "grammar-firstpass.y"
-                                                                                                { pc_inc(4); }
+  case 91: /* incommand: PARLEFT C PARRIGHT  */
+#line 196 "grammar-firstpass.y"
+                                                                                                                {  pc_inc(2); }
 #line 2452 "grammar-firstpass.tab.c"
     break;
 
-  case 96: /* ldcommand: IX COMMA PARLEFT expression2 PARRIGHT  */
-#line 199 "grammar-firstpass.y"
-                                                                                                { pc_inc(4); }
+  case 92: /* outcommand: reg8 COMMA PARLEFT expression2 PARRIGHT  */
+#line 198 "grammar-firstpass.y"
+                                                                        { pc_inc(2); }
 #line 2458 "grammar-firstpass.tab.c"
     break;
 
-  case 97: /* ldcommand: IY COMMA PARLEFT expression2 PARRIGHT  */
-#line 200 "grammar-firstpass.y"
-                                                                                                { pc_inc(4); }
+  case 93: /* outcommand: reg8 COMMA PARLEFT C PARRIGHT  */
+#line 199 "grammar-firstpass.y"
+                                                                                        { pc_inc(2); }
 #line 2464 "grammar-firstpass.tab.c"
     break;
 
-  case 98: /* ldcommand: HL COMMA expression2  */
-#line 201 "grammar-firstpass.y"
-                                                                                                                { pc_inc(3); }
+  case 94: /* outcommand: PARLEFT C PARRIGHT  */
+#line 200 "grammar-firstpass.y"
+                                                                                                        { pc_inc(2); }
 #line 2470 "grammar-firstpass.tab.c"
     break;
 
-  case 99: /* ldcommand: BC COMMA expression2  */
+  case 95: /* ldcommand: reg8 COMMA reg8  */
 #line 202 "grammar-firstpass.y"
-                                                                                                                { pc_inc(3); }
+                                                                                                                { pc_inc(1); }
 #line 2476 "grammar-firstpass.tab.c"
     break;
 
-  case 100: /* ldcommand: DE COMMA expression2  */
+  case 96: /* ldcommand: reg8 COMMA expression2  */
 #line 203 "grammar-firstpass.y"
-                                                                                                                { pc_inc(3); }
+                                                                                                                { pc_inc(2); }
 #line 2482 "grammar-firstpass.tab.c"
     break;
 
-  case 101: /* ldcommand: SP COMMA expression2  */
+  case 97: /* ldcommand: reg8 COMMA PARLEFT reg16 PARRIGHT  */
 #line 204 "grammar-firstpass.y"
-                                                                                                                { pc_inc(3); }
+                                                                                                { pc_inc(1); }
 #line 2488 "grammar-firstpass.tab.c"
     break;
 
-  case 102: /* ldcommand: IX COMMA expression2  */
+  case 98: /* ldcommand: reg8 COMMA PARLEFT expression2 PARRIGHT  */
 #line 205 "grammar-firstpass.y"
-                                                                                                                { pc_inc(4); }
+                                                                                                { pc_inc(3); }
 #line 2494 "grammar-firstpass.tab.c"
     break;
 
-  case 103: /* ldcommand: IY COMMA expression2  */
+  case 99: /* ldcommand: reg8 COMMA PARLEFT indexreg OPADD expression PARRIGHT  */
 #line 206 "grammar-firstpass.y"
-                                                                                                                { pc_inc(4); }
+                                                                                        { pc_inc(3); }
 #line 2500 "grammar-firstpass.tab.c"
     break;
 
-  case 104: /* ldcommand: PARLEFT indexreg OPADD expression PARRIGHT COMMA expression  */
+  case 100: /* ldcommand: PARLEFT reg16 PARRIGHT COMMA reg8  */
 #line 207 "grammar-firstpass.y"
-                                                                                                { pc_inc(4); }
+                                                                                                        { pc_inc(1); }
 #line 2506 "grammar-firstpass.tab.c"
     break;
 
-  case 105: /* ldcommand: PARLEFT indexreg OPADD expression PARRIGHT COMMA reg8  */
+  case 101: /* ldcommand: PARLEFT reg16 PARRIGHT COMMA expression2  */
 #line 208 "grammar-firstpass.y"
-                                                                                                { pc_inc(3); }
+                                                                                                { pc_inc(2); }
 #line 2512 "grammar-firstpass.tab.c"
     break;
 
-  case 106: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA reg8  */
+  case 102: /* ldcommand: HL COMMA PARLEFT expression2 PARRIGHT  */
 #line 209 "grammar-firstpass.y"
-                                                                                                                { pc_inc(3); }
+                                                                                                { pc_inc(3); }
 #line 2518 "grammar-firstpass.tab.c"
     break;
 
-  case 107: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA indexreg  */
+  case 103: /* ldcommand: DE COMMA PARLEFT expression2 PARRIGHT  */
 #line 210 "grammar-firstpass.y"
-                                                                                                                { pc_inc(4); }
+                                                                                                { pc_inc(4); }
 #line 2524 "grammar-firstpass.tab.c"
     break;
 
-  case 108: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA HL  */
+  case 104: /* ldcommand: BC COMMA PARLEFT expression2 PARRIGHT  */
 #line 211 "grammar-firstpass.y"
-                                                                                                        { pc_inc(3); }
+                                                                                                { pc_inc(4); }
 #line 2530 "grammar-firstpass.tab.c"
     break;
 
-  case 109: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA BC  */
+  case 105: /* ldcommand: SP COMMA PARLEFT expression2 PARRIGHT  */
 #line 212 "grammar-firstpass.y"
-                                                                                                        { pc_inc(4); }
+                                                                                                { pc_inc(4); }
 #line 2536 "grammar-firstpass.tab.c"
     break;
 
-  case 110: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA DE  */
+  case 106: /* ldcommand: IX COMMA PARLEFT expression2 PARRIGHT  */
 #line 213 "grammar-firstpass.y"
-                                                                                                        { pc_inc(4); }
+                                                                                                { pc_inc(4); }
 #line 2542 "grammar-firstpass.tab.c"
     break;
 
-  case 111: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA SP  */
+  case 107: /* ldcommand: IY COMMA PARLEFT expression2 PARRIGHT  */
 #line 214 "grammar-firstpass.y"
-                                                                                                        { pc_inc(4); }
+                                                                                                { pc_inc(4); }
 #line 2548 "grammar-firstpass.tab.c"
     break;
 
-  case 112: /* orcommand: reg8  */
-#line 219 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 108: /* ldcommand: HL COMMA expression2  */
+#line 215 "grammar-firstpass.y"
+                                                                                                                { pc_inc(3); }
 #line 2554 "grammar-firstpass.tab.c"
     break;
 
-  case 113: /* orcommand: expression  */
-#line 220 "grammar-firstpass.y"
-                                                                                                                                { pc_inc(2); }
+  case 109: /* ldcommand: BC COMMA expression2  */
+#line 216 "grammar-firstpass.y"
+                                                                                                                { pc_inc(3); }
 #line 2560 "grammar-firstpass.tab.c"
     break;
 
-  case 114: /* orcommand: PARLEFT HL PARRIGHT  */
-#line 221 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 110: /* ldcommand: DE COMMA expression2  */
+#line 217 "grammar-firstpass.y"
+                                                                                                                { pc_inc(3); }
 #line 2566 "grammar-firstpass.tab.c"
     break;
 
-  case 115: /* orcommand: PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 222 "grammar-firstpass.y"
-                                                                                                { pc_inc(3); }
+  case 111: /* ldcommand: SP COMMA expression2  */
+#line 218 "grammar-firstpass.y"
+                                                                                                                { pc_inc(3); }
 #line 2572 "grammar-firstpass.tab.c"
     break;
 
-  case 116: /* orcommand: index8reg  */
-#line 223 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 112: /* ldcommand: IX COMMA expression2  */
+#line 219 "grammar-firstpass.y"
+                                                                                                                { pc_inc(4); }
 #line 2578 "grammar-firstpass.tab.c"
     break;
 
-  case 117: /* inccommand: reg8  */
-#line 225 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 113: /* ldcommand: IY COMMA expression2  */
+#line 220 "grammar-firstpass.y"
+                                                                                                                { pc_inc(4); }
 #line 2584 "grammar-firstpass.tab.c"
     break;
 
-  case 118: /* inccommand: reg16  */
-#line 226 "grammar-firstpass.y"
-                                                                                                                                { pc_inc(1); }
+  case 114: /* ldcommand: PARLEFT indexreg OPADD expression PARRIGHT COMMA expression  */
+#line 221 "grammar-firstpass.y"
+                                                                                                { pc_inc(4); }
 #line 2590 "grammar-firstpass.tab.c"
     break;
 
-  case 119: /* inccommand: PARLEFT HL PARRIGHT  */
-#line 227 "grammar-firstpass.y"
-                                                                                                                { pc_inc(1); }
+  case 115: /* ldcommand: PARLEFT indexreg OPADD expression PARRIGHT COMMA reg8  */
+#line 222 "grammar-firstpass.y"
+                                                                                                { pc_inc(3); }
 #line 2596 "grammar-firstpass.tab.c"
     break;
 
-  case 120: /* inccommand: PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 228 "grammar-firstpass.y"
-                                                                                                { pc_inc(3); }
+  case 116: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA reg8  */
+#line 223 "grammar-firstpass.y"
+                                                                                                                { pc_inc(3); }
 #line 2602 "grammar-firstpass.tab.c"
     break;
 
-  case 121: /* inccommand: indexreg  */
-#line 229 "grammar-firstpass.y"
-                                                                                                                                { pc_inc(1); }
+  case 117: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA indexreg  */
+#line 224 "grammar-firstpass.y"
+                                                                                                                { pc_inc(4); }
 #line 2608 "grammar-firstpass.tab.c"
     break;
 
-  case 122: /* inccommand: index8reg  */
-#line 230 "grammar-firstpass.y"
-                                                                                                                                { pc_inc(1); }
+  case 118: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA HL  */
+#line 225 "grammar-firstpass.y"
+                                                                                                        { pc_inc(3); }
 #line 2614 "grammar-firstpass.tab.c"
     break;
 
-  case 123: /* deccommand: reg8  */
-#line 232 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 119: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA BC  */
+#line 226 "grammar-firstpass.y"
+                                                                                                        { pc_inc(4); }
 #line 2620 "grammar-firstpass.tab.c"
     break;
 
-  case 124: /* deccommand: reg16  */
-#line 233 "grammar-firstpass.y"
-                                                                                                                                { pc_inc(1); }
+  case 120: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA DE  */
+#line 227 "grammar-firstpass.y"
+                                                                                                        { pc_inc(4); }
 #line 2626 "grammar-firstpass.tab.c"
     break;
 
-  case 125: /* deccommand: PARLEFT HL PARRIGHT  */
-#line 234 "grammar-firstpass.y"
-                                                                                                                { pc_inc(1); }
+  case 121: /* ldcommand: PARLEFT expression2 PARRIGHT COMMA SP  */
+#line 228 "grammar-firstpass.y"
+                                                                                                        { pc_inc(4); }
 #line 2632 "grammar-firstpass.tab.c"
     break;
 
-  case 126: /* deccommand: PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 235 "grammar-firstpass.y"
-                                                                                                { pc_inc(3); }
+  case 122: /* orcommand: reg8  */
+#line 233 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2638 "grammar-firstpass.tab.c"
     break;
 
-  case 127: /* deccommand: indexreg  */
-#line 236 "grammar-firstpass.y"
-                                                                                                                                { pc_inc(1); }
+  case 123: /* orcommand: expression  */
+#line 234 "grammar-firstpass.y"
+                                                                                                                                { pc_inc(2); }
 #line 2644 "grammar-firstpass.tab.c"
     break;
 
-  case 128: /* deccommand: index8reg  */
-#line 237 "grammar-firstpass.y"
-                                                                                                                                { pc_inc(1); }
+  case 124: /* orcommand: PARLEFT HL PARRIGHT  */
+#line 235 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2650 "grammar-firstpass.tab.c"
     break;
 
-  case 129: /* adccommand: A COMMA expression  */
-#line 239 "grammar-firstpass.y"
-                                                                                                                { pc_inc(2); }
+  case 125: /* orcommand: PARLEFT indexreg OPADD expression PARRIGHT  */
+#line 236 "grammar-firstpass.y"
+                                                                                                { pc_inc(3); }
 #line 2656 "grammar-firstpass.tab.c"
     break;
 
-  case 130: /* adccommand: A COMMA reg8  */
-#line 240 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 126: /* orcommand: index8reg  */
+#line 237 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2662 "grammar-firstpass.tab.c"
     break;
 
-  case 131: /* adccommand: A COMMA index8reg  */
-#line 241 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 127: /* inccommand: reg8  */
+#line 239 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2668 "grammar-firstpass.tab.c"
     break;
 
-  case 132: /* adccommand: A COMMA PARLEFT HL PARRIGHT  */
-#line 242 "grammar-firstpass.y"
-                                                                                                                { pc_inc(1); }
+  case 128: /* inccommand: reg16  */
+#line 240 "grammar-firstpass.y"
+                                                                                                                                { pc_inc(1); }
 #line 2674 "grammar-firstpass.tab.c"
     break;
 
-  case 133: /* adccommand: A COMMA PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 243 "grammar-firstpass.y"
-                                                                                        { pc_inc(3); }
+  case 129: /* inccommand: PARLEFT HL PARRIGHT  */
+#line 241 "grammar-firstpass.y"
+                                                                                                                { pc_inc(1); }
 #line 2680 "grammar-firstpass.tab.c"
     break;
 
-  case 134: /* adccommand: HL COMMA reg16  */
-#line 244 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 130: /* inccommand: PARLEFT indexreg OPADD expression PARRIGHT  */
+#line 242 "grammar-firstpass.y"
+                                                                                                { pc_inc(3); }
 #line 2686 "grammar-firstpass.tab.c"
     break;
 
-  case 135: /* addcommand: A COMMA expression  */
-#line 246 "grammar-firstpass.y"
-                                                                                                                { pc_inc(2); }
+  case 131: /* inccommand: indexreg  */
+#line 243 "grammar-firstpass.y"
+                                                                                                                                { pc_inc(1); }
 #line 2692 "grammar-firstpass.tab.c"
     break;
 
-  case 136: /* addcommand: A COMMA reg8  */
-#line 247 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 132: /* inccommand: index8reg  */
+#line 244 "grammar-firstpass.y"
+                                                                                                                                { pc_inc(1); }
 #line 2698 "grammar-firstpass.tab.c"
     break;
 
-  case 137: /* addcommand: A COMMA index8reg  */
-#line 248 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 133: /* deccommand: reg8  */
+#line 246 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2704 "grammar-firstpass.tab.c"
     break;
 
-  case 138: /* addcommand: A COMMA PARLEFT HL PARRIGHT  */
-#line 249 "grammar-firstpass.y"
-                                                                                                                { pc_inc(1); }
+  case 134: /* deccommand: reg16  */
+#line 247 "grammar-firstpass.y"
+                                                                                                                                { pc_inc(1); }
 #line 2710 "grammar-firstpass.tab.c"
     break;
 
-  case 139: /* addcommand: A COMMA PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 250 "grammar-firstpass.y"
-                                                                                        { pc_inc(3); }
+  case 135: /* deccommand: PARLEFT HL PARRIGHT  */
+#line 248 "grammar-firstpass.y"
+                                                                                                                { pc_inc(1); }
 #line 2716 "grammar-firstpass.tab.c"
     break;
 
-  case 140: /* addcommand: HL COMMA reg16  */
-#line 251 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 136: /* deccommand: PARLEFT indexreg OPADD expression PARRIGHT  */
+#line 249 "grammar-firstpass.y"
+                                                                                                { pc_inc(3); }
 #line 2722 "grammar-firstpass.tab.c"
     break;
 
-  case 141: /* addcommand: indexreg COMMA reg16  */
-#line 252 "grammar-firstpass.y"
-                                                                                                                { pc_inc(2); }
+  case 137: /* deccommand: indexreg  */
+#line 250 "grammar-firstpass.y"
+                                                                                                                                { pc_inc(1); }
 #line 2728 "grammar-firstpass.tab.c"
     break;
 
-  case 142: /* subcommand: reg8  */
-#line 254 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 138: /* deccommand: index8reg  */
+#line 251 "grammar-firstpass.y"
+                                                                                                                                { pc_inc(1); }
 #line 2734 "grammar-firstpass.tab.c"
     break;
 
-  case 143: /* subcommand: expression  */
-#line 255 "grammar-firstpass.y"
-                                                                                                                                { pc_inc(2); }
+  case 139: /* adccommand: A COMMA expression  */
+#line 253 "grammar-firstpass.y"
+                                                                                                                { pc_inc(2); }
 #line 2740 "grammar-firstpass.tab.c"
     break;
 
-  case 144: /* subcommand: PARLEFT HL PARRIGHT  */
-#line 256 "grammar-firstpass.y"
+  case 140: /* adccommand: A COMMA reg8  */
+#line 254 "grammar-firstpass.y"
                                                                                                                         { pc_inc(1); }
 #line 2746 "grammar-firstpass.tab.c"
     break;
 
-  case 145: /* subcommand: PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 257 "grammar-firstpass.y"
-                                                                                                { pc_inc(3); }
+  case 141: /* adccommand: A COMMA index8reg  */
+#line 255 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2752 "grammar-firstpass.tab.c"
     break;
 
-  case 146: /* subcommand: index8reg  */
-#line 258 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 142: /* adccommand: A COMMA PARLEFT HL PARRIGHT  */
+#line 256 "grammar-firstpass.y"
+                                                                                                                { pc_inc(1); }
 #line 2758 "grammar-firstpass.tab.c"
     break;
 
-  case 147: /* sbccommand: A COMMA expression  */
-#line 260 "grammar-firstpass.y"
-                                                                                                                { pc_inc(2); }
+  case 143: /* adccommand: A COMMA PARLEFT indexreg OPADD expression PARRIGHT  */
+#line 257 "grammar-firstpass.y"
+                                                                                        { pc_inc(3); }
 #line 2764 "grammar-firstpass.tab.c"
     break;
 
-  case 148: /* sbccommand: A COMMA reg8  */
-#line 261 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(1); }
+  case 144: /* adccommand: HL COMMA reg16  */
+#line 258 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2770 "grammar-firstpass.tab.c"
     break;
 
-  case 149: /* sbccommand: A COMMA index8reg  */
-#line 262 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 145: /* addcommand: A COMMA expression  */
+#line 260 "grammar-firstpass.y"
+                                                                                                                { pc_inc(2); }
 #line 2776 "grammar-firstpass.tab.c"
     break;
 
-  case 150: /* sbccommand: A COMMA PARLEFT HL PARRIGHT  */
-#line 263 "grammar-firstpass.y"
-                                                                                                                { pc_inc(1); }
+  case 146: /* addcommand: A COMMA reg8  */
+#line 261 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2782 "grammar-firstpass.tab.c"
     break;
 
-  case 151: /* sbccommand: A COMMA PARLEFT indexreg OPADD expression PARRIGHT  */
-#line 264 "grammar-firstpass.y"
-                                                                                        { pc_inc(3); }
+  case 147: /* addcommand: A COMMA index8reg  */
+#line 262 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2788 "grammar-firstpass.tab.c"
     break;
 
-  case 152: /* sbccommand: HL COMMA reg16  */
-#line 265 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 148: /* addcommand: A COMMA PARLEFT HL PARRIGHT  */
+#line 263 "grammar-firstpass.y"
+                                                                                                                { pc_inc(1); }
 #line 2794 "grammar-firstpass.tab.c"
     break;
 
-  case 153: /* excommand: AF COMMA AFPLUS  */
-#line 267 "grammar-firstpass.y"
-                                                                        {  pc_inc(1);  }
+  case 149: /* addcommand: A COMMA PARLEFT indexreg OPADD expression PARRIGHT  */
+#line 264 "grammar-firstpass.y"
+                                                                                        { pc_inc(3); }
 #line 2800 "grammar-firstpass.tab.c"
     break;
 
-  case 154: /* excommand: PARLEFT SP PARRIGHT COMMA HL  */
-#line 268 "grammar-firstpass.y"
-                                                                {  pc_inc(1);  }
+  case 150: /* addcommand: HL COMMA reg16  */
+#line 265 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2806 "grammar-firstpass.tab.c"
     break;
 
-  case 155: /* excommand: DE COMMA HL  */
-#line 269 "grammar-firstpass.y"
-                                                                                        {  pc_inc(1);  }
+  case 151: /* addcommand: indexreg COMMA reg16  */
+#line 266 "grammar-firstpass.y"
+                                                                                                                { pc_inc(2); }
 #line 2812 "grammar-firstpass.tab.c"
     break;
 
-  case 156: /* excommand: PARLEFT SP PARRIGHT COMMA indexreg  */
-#line 270 "grammar-firstpass.y"
-                                                                        {  pc_inc(2);  }
+  case 152: /* subcommand: reg8  */
+#line 268 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2818 "grammar-firstpass.tab.c"
     break;
 
-  case 157: /* djnzcommand: expression  */
-#line 272 "grammar-firstpass.y"
-                                                                                                { pc_inc(2); }
+  case 153: /* subcommand: expression  */
+#line 269 "grammar-firstpass.y"
+                                                                                                                                { pc_inc(2); }
 #line 2824 "grammar-firstpass.tab.c"
     break;
 
-  case 158: /* jrcommand: expression  */
-#line 274 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(2); }
+  case 154: /* subcommand: PARLEFT HL PARRIGHT  */
+#line 270 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2830 "grammar-firstpass.tab.c"
     break;
 
-  case 159: /* jrcommand: condflag COMMA expression  */
-#line 275 "grammar-firstpass.y"
-                                                                                                        { pc_inc(2); }
+  case 155: /* subcommand: PARLEFT indexreg OPADD expression PARRIGHT  */
+#line 271 "grammar-firstpass.y"
+                                                                                                { pc_inc(3); }
 #line 2836 "grammar-firstpass.tab.c"
     break;
 
-  case 160: /* jpcommand: expression  */
-#line 277 "grammar-firstpass.y"
-                                                                                                                        { pc_inc(3); }
+  case 156: /* subcommand: index8reg  */
+#line 272 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2842 "grammar-firstpass.tab.c"
     break;
 
-  case 161: /* jpcommand: condflag COMMA expression  */
-#line 278 "grammar-firstpass.y"
-                                                                                                        { pc_inc(3); }
+  case 157: /* sbccommand: A COMMA expression  */
+#line 274 "grammar-firstpass.y"
+                                                                                                                { pc_inc(2); }
 #line 2848 "grammar-firstpass.tab.c"
     break;
 
-  case 162: /* jpcommand: PARLEFT HL PARRIGHT  */
-#line 279 "grammar-firstpass.y"
-                                                                                                                { pc_inc(1); }
+  case 158: /* sbccommand: A COMMA reg8  */
+#line 275 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(1); }
 #line 2854 "grammar-firstpass.tab.c"
     break;
 
-  case 163: /* jpcommand: PARLEFT indexreg PARRIGHT  */
-#line 280 "grammar-firstpass.y"
-                                                                                                                { pc_inc(2); }
+  case 159: /* sbccommand: A COMMA index8reg  */
+#line 276 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2860 "grammar-firstpass.tab.c"
     break;
 
-  case 164: /* callcommand: expression  */
-#line 282 "grammar-firstpass.y"
-                                                                                                                { pc_inc(3); }
+  case 160: /* sbccommand: A COMMA PARLEFT HL PARRIGHT  */
+#line 277 "grammar-firstpass.y"
+                                                                                                                { pc_inc(1); }
 #line 2866 "grammar-firstpass.tab.c"
     break;
 
-  case 165: /* callcommand: condflag COMMA expression  */
-#line 283 "grammar-firstpass.y"
-                                                                                                        { pc_inc(3); }
+  case 161: /* sbccommand: A COMMA PARLEFT indexreg OPADD expression PARRIGHT  */
+#line 278 "grammar-firstpass.y"
+                                                                                        { pc_inc(3); }
 #line 2872 "grammar-firstpass.tab.c"
     break;
 
-  case 166: /* pushcommand: reg16  */
-#line 285 "grammar-firstpass.y"
-                                        {  pc_inc(1);  }
+  case 162: /* sbccommand: HL COMMA reg16  */
+#line 279 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2878 "grammar-firstpass.tab.c"
     break;
 
-  case 167: /* pushcommand: indexreg  */
-#line 286 "grammar-firstpass.y"
-                                                        {  pc_inc(2);  }
+  case 163: /* excommand: AF COMMA AFPLUS  */
+#line 281 "grammar-firstpass.y"
+                                                                        {  pc_inc(1);  }
 #line 2884 "grammar-firstpass.tab.c"
     break;
 
-  case 168: /* pushcommand: AF  */
-#line 287 "grammar-firstpass.y"
-                                                        { pc_inc(1); }
+  case 164: /* excommand: PARLEFT SP PARRIGHT COMMA HL  */
+#line 282 "grammar-firstpass.y"
+                                                                {  pc_inc(1);  }
 #line 2890 "grammar-firstpass.tab.c"
     break;
 
-  case 169: /* popcommand: reg16  */
-#line 289 "grammar-firstpass.y"
-                                        {  pc_inc(1);  }
+  case 165: /* excommand: DE COMMA HL  */
+#line 283 "grammar-firstpass.y"
+                                                                                        {  pc_inc(1);  }
 #line 2896 "grammar-firstpass.tab.c"
     break;
 
-  case 170: /* popcommand: indexreg  */
-#line 290 "grammar-firstpass.y"
-                                                {  pc_inc(2);  }
+  case 166: /* excommand: PARLEFT SP PARRIGHT COMMA indexreg  */
+#line 284 "grammar-firstpass.y"
+                                                                        {  pc_inc(2);  }
 #line 2902 "grammar-firstpass.tab.c"
     break;
 
-  case 171: /* popcommand: AF  */
-#line 291 "grammar-firstpass.y"
-                                                {  pc_inc(1); }
+  case 167: /* djnzcommand: expression  */
+#line 286 "grammar-firstpass.y"
+                                                                                                { pc_inc(2); }
 #line 2908 "grammar-firstpass.tab.c"
     break;
 
-  case 186: /* expression: expritem  */
-#line 310 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[0].normal); }
+  case 168: /* jrcommand: expression  */
+#line 288 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(2); }
 #line 2914 "grammar-firstpass.tab.c"
     break;
 
-  case 187: /* expression: expression OPADD expritem  */
-#line 311 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-2].normal) + (yyvsp[0].normal); }
+  case 169: /* jrcommand: condflag COMMA expression  */
+#line 289 "grammar-firstpass.y"
+                                                                                                        { pc_inc(2); }
 #line 2920 "grammar-firstpass.tab.c"
     break;
 
-  case 188: /* expression: expression OPSUB expritem  */
-#line 312 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-2].normal) - (yyvsp[0].normal); }
+  case 170: /* jpcommand: expression  */
+#line 291 "grammar-firstpass.y"
+                                                                                                                        { pc_inc(3); }
 #line 2926 "grammar-firstpass.tab.c"
     break;
 
-  case 189: /* expression: expression OPMUL expritem  */
-#line 313 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-2].normal) * (yyvsp[0].normal); }
+  case 171: /* jpcommand: condflag COMMA expression  */
+#line 292 "grammar-firstpass.y"
+                                                                                                        { pc_inc(3); }
 #line 2932 "grammar-firstpass.tab.c"
     break;
 
-  case 190: /* expression: expression OPDIV expritem  */
-#line 314 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-2].normal) / (yyvsp[0].normal); }
+  case 172: /* jpcommand: PARLEFT HL PARRIGHT  */
+#line 293 "grammar-firstpass.y"
+                                                                                                                { pc_inc(1); }
 #line 2938 "grammar-firstpass.tab.c"
     break;
 
-  case 191: /* expression: PARLEFT expression PARRIGHT  */
-#line 315 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-1].normal); }
+  case 173: /* jpcommand: PARLEFT indexreg PARRIGHT  */
+#line 294 "grammar-firstpass.y"
+                                                                                                                { pc_inc(2); }
 #line 2944 "grammar-firstpass.tab.c"
     break;
 
-  case 192: /* expression2: expritem  */
-#line 317 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[0].normal); }
+  case 174: /* callcommand: expression  */
+#line 296 "grammar-firstpass.y"
+                                                                                                                { pc_inc(3); }
 #line 2950 "grammar-firstpass.tab.c"
     break;
 
-  case 193: /* expression2: expression2 OPADD expritem  */
-#line 318 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-2].normal) + (yyvsp[0].normal); }
+  case 175: /* callcommand: condflag COMMA expression  */
+#line 297 "grammar-firstpass.y"
+                                                                                                        { pc_inc(3); }
 #line 2956 "grammar-firstpass.tab.c"
     break;
 
-  case 194: /* expression2: expression2 OPSUB expritem  */
-#line 319 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-2].normal) - (yyvsp[0].normal); }
+  case 176: /* pushcommand: reg16  */
+#line 299 "grammar-firstpass.y"
+                                        {  pc_inc(1);  }
 #line 2962 "grammar-firstpass.tab.c"
     break;
 
-  case 195: /* expression2: expression2 OPMUL expritem  */
-#line 320 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-2].normal) * (yyvsp[0].normal); }
+  case 177: /* pushcommand: indexreg  */
+#line 300 "grammar-firstpass.y"
+                                                        {  pc_inc(2);  }
 #line 2968 "grammar-firstpass.tab.c"
     break;
 
-  case 196: /* expression2: expression2 OPDIV expritem  */
-#line 321 "grammar-firstpass.y"
-                                                                        { (yyval.normal) = (yyvsp[-2].normal) / (yyvsp[0].normal); }
+  case 178: /* pushcommand: AF  */
+#line 301 "grammar-firstpass.y"
+                                                        { pc_inc(1); }
 #line 2974 "grammar-firstpass.tab.c"
     break;
 
-  case 197: /* expression2: expression2 OPADD PARLEFT expression2 PARRIGHT  */
-#line 322 "grammar-firstpass.y"
-                                                                                        { (yyval.normal) = (yyvsp[-4].normal) + (yyvsp[-1].normal); }
+  case 179: /* popcommand: reg16  */
+#line 303 "grammar-firstpass.y"
+                                        {  pc_inc(1);  }
 #line 2980 "grammar-firstpass.tab.c"
     break;
 
-  case 198: /* expression2: expression2 OPSUB PARLEFT expression2 PARRIGHT  */
-#line 323 "grammar-firstpass.y"
-                                                                                        { (yyval.normal) = (yyvsp[-4].normal) - (yyvsp[-1].normal); }
+  case 180: /* popcommand: indexreg  */
+#line 304 "grammar-firstpass.y"
+                                                {  pc_inc(2);  }
 #line 2986 "grammar-firstpass.tab.c"
     break;
 
-  case 199: /* expression2: expression2 OPMUL PARLEFT expression2 PARRIGHT  */
-#line 324 "grammar-firstpass.y"
-                                                                                        { (yyval.normal) = (yyvsp[-4].normal) * (yyvsp[-1].normal); }
+  case 181: /* popcommand: AF  */
+#line 305 "grammar-firstpass.y"
+                                                {  pc_inc(1); }
 #line 2992 "grammar-firstpass.tab.c"
     break;
 
-  case 200: /* expression2: expression2 OPDIV PARLEFT expression2 PARRIGHT  */
-#line 325 "grammar-firstpass.y"
-                                                                                        { (yyval.normal) = (yyvsp[-4].normal) / (yyvsp[-1].normal); }
+  case 196: /* expression: expritem  */
+#line 324 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[0].normal); }
 #line 2998 "grammar-firstpass.tab.c"
     break;
 
-  case 201: /* expression2: PARLEFT expression2 PARRIGHT OPADD expritem  */
-#line 326 "grammar-firstpass.y"
-                                                                                        { (yyval.normal) = (yyvsp[-3].normal) + (yyvsp[0].normal); }
+  case 197: /* expression: expression OPADD expritem  */
+#line 325 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) + (yyvsp[0].normal); }
 #line 3004 "grammar-firstpass.tab.c"
     break;
 
-  case 202: /* expression2: PARLEFT expression2 PARRIGHT OPSUB expritem  */
-#line 327 "grammar-firstpass.y"
-                                                                                        { (yyval.normal) = (yyvsp[-3].normal) - (yyvsp[0].normal); }
+  case 198: /* expression: expression OPSUB expritem  */
+#line 326 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) - (yyvsp[0].normal); }
 #line 3010 "grammar-firstpass.tab.c"
     break;
 
-  case 203: /* expression2: PARLEFT expression2 PARRIGHT OPMUL expritem  */
-#line 328 "grammar-firstpass.y"
-                                                                                        { (yyval.normal) = (yyvsp[-3].normal) * (yyvsp[0].normal); }
+  case 199: /* expression: expression OPMUL expritem  */
+#line 327 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) * (yyvsp[0].normal); }
 #line 3016 "grammar-firstpass.tab.c"
     break;
 
-  case 204: /* expression2: PARLEFT expression2 PARRIGHT OPDIV expritem  */
-#line 329 "grammar-firstpass.y"
-                                                                                        { (yyval.normal) = (yyvsp[-3].normal) / (yyvsp[0].normal); }
+  case 200: /* expression: expression OPDIV expritem  */
+#line 328 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) / (yyvsp[0].normal); }
 #line 3022 "grammar-firstpass.tab.c"
     break;
 
-  case 205: /* expression2: PARLEFT expression2 PARRIGHT OPADD PARLEFT expression2 PARRIGHT  */
-#line 330 "grammar-firstpass.y"
-                                                                                                        { (yyval.normal) = (yyvsp[-5].normal) + (yyvsp[-1].normal); }
+  case 201: /* expression: PARLEFT expression PARRIGHT  */
+#line 329 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-1].normal); }
 #line 3028 "grammar-firstpass.tab.c"
     break;
 
-  case 206: /* expression2: PARLEFT expression2 PARRIGHT OPSUB PARLEFT expression2 PARRIGHT  */
+  case 202: /* expression2: expritem  */
 #line 331 "grammar-firstpass.y"
-                                                                                                        { (yyval.normal) = (yyvsp[-5].normal) - (yyvsp[-1].normal); }
+                                                                        { (yyval.normal) = (yyvsp[0].normal); }
 #line 3034 "grammar-firstpass.tab.c"
     break;
 
-  case 207: /* expression2: PARLEFT expression2 PARRIGHT OPMUL PARLEFT expression2 PARRIGHT  */
+  case 203: /* expression2: expression2 OPADD expritem  */
 #line 332 "grammar-firstpass.y"
-                                                                                                        { (yyval.normal) = (yyvsp[-5].normal) * (yyvsp[-1].normal); }
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) + (yyvsp[0].normal); }
 #line 3040 "grammar-firstpass.tab.c"
     break;
 
-  case 208: /* expression2: PARLEFT expression2 PARRIGHT OPDIV PARLEFT expression2 PARRIGHT  */
+  case 204: /* expression2: expression2 OPSUB expritem  */
 #line 333 "grammar-firstpass.y"
-                                                                                                        { (yyval.normal) = (yyvsp[-5].normal) / (yyvsp[-1].normal); }
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) - (yyvsp[0].normal); }
 #line 3046 "grammar-firstpass.tab.c"
     break;
 
-  case 211: /* expritem: INTEGER  */
-#line 338 "grammar-firstpass.y"
-                                                        {	(yyval.normal) = (yyvsp[0].normal); }
+  case 205: /* expression2: expression2 OPMUL expritem  */
+#line 334 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) * (yyvsp[0].normal); }
 #line 3052 "grammar-firstpass.tab.c"
     break;
 
-  case 212: /* expritem: LITERAL  */
+  case 206: /* expression2: expression2 OPDIV expritem  */
+#line 335 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) / (yyvsp[0].normal); }
+#line 3058 "grammar-firstpass.tab.c"
+    break;
+
+  case 207: /* expression2: expression2 OPADD PARLEFT expression2 PARRIGHT  */
+#line 336 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = (yyvsp[-4].normal) + (yyvsp[-1].normal); }
+#line 3064 "grammar-firstpass.tab.c"
+    break;
+
+  case 208: /* expression2: expression2 OPSUB PARLEFT expression2 PARRIGHT  */
+#line 337 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = (yyvsp[-4].normal) - (yyvsp[-1].normal); }
+#line 3070 "grammar-firstpass.tab.c"
+    break;
+
+  case 209: /* expression2: expression2 OPMUL PARLEFT expression2 PARRIGHT  */
+#line 338 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = (yyvsp[-4].normal) * (yyvsp[-1].normal); }
+#line 3076 "grammar-firstpass.tab.c"
+    break;
+
+  case 210: /* expression2: expression2 OPDIV PARLEFT expression2 PARRIGHT  */
 #line 339 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = (yyvsp[-4].normal) / (yyvsp[-1].normal); }
+#line 3082 "grammar-firstpass.tab.c"
+    break;
+
+  case 211: /* expression2: PARLEFT expression2 PARRIGHT OPADD expritem  */
+#line 340 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = (yyvsp[-3].normal) + (yyvsp[0].normal); }
+#line 3088 "grammar-firstpass.tab.c"
+    break;
+
+  case 212: /* expression2: PARLEFT expression2 PARRIGHT OPSUB expritem  */
+#line 341 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = (yyvsp[-3].normal) - (yyvsp[0].normal); }
+#line 3094 "grammar-firstpass.tab.c"
+    break;
+
+  case 213: /* expression2: PARLEFT expression2 PARRIGHT OPMUL expritem  */
+#line 342 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = (yyvsp[-3].normal) * (yyvsp[0].normal); }
+#line 3100 "grammar-firstpass.tab.c"
+    break;
+
+  case 214: /* expression2: PARLEFT expression2 PARRIGHT OPDIV expritem  */
+#line 343 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = (yyvsp[-3].normal) / (yyvsp[0].normal); }
+#line 3106 "grammar-firstpass.tab.c"
+    break;
+
+  case 215: /* expression2: PARLEFT expression2 PARRIGHT OPADD PARLEFT expression2 PARRIGHT  */
+#line 344 "grammar-firstpass.y"
+                                                                                                        { (yyval.normal) = (yyvsp[-5].normal) + (yyvsp[-1].normal); }
+#line 3112 "grammar-firstpass.tab.c"
+    break;
+
+  case 216: /* expression2: PARLEFT expression2 PARRIGHT OPSUB PARLEFT expression2 PARRIGHT  */
+#line 345 "grammar-firstpass.y"
+                                                                                                        { (yyval.normal) = (yyvsp[-5].normal) - (yyvsp[-1].normal); }
+#line 3118 "grammar-firstpass.tab.c"
+    break;
+
+  case 217: /* expression2: PARLEFT expression2 PARRIGHT OPMUL PARLEFT expression2 PARRIGHT  */
+#line 346 "grammar-firstpass.y"
+                                                                                                        { (yyval.normal) = (yyvsp[-5].normal) * (yyvsp[-1].normal); }
+#line 3124 "grammar-firstpass.tab.c"
+    break;
+
+  case 218: /* expression2: PARLEFT expression2 PARRIGHT OPDIV PARLEFT expression2 PARRIGHT  */
+#line 347 "grammar-firstpass.y"
+                                                                                                        { (yyval.normal) = (yyvsp[-5].normal) / (yyvsp[-1].normal); }
+#line 3130 "grammar-firstpass.tab.c"
+    break;
+
+  case 219: /* listexpr: expritem  */
+#line 349 "grammar-firstpass.y"
+                                                                                { (yyval.normal) = ((yyvsp[0].normal) > 0xFF)?2:1; }
+#line 3136 "grammar-firstpass.tab.c"
+    break;
+
+  case 220: /* listexpr: STRING  */
+#line 350 "grammar-firstpass.y"
+                                                                                        { (yyval.normal) = strlen((yyvsp[0].literal)); }
+#line 3142 "grammar-firstpass.tab.c"
+    break;
+
+  case 221: /* listexpr: listexpr COMMA expritem  */
+#line 351 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) + (((yyvsp[0].normal) > 0xFF)?2:1); }
+#line 3148 "grammar-firstpass.tab.c"
+    break;
+
+  case 222: /* listexpr: listexpr COMMA STRING  */
+#line 352 "grammar-firstpass.y"
+                                                                        { (yyval.normal) = (yyvsp[-2].normal) + strlen((yyvsp[0].literal)); }
+#line 3154 "grammar-firstpass.tab.c"
+    break;
+
+  case 223: /* expritem: INTEGER  */
+#line 354 "grammar-firstpass.y"
+                                                        {	(yyval.normal) = (yyvsp[0].normal); }
+#line 3160 "grammar-firstpass.tab.c"
+    break;
+
+  case 224: /* expritem: LITERAL  */
+#line 355 "grammar-firstpass.y"
                                                                 {	
 										if ( sym_lookuplabel((yyvsp[0].literal)) == TRUE ) {
 											(yyval.normal) = sym_getvalue((yyvsp[0].literal));
@@ -3061,11 +3169,11 @@ yyreduce:
 											(yyval.normal) = 0;
 										}	
 									}
-#line 3065 "grammar-firstpass.tab.c"
+#line 3173 "grammar-firstpass.tab.c"
     break;
 
 
-#line 3069 "grammar-firstpass.tab.c"
+#line 3177 "grammar-firstpass.tab.c"
 
       default: break;
     }

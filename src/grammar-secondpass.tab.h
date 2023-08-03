@@ -60,8 +60,8 @@ extern int secondpassdebug;
 #include "defs.h"
 #include "parseerrors.h"
 #include "symbols.h" 
-#include "lines.h"
 #include "code.h"
+#include "preproc.h"
    
 
 #line 68 "grammar-secondpass.tab.h"
@@ -79,12 +79,12 @@ extern int secondpassdebug;
     ORG = 259,                     /* ORG  */
     ALIGN = 260,                   /* ALIGN  */
     END = 261,                     /* END  */
-    DEFS = 262,                    /* DEFS  */
-    DS = 263,                      /* DS  */
+    INCBIN = 262,                  /* INCBIN  */
+    DEFS = 263,                    /* DEFS  */
     DEFB = 264,                    /* DEFB  */
-    DB = 265,                      /* DB  */
-    DEFM = 266,                    /* DEFM  */
-    DM = 267,                      /* DM  */
+    DEFM = 265,                    /* DEFM  */
+    DEFW = 266,                    /* DEFW  */
+    ENTER = 267,                   /* ENTER  */
     IXH = 268,                     /* IXH  */
     IXL = 269,                     /* IXL  */
     IYH = 270,                     /* IYH  */
@@ -129,57 +129,61 @@ extern int secondpassdebug;
     XOR = 309,                     /* XOR  */
     AND = 310,                     /* AND  */
     OR = 311,                      /* OR  */
-    CP = 312,                      /* CP  */
-    CPI = 313,                     /* CPI  */
-    CPIR = 314,                    /* CPIR  */
-    CPD = 315,                     /* CPD  */
-    CPDR = 316,                    /* CPDR  */
-    EX = 317,                      /* EX  */
-    EXX = 318,                     /* EXX  */
-    CCF = 319,                     /* CCF  */
-    RLCA = 320,                    /* RLCA  */
-    RRCA = 321,                    /* RRCA  */
-    RLA = 322,                     /* RLA  */
-    RLC = 323,                     /* RLC  */
-    SLA = 324,                     /* SLA  */
-    SLL = 325,                     /* SLL  */
-    SRL = 326,                     /* SRL  */
-    RR = 327,                      /* RR  */
-    RL = 328,                      /* RL  */
-    RRC = 329,                     /* RRC  */
-    SRA = 330,                     /* SRA  */
-    BIT = 331,                     /* BIT  */
-    SET = 332,                     /* SET  */
-    RES = 333,                     /* RES  */
-    PUSH = 334,                    /* PUSH  */
-    POP = 335,                     /* POP  */
-    COMMA = 336,                   /* COMMA  */
-    NZ = 337,                      /* NZ  */
-    Z = 338,                       /* Z  */
-    NC = 339,                      /* NC  */
-    PO = 340,                      /* PO  */
-    PE = 341,                      /* PE  */
-    P = 342,                       /* P  */
-    M = 343,                       /* M  */
-    IN = 344,                      /* IN  */
-    OUT = 345,                     /* OUT  */
-    INI = 346,                     /* INI  */
-    INIR = 347,                    /* INIR  */
-    IND = 348,                     /* IND  */
-    INDR = 349,                    /* INDR  */
-    OUTI = 350,                    /* OUTI  */
-    OUTD = 351,                    /* OUTD  */
-    OTIR = 352,                    /* OTIR  */
-    OTDR = 353,                    /* OTDR  */
-    LITERAL = 354,                 /* LITERAL  */
-    INTEGER = 355,                 /* INTEGER  */
-    STRING = 356,                  /* STRING  */
-    PARLEFT = 357,                 /* PARLEFT  */
-    PARRIGHT = 358,                /* PARRIGHT  */
-    OPADD = 359,                   /* OPADD  */
-    OPSUB = 360,                   /* OPSUB  */
-    OPMUL = 361,                   /* OPMUL  */
-    OPDIV = 362                    /* OPDIV  */
+    NEG = 312,                     /* NEG  */
+    CP = 313,                      /* CP  */
+    CPI = 314,                     /* CPI  */
+    CPIR = 315,                    /* CPIR  */
+    CPD = 316,                     /* CPD  */
+    CPDR = 317,                    /* CPDR  */
+    EX = 318,                      /* EX  */
+    EXX = 319,                     /* EXX  */
+    LDI = 320,                     /* LDI  */
+    LDIR = 321,                    /* LDIR  */
+    SCF = 322,                     /* SCF  */
+    CCF = 323,                     /* CCF  */
+    RLCA = 324,                    /* RLCA  */
+    RRCA = 325,                    /* RRCA  */
+    RLA = 326,                     /* RLA  */
+    RLC = 327,                     /* RLC  */
+    SLA = 328,                     /* SLA  */
+    SLL = 329,                     /* SLL  */
+    SRL = 330,                     /* SRL  */
+    RR = 331,                      /* RR  */
+    RL = 332,                      /* RL  */
+    RRC = 333,                     /* RRC  */
+    SRA = 334,                     /* SRA  */
+    BIT = 335,                     /* BIT  */
+    SET = 336,                     /* SET  */
+    RES = 337,                     /* RES  */
+    PUSH = 338,                    /* PUSH  */
+    POP = 339,                     /* POP  */
+    COMMA = 340,                   /* COMMA  */
+    NZ = 341,                      /* NZ  */
+    Z = 342,                       /* Z  */
+    NC = 343,                      /* NC  */
+    PO = 344,                      /* PO  */
+    PE = 345,                      /* PE  */
+    P = 346,                       /* P  */
+    M = 347,                       /* M  */
+    IN = 348,                      /* IN  */
+    OUT = 349,                     /* OUT  */
+    INI = 350,                     /* INI  */
+    INIR = 351,                    /* INIR  */
+    IND = 352,                     /* IND  */
+    INDR = 353,                    /* INDR  */
+    OUTI = 354,                    /* OUTI  */
+    OUTD = 355,                    /* OUTD  */
+    OTIR = 356,                    /* OTIR  */
+    OTDR = 357,                    /* OTDR  */
+    LITERAL = 358,                 /* LITERAL  */
+    INTEGER = 359,                 /* INTEGER  */
+    STRING = 360,                  /* STRING  */
+    PARLEFT = 361,                 /* PARLEFT  */
+    PARRIGHT = 362,                /* PARRIGHT  */
+    OPADD = 363,                   /* OPADD  */
+    OPSUB = 364,                   /* OPSUB  */
+    OPMUL = 365,                   /* OPMUL  */
+    OPDIV = 366                    /* OPDIV  */
   };
   typedef enum secondpasstokentype secondpasstoken_kind_t;
 #endif
@@ -193,7 +197,7 @@ union SECONDPASSSTYPE
   int32_t 		normal;
   char 			literal[MAX_SIZE_LITERAL];
 
-#line 197 "grammar-secondpass.tab.h"
+#line 201 "grammar-secondpass.tab.h"
 
 };
 typedef union SECONDPASSSTYPE SECONDPASSSTYPE;
@@ -216,6 +220,6 @@ int secondpassparse (void);
   YY_DECL;
 
 
-#line 220 "grammar-secondpass.tab.h"
+#line 224 "grammar-secondpass.tab.h"
 
 #endif /* !YY_SECONDPASS_GRAMMAR_SECONDPASS_TAB_H_INCLUDED  */

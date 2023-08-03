@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "grammar-firstpass.tab.h"
-#include "lines.h"
+#include "code.h"
 
 %}
 
@@ -15,7 +15,7 @@
 %%
 
 [ \t]*					{ /* eat up whitespace */   }
-\n						{  line_increase(); }
+\n						{   return ENTER; }
 
 EQU                   		{  return EQU; }
 ALIGN						{  return ALIGN; }
@@ -26,7 +26,14 @@ DEFB						{  return DEFB; }
 DB							{  return DEFB; }
 DEFM						{  return DEFM; }
 DM							{  return DEFM; }
+DEFW						{  return DEFW; }
+DW							{  return DEFW; }
 ORG							{  return ORG; }
+INCLUDEBIN					{  return INCBIN; }
+INCBIN						{  return INCBIN; }
+
+LDIR						{ return LDIR; }
+LDI							{ return LDI; }
 
 INC							{  return INC; }
 DEC							{  return DEC; }
@@ -38,12 +45,15 @@ EI							{  return EI; }
 
 LD							{  return LD; }
 
+SCF			{ return SCF; }
+
 PUSH		{ return PUSH; }
 POP			{ return POP; }
 
 XOR			{  return XOR; }
 AND			{  return AND; }
 OR			{  return OR; }
+NEG			{  return NEG; }
 
 ADC			{  return ADC; }
 ADD			{  return ADD; }

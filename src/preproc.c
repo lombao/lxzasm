@@ -117,11 +117,44 @@ void preproc_origline_add(const char * line) {
 			generalerror(msgerror);
 		}
 		
-		origlines[nlines++] = strdup(line);	
+		origlines[nlines] = strdup(line);	
+		for(int a=0;a<strlen(origlines[nlines]);a++) {
+			if ( origlines[nlines][a] == '\n' ) {
+				origlines[nlines][a] = 0x00;
+			}
+		}
+		nlines++;
 }
 
 
 char * preproc_origline_get(const int line) {
 	return origlines[line-1];
 }
+
+int preproc_numberlines() {
+	return nlines;
+}
+
 //---------------------------------------------------------------------
+
+
+
+int preproc_include_bin(const char * file, uint8_t * buffer) {
+
+uint8_t localbuffer[65535];
+int k = 0;
+
+	FILE * fr=fopen(file, "rb"); 
+	if ( fr == NULL) { 
+		fprintf(stderr,"::: ERROR: I cannot open the include file %s\n",file);
+		exit(EXIT_FAILURE);
+	}
+	if ( buffer == NULL) {
+		k = fread(localbuffer,1,65535,fr);
+	}
+	else {
+		k = fread(buffer,1,65535,fr);
+	}
+	fclose(fr);
+	return k;
+}

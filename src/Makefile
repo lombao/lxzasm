@@ -8,7 +8,7 @@ YACC = bison
 CC = gcc
 
 all:	lxzasm
-lxzasm:	main.o preproc.o grammar-firstpass.tab.o grammar-secondpass.tab.o lex.firstpass.o lex.secondpass.o symbols.o parseerrors.o lines.o code.o
+lxzasm:	main.o preproc.o grammar-firstpass.tab.o grammar-secondpass.tab.o lex.firstpass.o lex.secondpass.o symbols.o parseerrors.o code.o
 		$(CC) -o $@ -Wall -O3 $^ 
 
 preproc.o: preproc.c preproc.h
@@ -20,9 +20,6 @@ main.o: main.c defs.h
 symbols.o: symbols.c defs.h symbols.h
 		$(CC) -c $^ -Wall 
 		
-lines.o: lines.c defs.h lines.h
-		$(CC) -c $^ -Wall 
-
 parseerrors.o: parseerrors.c defs.h parseerrors.h
 		$(CC) -c $^ -Wall 
 

@@ -53,7 +53,7 @@ int sym_addlabel(const char * label, const int value) {
 int sym_getvalue(const char * label) {
 	
 	for (int a=0; a<nsymbols;a++) {
-		if ( strncmp(label,symbols[a].literal,strlen(label)) == TRUE ) {
+		if ( strcmp(label,symbols[a].literal) == TRUE ) {
 			return symbols[a].value;
 		}
 	}
@@ -63,7 +63,7 @@ int sym_getvalue(const char * label) {
 int sym_lookuplabel( const char * label ) {
 	
 	for (int a=0; a<nsymbols;a++) {
-		if ( strncmp(label,symbols[a].literal,strlen(label)) == TRUE ) {
+		if ( strcmp(label,symbols[a].literal) == TRUE ) {
 			return TRUE;
 		}
 	}
@@ -78,5 +78,6 @@ int sym_dumplabels( ) {
 		printf("LABEL:%s \t\t VALUE:%04X\n",symbols[a].literal, symbols[a].value);
 	}
 	printf("\n");
+	printf("Number of sysmbols: %d\n",nsymbols);
 	return TRUE;
 }

@@ -5,8 +5,8 @@
 #include "defs.h"
 #include "parseerrors.h"
 #include "symbols.h" 
-#include "lines.h"
 #include "code.h"
+#include "preproc.h"
    
 }
 
@@ -34,16 +34,20 @@
 %type <normal>   	expression expression2
 %type <normal>  	expritem
 %type <normal>     	reg8
+%type <normal>		relativejump
 
 /* tokens */
 
-%token EQU ORG ALIGN END
-%token DEFS DS DEFB DB DEFM DM
+%token EQU ORG ALIGN END INCBIN
+%token DEFS DEFB DEFM DEFW 
 
+%token ENTER
 
 %token IXH IXL IYH IYL
 %token AF BC DE HL IX IY SP AFPLUS
 %token A F B C D E H L I R 
+
+
 
 %token INC DEC
 %token ADC ADD SUB SBC
@@ -53,13 +57,16 @@
 %token DI EI LD
 %token HALT NOP
 
-%token XOR AND OR
+%token XOR AND OR NEG
 
 %token CP
 %token CPI CPIR CPD CPDR
 
 %token EX EXX
 
+%token LDI LDIR
+
+%token SCF
 %token CCF
 
 %token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA
@@ -85,20 +92,30 @@
 %%
     program:  	lines    	  			{  	}
     ;
-    lines:  line         {   }
-		|	lines line   {   }
+    lines:  line         {  line_increase(); }
+		|	lines line   {  line_increase(); }
 	;	
-    line: instruction						{ }
-		|	directive						{ }
+    line: instruction ENTER				{ }
+		|	directive ENTER				{ }
+		|   ENTER						{ }
 
 	;
 	directive: 		END					{ return 0;}
 			|	DEFS	expression						{ for(int a=0;a<$2;a++) { code_putbyte(0x00); }  }
 			|	DEFS	expression COMMA expression		{ for(int a=0;a<$2;a++) { code_putbyte($4); }  }
 			|   DEFM	STRING							{ for(int a=0;a<(int)strlen($2);a++) {code_putbyte($2[a]); } }
+			|	DEFW	expression						{ code_putword($2); }
+			|   DEFB	listexpr						{  }
 			|   LITERAL EQU expression					{ /* done in first pass */ }
 			|   EQU expression							{ /* done in first pass most likely is LABEL EQU expression */ }
 			|  	ORG INTEGER								{ pc_init($2);	}
+			|	INCBIN	STRING							{ 
+																uint8_t incbin[65535]; 
+																int k = preproc_include_bin($2,incbin);
+																for(int a=0;a<k;a++) {
+																	code_putbyte(incbin[a]);
+																}
+														 }
 			|   ALIGN   expression	{ 
 										int pc = pc_get();
 										int k = ((( pc / $2)+1)*$2); 
@@ -130,6 +147,10 @@
 				| OTIR					{ code_putbyte( 0xED );  code_putbyte( 0xB3 ); }
 				| OUTD					{ code_putbyte( 0xED );  code_putbyte( 0xAB ); }
 				| OTDR					{ code_putbyte( 0xED );  code_putbyte( 0xBB ); }	
+				| SCF 					{ code_putbyte( 0x37 ); }
+				| LDI					{ code_putbyte( 0xED );  code_putbyte( 0xA0 ); }
+				| LDIR					{ code_putbyte( 0xED );  code_putbyte( 0xB0 ); }		
+				| NEG					{ code_putbyte( 0xED );  code_putbyte( 0x44 ); }			
 				| LD  ldcommand			{ }
 				| AND andcommand		{ }
 				| XOR xorcommand		{ }
@@ -157,6 +178,7 @@
 				| SET setcommand		{ }
 				| SLA slacommand		{ }
 				| SRA sracommand		{ }
+				| SRL srlcommand		{ }
 				| RL rlcommand			{ }
 				| RR rrcommand			{ }
 				| RRC rrccommand		{ }
@@ -228,6 +250,17 @@
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x26 ); }
 			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x26 ); }
 			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x26 ); }
+	;
+	srlcommand: A													{ code_putbyte( 0xCB ); code_putbyte( 0x3F ); }
+			| 	B													{ code_putbyte( 0xCB ); code_putbyte( 0x38 ); }
+			| 	C													{ code_putbyte( 0xCB ); code_putbyte( 0x39 ); }
+			| 	D													{ code_putbyte( 0xCB ); code_putbyte( 0x3A ); }
+			| 	E													{ code_putbyte( 0xCB ); code_putbyte( 0x3B ); }
+			| 	H													{ code_putbyte( 0xCB ); code_putbyte( 0x3C ); }
+			| 	L													{ code_putbyte( 0xCB ); code_putbyte( 0x3D ); }
+			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x3E ); }
+			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3E ); }
+			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3E ); }
 	;
 	rescommand:	INTEGER COMMA reg8							{ code_putbyte( 0xCB ); code_putbyte( ($1<<3)|$3|128  );   }
 			| 	INTEGER COMMA PARLEFT HL PARRIGHT 			{ code_putbyte( 0xCB ); code_putbyte( ($1<<3)|128|4|2 ); }
@@ -407,7 +440,7 @@
 			| 	PARLEFT expression2 PARRIGHT COMMA BC				{ code_putbyte( 0xED ); code_putbyte( 0x43 ); code_putword( $2 );  } 
 			| 	PARLEFT expression2 PARRIGHT COMMA DE				{ code_putbyte( 0xED ); code_putbyte( 0x53 ); code_putword( $2 );  } 
 			| 	PARLEFT expression2 PARRIGHT COMMA SP				{ code_putbyte( 0xED ); code_putbyte( 0x73 ); code_putword( $2 );  } 
-			| 	PARLEFT expression2 PARRIGHT COMMA A				{ code_putbyte( 0x22 ); code_putword( $2 );  } 
+			| 	PARLEFT expression2 PARRIGHT COMMA A				{ code_putbyte( 0x32 ); code_putword( $2 );  } 
 			| 	PARLEFT expression2 PARRIGHT COMMA IX				{ code_putbyte( 0xDD ); code_putbyte( 0x22 ); code_putword( $2 );  } 
 			| 	PARLEFT expression2 PARRIGHT COMMA IY				{ code_putbyte( 0xFD ); code_putbyte( 0x22 ); code_putword( $2 );  } 
 			
@@ -470,7 +503,7 @@
 			| 	H													{ code_putbyte( 0xBC ); }
 			| 	L													{ code_putbyte( 0xBD ); }
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xBE ); }
-			|	expression2											{ code_putbyte( 0xBE ); code_putbyte( $1 ); }
+			|	expression2											{ code_putbyte( 0xFE ); code_putbyte( $1 ); }
 			| 	IXH													{ code_putbyte( 0xDD ); code_putbyte( 0xBC ); }
 			| 	IXL													{ code_putbyte( 0xDD ); code_putbyte( 0xBD ); }	
 			| 	IYH													{ code_putbyte( 0xFD ); code_putbyte( 0xBC ); }
@@ -623,11 +656,12 @@
 			|		IX							{ code_putbyte( 0xDD); code_putbyte( 0xE1); }
 			|		IY							{ code_putbyte( 0xFD); code_putbyte( 0xE1); }
 	;
-	jrcommand:	INTEGER              			{ code_putbyte( 0x18 ); code_putbyte( $1 - pc_get()-1 );  }
-			|	NZ COMMA INTEGER				{ code_putbyte( 0x20 ); code_putbyte( $3 - pc_get()-1 );  }	
-			|	Z COMMA INTEGER					{ code_putbyte( 0x28 ); code_putbyte( $3 - pc_get()-1 );  }	
-			|	NC COMMA INTEGER				{ code_putbyte( 0x30 ); code_putbyte( $3 - pc_get()-1 );  }	
-			|	C COMMA INTEGER					{ code_putbyte( 0x38 ); code_putbyte( $3 - pc_get()-1 );  }	
+	jrcommand:	relativejump           				{ code_putbyte( 0x18 ); code_putbyte( $1 ); }
+			|	NZ COMMA relativejump				{ code_putbyte( 0x20 ); code_putbyte( $3 ); }	
+			|	Z COMMA relativejump				{ code_putbyte( 0x28 ); code_putbyte( $3 ); }	
+			|	NC COMMA relativejump				{ code_putbyte( 0x30 ); code_putbyte( $3 ); }	
+			|	C COMMA relativejump				{ code_putbyte( 0x38 ); code_putbyte( $3 ); }	
+			
 	;
 	jpcommand:	expression             			{ code_putbyte( 0xC3 ); code_putword( $1 ); }
 			|	NZ COMMA expression				{ code_putbyte( 0xC2 ); code_putword( $3 ); }	
@@ -652,17 +686,19 @@
 			|	P COMMA expression				{ code_putbyte( 0xF4 ); code_putword( $3 ); }	
 			|	M COMMA expression				{ code_putbyte( 0xFC ); code_putword( $3 ); }	
 	;
-	djnzcommand:	INTEGER              						{ code_putbyte( 0x10 ); code_putbyte( $1 - pc_get()-1 );  }	
+	djnzcommand:	relativejump     				{ code_putbyte( 0x10 ); code_putbyte( $1 );  }	
+	;
+	relativejump:	INTEGER              						{ $$ = $1 - pc_get()-1;   }	
 			|		LITERAL											{
 																		int k = pc_get();
 																		if ( sym_lookuplabel($1) == TRUE ) {
 																			int jump = sym_getvalue($1);
-																			int diff = jump - k;
+																			int diff = jump - k - 2;
 																			if ( diff > 127 || diff < -128 ) { 
 																				generalerror("DJNZ Jump is too far away");
 																			}
 																			else {
-																			   code_putbyte( 0x10 ); code_putbyte( diff );  
+																			   $$ = diff;  
 																			}
 																		}
 																		else {
@@ -671,6 +707,8 @@
 																	}
 		
 	;
+	
+	
 	retcommand:									{  code_putbyte( 0xC9 );}
 		| 	NZ									{  code_putbyte( 0xC0 ); }
 		| 	Z									{  code_putbyte( 0xC8 ); }
@@ -731,6 +769,13 @@
 										}	
 									}
 	;
+	listexpr:	expritem						{ code_putbyte($1); }
+		|		listexpr COMMA expritem			{ code_putbyte($3); }
+		| 		STRING							{ for(size_t a=0;a<strlen($1);a++) { code_putbyte($1[a]); } }
+		| 		listexpr COMMA STRING			{ for(size_t a=0;a<strlen($3);a++) { code_putbyte($3[a]); } }
+		
+	;
+
     reg8:      A	{ $$ = 7; }
              | B    { $$ = 0; }
              | C    { $$ = 1; }

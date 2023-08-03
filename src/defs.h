@@ -29,8 +29,8 @@
 #define MAX_SIZE_FILE_NAME 100
 
 /* Max size of an asm line */ 
-#define MAX_SIZE_ASM_LINE 300
-#define MAX_NUM_ASM_LINES 4000
+#define MAX_SIZE_ASM_LINE 500
+#define MAX_NUM_ASM_LINES 8000
 
 /* Max size of addressable memory */
 #define MAX_SIZE_RAM 65535
