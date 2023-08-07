@@ -109,7 +109,7 @@ This is a collection of online sources of info I've found about the Z80
 
 ### TODO list
 * Create a switch to control the generation of undocumented instructions.
-* Allow to use the + - signs in numbers
 * include file
 * Allow to compile more than one file at a time
 * macros
+* create an option to normalize/pretty the assembler source code

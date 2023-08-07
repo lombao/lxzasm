@@ -26,13 +26,13 @@
 
 void firstpasserror(const char *str)
 {
-	printf("first pass\n");
+	printf("** (debug) first pass\n");
 	generalerror(str);
 } 
 
 void secondpasserror(const char *str)
 {
-	printf("second pass\n");
+	printf("** (debug) second pass\n");
 	generalerror(str);
 } 
 

@@ -15,6 +15,7 @@
 %union {
   int32_t 		normal;
   char 			literal[MAX_SIZE_LITERAL];
+  int8_t		byte;
 }
 
 
@@ -33,7 +34,7 @@
 /* Definte types of non terminals */
 %type <normal>   	expression expression2
 %type <normal>  	expritem
-%type <normal>		listexpr
+%type <byte>		listexpr
 
 /* tokens */
 
@@ -346,12 +347,13 @@
 		|	PARLEFT expression2 PARRIGHT OPMUL PARLEFT expression2 PARRIGHT			{ $$ = $2 * $6; }
 		|	PARLEFT expression2 PARRIGHT OPDIV PARLEFT expression2 PARRIGHT			{ $$ = $2 / $6; }
 	;
-	listexpr:	expritem						{ $$ = ($1 > 0xFF)?2:1; }
+	listexpr:	expression						{ $$ = ($1 > 0xFF)?2:1; }
 		|		STRING							{ $$ = strlen($1); }
-		|		listexpr COMMA expritem			{ $$ = $1 + (($3 > 0xFF)?2:1); }
+		|		listexpr COMMA expression			{ $$ = $1 + (($3 > 0xFF)?2:1); }
 		|		listexpr COMMA STRING			{ $$ = $1 + strlen($3); }
 	;
-	expritem:	INTEGER				{	$$ = $1; }
+	expritem:	INTEGER				{	$$ = $1;  }
+		|		OPSUB INTEGER		{ 	$$ = -$2; }
 		|		LITERAL				{	
 										if ( sym_lookuplabel($1) == TRUE ) {
 											$$ = sym_getvalue($1);

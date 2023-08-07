@@ -15,6 +15,9 @@
 %union {
   int32_t 		normal;
   char 			literal[MAX_SIZE_LITERAL];
+  int8_t		byte;
+  int16_t		word;
+  uint8_t		array[256];
 }
 
 
@@ -31,10 +34,11 @@
 %define parse.error verbose
 
 /* Definte types of non terminals */
-%type <normal>   	expression expression2
-%type <normal>  	expritem
+%type <word>   		expression expression2
+%type <word>		expritem
 %type <normal>     	reg8
 %type <normal>		relativejump
+%type <array>		listexpr
 
 /* tokens */
 
@@ -105,7 +109,14 @@
 			|	DEFS	expression COMMA expression		{ for(int a=0;a<$2;a++) { code_putbyte($4); }  }
 			|   DEFM	STRING							{ for(int a=0;a<(int)strlen($2);a++) {code_putbyte($2[a]); } }
 			|	DEFW	expression						{ code_putword($2); }
-			|   DEFB	listexpr						{  }
+			|   DEFB	listexpr						{ 
+															
+															for(int a=1;a<=$2[0];a++) {
+																code_putbyte($2[a]);
+															
+															}
+									
+														}
 			|   LITERAL EQU expression					{ /* done in first pass */ }
 			|   EQU expression							{ /* done in first pass most likely is LABEL EQU expression */ }
 			|  	ORG INTEGER								{ pc_init($2);	}
@@ -760,6 +771,7 @@
 		|	PARLEFT expression2 PARRIGHT OPDIV PARLEFT expression2 PARRIGHT			{ $$ = $2 / $6; }
 	;
 	expritem:	INTEGER				{	$$ = $1; }
+		|		OPSUB INTEGER		{	$$ = -$2; }
 		|		LITERAL				{	
 										if ( sym_lookuplabel($1) == TRUE ) {
 											$$ = sym_getvalue($1);
@@ -770,10 +782,10 @@
 									}
 		|		DOLAR				{ $$ = pc_get(); }
 	;
-	listexpr:	expritem						{ code_putbyte($1); }
-		|		listexpr COMMA expritem			{ code_putbyte($3); }
-		| 		STRING							{ for(size_t a=0;a<strlen($1);a++) { code_putbyte($1[a]); } }
-		| 		listexpr COMMA STRING			{ for(size_t a=0;a<strlen($3);a++) { code_putbyte($3[a]); } }
+	listexpr:	expression						{ $$[1] = (uint8_t)$1; $$[0] = 1; }
+		|		listexpr COMMA expression		{ $$[$$[0]+1] = (uint8_t)$3; $$[0] += 1; }
+		| 		STRING							{ $$[0] = 0; for(size_t a=0;a<strlen($1);a++) { $$[$$[0]+1] = (uint8_t)$1[a]; $$[0] += 1; } }
+		| 		listexpr COMMA STRING			{ for(size_t a=0;a<strlen($3);a++) { $$[$$[0]+1] = (uint8_t)$3[a]; $$[0] += 1; } }
 		
 	;
 

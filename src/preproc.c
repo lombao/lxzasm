@@ -117,13 +117,19 @@ void preproc_origline_add(const char * line) {
 			generalerror(msgerror);
 		}
 		
-		origlines[nlines] = strdup(line);	
+		int a = 0;
+		while(line[a]==' ' || line[a]=='\t') { a++; }
+		origlines[nlines] = strdup(&line[a]);	
+		
 		for(int a=0;a<strlen(origlines[nlines]);a++) {
 			if ( origlines[nlines][a] == '\n' ) {
 				origlines[nlines][a] = 0x00;
 			}
 		}
 		nlines++;
+		
+		
+		
 }
 
 

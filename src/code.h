@@ -26,8 +26,8 @@
 #include "defs.h"
 
 extern int code_init();
-extern int code_putbyte(const int value);
-extern int code_putword(const int value);
+extern int code_putbyte(const uint8_t value);
+extern int code_putword(const uint16_t value);
 extern int code_output(char * file);
 
 

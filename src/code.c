@@ -75,15 +75,10 @@ int code_init() {
 
 
 
-int code_putbyte(const int value) {
+int code_putbyte(const uint8_t value) {
 	
-char hex[4];
+char hex[3];
 
-
-	if ( value > 0xFF ) { 
-		generalerror("Internal Error: The opcode value exceeds the 8 bits range");
-	}
-	
 	rom[pc_get()] = value;
 	sprintf(hex,"%02X",value);
 
@@ -108,15 +103,11 @@ char hex[4];
 
 
 
-int code_putword(const int value) {
+int code_putword(const uint16_t value) {
 	
 char hex1[4];
 char hex2[4];
 
-	if ( value > 0xFFFF ) { 
-		generalerror("Internal Error: The word value exceeds the 16 bits range");
-	}
-	
 	rom[pc_get()] = value & 0x00FF;
 	rom[pc_get()+1] = value >> 8;
 	
@@ -190,13 +181,13 @@ int list_print() {
 	char codeline[MAX_SIZE_ASM_LINE];
 	
 	printf("       LIST \n");
-	printf("=========================================================\n");
-	printf("Line Address %21s                        %s\n","Code","Assembler");
+	printf("================================================================\n");
+	printf("Line Address %11s                  %s\n","Code","Assembler");
 	for (k=1;k<=preproc_numberlines();k++) {
 			strcpy(codeline,preproc_origline_get(k));
 			
 			if ( listlines[k].opcode != NULL ) {
-				printf("%4d  %04X  %45s :: %s\n",k,listlines[k].address,listlines[k].opcode,codeline);
+				printf("%4d  %04X    %-20s => %-s\n",k,listlines[k].address,listlines[k].opcode,codeline);
 			}
 	}
 	
