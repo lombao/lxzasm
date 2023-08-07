@@ -28,7 +28,8 @@ void preproc_processline(const char * line, char * output);
 //----------------------------------------------------------------------
 char * origlines[MAX_SIZE_ASM_LINE];
 int nlines;
-
+FILE * fdt = NULL;
+	
 //*********************************************************************/
 FILE * preproc_proc(const char * file) {
 	
@@ -41,20 +42,23 @@ char postline[MAX_SIZE_ASM_LINE];
 		exit(EXIT_FAILURE);
 	}
 	
-	FILE * fdt = tmpfile();
-	if ( fdt == NULL) { 
-		fprintf(stderr,"::: ERROR: PREPROC I cannot create temporal file for preprocessing");
-		exit(EXIT_FAILURE);
+	//printf("(DEBUG) Input file %s\n",file);
+	
+	if ( fdt == NULL ) {
+		fdt = tmpfile();
+		if ( fdt == NULL) { 
+			generalerror("::: ERROR: PREPROC I cannot create temporal file for preprocessing");
+		}
 	}
 	
 	while ( fgets( lineasm ,MAX_SIZE_ASM_LINE,fi) != NULL ) {
 		preproc_origline_add(lineasm);
 		preproc_processline(lineasm,postline);
 		fputs(postline,fdt);
+		//printf("(DEBUG) postline: %s\n",postline);
 	}
 	
-	/* Note that rewind to point to the beginning of the file before return */
-	rewind(fdt);
+	fclose(fi);
 	return fdt;
 }
 

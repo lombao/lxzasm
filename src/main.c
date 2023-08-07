@@ -49,7 +49,7 @@ void showVersion();
 /* Print usage */
 void showUsage() {
 	 fprintf(stderr,"LXZ Assembler. Version %s\n\n",LXZASMVERSION); 
-	 fprintf(stderr,"Usage: lxzasm [-v] [ -h] [ -l]  inputfile \n");
+	 fprintf(stderr,"Usage: lxzasm [-v] [ -h] [ -l]  asmfile1 asmfile2 ... \n");
 	 fprintf(stderr,"	v:  Show Version\n");
 	 fprintf(stderr,"	h:  Show Help ( this help )\n");	
 	 fprintf(stderr,"	d:  Dump all Labels\n");
@@ -111,7 +111,11 @@ int main(int argc, char *argv[]) {
   
 
 	/* We run the preproc and return the yyin file descriptor */
-	secondpassin = firstpassin = preproc_proc( argv[optind] );
+	for(int i=optind;i<argc;i++) {
+		secondpassin = firstpassin = preproc_proc( argv[i] );
+	}
+	/* Note that rewind to point to the beginning of the file before return */
+	rewind(firstpassin);
 //	printf("**** Preproc complete\n");
 		
 	/* first pass */

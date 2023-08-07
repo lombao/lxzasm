@@ -1,18 +1,17 @@
 # LXZASM
 
-A yet another simple Z80 assembler
+A yet another simple Z80 assembler for Linux
 Written in C, using flex & bison ( lex&yacc )
 
 ## Why ?
 Why not. what kind of question is this ?
-
 
 ## The build requirements are:
 - flex and bison
 - any non-prehistoric glibc & gcc  will suffice
 
 ## How to build ?
-``` 
+```
 cd src
 make
 cp lxzasm <your preferred location>
@@ -30,7 +29,6 @@ cd ../tests
 ./tests.sh
 ```
 
-
 ## BSD and other *nix 
 It should run on BSD systems with minor or no changes at all but I did not test that myself.
 If there is anything I can change to improve compatibility, please let me know.  
@@ -39,17 +37,28 @@ If there is anything I can change to improve compatibility, please let me know.
 ## How to use it ?
 ```
 $ ./lxzasm -h
-LXZ Assembler. Version 0.1
+LXZ Assembler. Version 0.2
 
-Usage: lxzasm [-v] [ -h] [ -l]  inputfile 
+Usage: lxzasm [-v] [ -h] [ -l]  asmfile1 asmfile2 ...
 	v:  Show Version
 	h:  Show Help ( this help )
 	d:  Dump all Labels
 	l:  Generate List report
 ```
 
+### The basic compilation
+The simplest compilation would be passing just an assembler file like this:
+```
+lxzasm test1.asm
+```
+This will generate a file named "output.ronm" which is a 64Kb binary file containing the flat memory with the compiled code inside
 
-
+### Combining more than one file
+You can compile more than one assembler file at a time, for instance, using the examples in tests folder you could
+```
+lxzasm test2.asm test3.asm
+```
+The order of compilation will be the order you provide the files, so beware if you have added an END directive in any of then because that will interrupt the compilation
 
 ## SYNTAX
 
@@ -81,6 +90,7 @@ the existent options
 * DEFB ( DW )
 * DEFM ( DM )
 * DEFW ( DW )
+* END
 * EQU
 * ORG
 * INCLUDEBIN ( INCBIN )
@@ -110,6 +120,5 @@ This is a collection of online sources of info I've found about the Z80
 ### TODO list
 * Create a switch to control the generation of undocumented instructions.
 * include file
-* Allow to compile more than one file at a time
 * macros
 * create an option to normalize/pretty the assembler source code

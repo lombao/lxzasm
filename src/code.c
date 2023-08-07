@@ -38,7 +38,7 @@ struct {
 	int line;
 	int address;
 	char * code;
-	char * opcode;
+	char opcode[256];
 } listlines[MAX_NUM_ASM_LINES];
 int numlistlines=0;
 
@@ -84,18 +84,11 @@ char hex[3];
 
 	int k = line_get();
 		
-	if ( listlines[k].opcode == NULL ) {
-			listlines[k].opcode = strdup(hex); 	
+	if ( listlines[k].opcode[0] == 0x0 ) {
 			listlines[k].address = pc_get();
-			
 	}
-	else {
-			int ks = strlen(  listlines[k].opcode );
-			if ( realloc( listlines[k].opcode, ks+2 ) == NULL ) {
-				generalerror("Internal Error. Memory allocation error");
-			}
-			strcat(listlines[k].opcode,hex); 	
-	}
+	strcat(listlines[k].opcode,hex); 	
+	
 	
 	pc_inc(1);
 	return TRUE;
@@ -116,23 +109,11 @@ char hex2[4];
 
 	int k = line_get();
 
-	if ( listlines[k].opcode == NULL ) {
-			listlines[k].opcode = strdup(hex1);
-			if ( realloc( listlines[k].opcode, 4 ) == NULL ) {
-				generalerror("Inbternal Error. Memory allocation problem"); 
-			}
-			strcat(listlines[k].opcode,hex2);
+	if ( listlines[k].opcode[0] == 0x0 ) {
 			listlines[k].address = pc_get();			
 	}
-	else {
-			int ks = strlen(  listlines[k].opcode );
-			if ( realloc( listlines[k].opcode, ks+4 ) == NULL ) {
-				generalerror("Inbternal Error. Memory allocation problem"); 
-			}
-			strcat(listlines[k].opcode,hex1);
-			strcat(listlines[k].opcode,hex2); 	
-	}
-
+	strcat(listlines[k].opcode,hex1);
+	strcat(listlines[k].opcode,hex2); 	
 	
 	pc_inc(2);
 	return TRUE;
@@ -186,7 +167,7 @@ int list_print() {
 	for (k=1;k<=preproc_numberlines();k++) {
 			strcpy(codeline,preproc_origline_get(k));
 			
-			if ( listlines[k].opcode != NULL ) {
+			if ( listlines[k].opcode[0] != 0x0 ) {
 				printf("%4d  %04X    %-20s => %-s\n",k,listlines[k].address,listlines[k].opcode,codeline);
 			}
 	}
