@@ -190,14 +190,13 @@ int list_print() {
 	char codeline[MAX_SIZE_ASM_LINE];
 	
 	printf("       LIST \n");
-	printf("========================\n\n");
-	
-	
-	for (k=1;k<preproc_numberlines();k++) {
+	printf("=========================================================\n");
+	printf("Line Address %21s                        %s\n","Code","Assembler");
+	for (k=1;k<=preproc_numberlines();k++) {
 			strcpy(codeline,preproc_origline_get(k));
 			
 			if ( listlines[k].opcode != NULL ) {
-				printf("%4d   %04X %45s :: %s\n",k,listlines[k].address,listlines[k].opcode,codeline);
+				printf("%4d  %04X  %45s :: %s\n",k,listlines[k].address,listlines[k].opcode,codeline);
 			}
 	}
 	

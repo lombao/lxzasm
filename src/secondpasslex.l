@@ -205,5 +205,7 @@ M					{ return M; }
 						strncpy(secondpasslval.literal,yytext+1,strlen(yytext)-1); secondpasslval.literal[strlen(yytext)-2]=0x0;return STRING; 
 					}
 
+\$						{ 	return DOLAR; }
+
 %%
 

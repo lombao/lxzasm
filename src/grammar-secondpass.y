@@ -41,7 +41,7 @@
 %token EQU ORG ALIGN END INCBIN
 %token DEFS DEFB DEFM DEFW 
 
-%token ENTER
+%token ENTER DOLAR
 
 %token IXH IXL IYH IYL
 %token AF BC DE HL IX IY SP AFPLUS
@@ -768,6 +768,7 @@
 											generalerror("Unknown Literal or Label");
 										}	
 									}
+		|		DOLAR				{ $$ = pc_get(); }
 	;
 	listexpr:	expritem						{ code_putbyte($1); }
 		|		listexpr COMMA expritem			{ code_putbyte($3); }

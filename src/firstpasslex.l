@@ -17,6 +17,7 @@
 [ \t]*					{ /* eat up whitespace */   }
 \n						{   return ENTER; }
 
+
 EQU                   		{  return EQU; }
 ALIGN						{  return ALIGN; }
 END							{  return END; }
@@ -212,5 +213,8 @@ M					{ return M; }
 						}
 						strncpy(firstpasslval.literal,yytext+1,strlen(yytext)-1); firstpasslval.literal[strlen(yytext)-2]=0x0;return STRING; 
 					}
+					
+\$						{ 	return DOLAR; }
+					
 %%
 

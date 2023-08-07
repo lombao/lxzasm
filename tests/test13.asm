@@ -1,0 +1,4 @@
+	ORG #A000
+LABEL1:	LD DE,$
+	LD BC,$-2
+LABEL2:	DW $

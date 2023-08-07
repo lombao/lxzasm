@@ -35,8 +35,6 @@ cd ../tests
 It should run on BSD systems with minor or no changes at all but I did not test that myself.
 If there is anything I can change to improve compatibility, please let me know.  
 
-## Bugs, suggestions and comments
-Please , send them to me: cesar dot lombao at gmail dot com .
 
 ## How to use it ?
 ```
@@ -51,18 +49,6 @@ Usage: lxzasm [-v] [ -h] [ -l]  inputfile
 ```
 
 
-## Sources of Information
-This is a collection of online sources of info I've found about the Z80
-
-* http://www.z80.info
-* http://z80.info/zip/z80-documented.pdf 
-* http://www.worldofspectrum.org/z88forever/dn327/z80undoc.htm  
-* http://48k.ca/zmac.html
-* http://www.mathematik.uni-ulm.de/users/ag/yaze-ag/
-* http://www.winape.net/help/macros.html
-* https://pasmo.speccy.org
-* https://www.amstrad.es/doku.php?id=publicaciones:revistas:mh_amstrad_semanal:mh_amstrad_semanal_indice
-* https://clrhome.org/table/
 
 
 ## SYNTAX
@@ -80,6 +66,13 @@ This is a collection of online sources of info I've found about the Z80
    LD A,00010000b
 ```
 
+### Using the $ Pointer
+```
+   DW $
+   LD BC,$-2
+```
+
+
 
 ## Directives and Pseudo instructions
 Please in the folder doc a more detailed description, this is just a list of
@@ -91,12 +84,31 @@ the existent options
 * EQU
 * ORG
 * INCLUDEBIN ( INCBIN )
+* The $ Pointer
 
 
 
-## TODO
+
+## Annex
+### Bugs, suggestions and comments
+Please , send them to me: cesar dot lombao at gmail dot com . 
+
+### Sources of Information
+This is a collection of online sources of info I've found about the Z80
+
+* http://www.z80.info
+* http://z80.info/zip/z80-documented.pdf 
+* http://www.worldofspectrum.org/z88forever/dn327/z80undoc.htm  
+* http://48k.ca/zmac.html
+* http://www.mathematik.uni-ulm.de/users/ag/yaze-ag/
+* http://www.winape.net/help/macros.html
+* https://pasmo.speccy.org
+* https://www.amstrad.es/doku.php?id=publicaciones:revistas:mh_amstrad_semanal:mh_amstrad_semanal_indice
+* https://clrhome.org/table/
+
+
+### TODO list
 * Create a switch to control the generation of undocumented instructions.
-* Implement the $ variable pointer
 * Allow to use the + - signs in numbers
 * include file
 * Allow to compile more than one file at a time

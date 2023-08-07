@@ -48,7 +48,6 @@ autom4te.cache
 .deps/
 .libs/
 kk
-kk1
 
 # Prerequisites
 *.d
@@ -90,7 +89,6 @@ kk1
 *.x86_64
 *.hex
 
-
 # Debug files
 *.dSYM/
 *.su
@@ -106,5 +104,17 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+
+# Bison Lex outputs
+src/grammar-firstpass.tab.c
+src/grammar-firstpass.tab.h
+src/grammar-secondpass.tab.c
+src/grammar-secondpass.tab.h
+src/lex.firstpass.c
+src/lex.secondpass.c
+
+
+# The binary program
+src/lxzasm
 
 

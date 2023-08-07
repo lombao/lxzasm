@@ -37,7 +37,7 @@
 
 /* tokens */
 
-%token ENTER
+%token ENTER DOLAR
 
 %token EQU ORG ALIGN END INCBIN
 %token DEFS DEFB DEFM DEFW
@@ -360,6 +360,7 @@
 											$$ = 0;
 										}	
 									}
+		|		DOLAR				{ $$ = pc_get(); }
 	;
 	indexreg:		IX
 				|	IY
