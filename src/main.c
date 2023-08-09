@@ -37,7 +37,8 @@ extern FILE * secondpassin;
 
 //----------------------------------------------------------------------
 /* GLOBAL VARIABLES           */
-
+int undocumentedWarning = FALSE;
+    
 //----------------------------------------------------------------------
 // INTERNAL
 void showUsage();
@@ -53,6 +54,7 @@ void showUsage() {
 	 fprintf(stderr,"	v:  Show Version\n");
 	 fprintf(stderr,"	h:  Show Help ( this help )\n");	
 	 fprintf(stderr,"	d:  Dump all Labels\n");
+	 fprintf(stderr,"	u:  Print Warning if used Undocumented\n");	 
 	 fprintf(stderr,"	l:  Generate List report\n");
 	 	
 	  
@@ -79,7 +81,8 @@ int main(int argc, char *argv[]) {
     int opt;
     int printLabels = FALSE;
     int printList 	= FALSE;
-	while ((opt = getopt(argc, argv, "o:lvh")) != -1) {
+
+	while ((opt = getopt(argc, argv, "o:ulvh")) != -1) {
 		switch (opt) {
 			case 'v':
 				showVersion();
@@ -94,6 +97,9 @@ int main(int argc, char *argv[]) {
 				break;
 			case 'l': 
 				printList = TRUE;
+				break;
+			case 'u': 
+				undocumentedWarning = TRUE;
 				break;
 			default: /* '?' */
 				fprintf(stderr,"Unknown option %i",opt); 
@@ -135,13 +141,11 @@ int main(int argc, char *argv[]) {
 	/* print the codeptr */
 //	printf("**** Second pass complete\n");
 	if ( printList ==  TRUE ) {
-		showVersion();
 		list_print();
 		sym_dumplabels();
 	}
 
 	if ( printLabels ==  TRUE ) {
-		showVersion();
 		sym_dumplabels();
 	}
     

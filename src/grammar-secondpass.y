@@ -194,6 +194,7 @@
 				| RR rrcommand			{ }
 				| RRC rrccommand		{ }
 				| RLC rlccommand		{ }
+				| SLL sllcommand			{ }
 	
 	;
 	rlccommand: A													{ code_putbyte( 0xCB ); code_putbyte( 0x07 ); }
@@ -206,6 +207,22 @@
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x06 ); }
 			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x06 ); }
 			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x06 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x00 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x01 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x02 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x03 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x04 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x05 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x07 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x00 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x01 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x02 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x03 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x04 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x05 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x07 ); }
+
+			
 	;
 	rrccommand: A													{ code_putbyte( 0xCB ); code_putbyte( 0x0F ); }
 			| 	B													{ code_putbyte( 0xCB ); code_putbyte( 0x08 ); }
@@ -217,6 +234,20 @@
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x0E ); }
 			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0E ); }
 			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0E ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x08 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x09 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0A ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0B ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0C ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0D ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0F ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x08 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x09 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0A ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0B ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0C ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0D ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x0F ); }
 	;
 	rrcommand: 	A													{ code_putbyte( 0xCB ); code_putbyte( 0x1F ); }
 			| 	B													{ code_putbyte( 0xCB ); code_putbyte( 0x18 ); }
@@ -228,6 +259,20 @@
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x1E ); }
 			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1E ); }
 			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1E ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x18 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x19 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1A ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1B ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1C ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1D ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1F ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x18 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x19 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1A ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1B ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1C ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1D ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x1F ); }
 	;
 	rlcommand: 	A													{ code_putbyte( 0xCB ); code_putbyte( 0x17 ); }
 			| 	B													{ code_putbyte( 0xCB ); code_putbyte( 0x10 ); }
@@ -239,6 +284,20 @@
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x16 ); }
 			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x16 ); }
 			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x16 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x10 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x11 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x12 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x13 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x14 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x15 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x17 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x10 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x11 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x12 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x13 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x14 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x15 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x17 ); }
 	;
 	sracommand: A													{ code_putbyte( 0xCB ); code_putbyte( 0x2F ); }
 			| 	B													{ code_putbyte( 0xCB ); code_putbyte( 0x28 ); }
@@ -250,6 +309,20 @@
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x2E ); }
 			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2E ); }
 			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2E ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x28 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x29 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2A ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2B ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2C ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2D ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2F ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x28 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x29 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2A ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2B ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2C ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2D ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x2F ); }
 	;
 	slacommand: A													{ code_putbyte( 0xCB ); code_putbyte( 0x27 ); }
 			| 	B													{ code_putbyte( 0xCB ); code_putbyte( 0x20 ); }
@@ -261,6 +334,47 @@
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x26 ); }
 			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x26 ); }
 			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x26 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x20 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x21 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x22 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x23 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x24 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x25 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x27 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x20 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x21 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x22 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x23 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x24 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x25 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x27 ); }
+			
+	;
+	sllcommand: A													{ code_putbyte( 0xCB ); code_putbyte( 0x37 ); }
+			| 	B													{ code_putbyte( 0xCB ); code_putbyte( 0x30 ); }
+			| 	C													{ code_putbyte( 0xCB ); code_putbyte( 0x31 ); }
+			| 	D													{ code_putbyte( 0xCB ); code_putbyte( 0x32 ); }
+			| 	E													{ code_putbyte( 0xCB ); code_putbyte( 0x33 ); }
+			| 	H													{ code_putbyte( 0xCB ); code_putbyte( 0x34 ); }
+			| 	L													{ code_putbyte( 0xCB ); code_putbyte( 0x35 ); }
+			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x36 ); }
+			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x36 ); }
+			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x36 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x30 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x31 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x32 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x33 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x34 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x35 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x37 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x30 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x31 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x32 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x33 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x34 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x35 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x37 ); }
+
 	;
 	srlcommand: A													{ code_putbyte( 0xCB ); code_putbyte( 0x3F ); }
 			| 	B													{ code_putbyte( 0xCB ); code_putbyte( 0x38 ); }
@@ -272,16 +386,61 @@
 			|	PARLEFT HL PARRIGHT									{ code_putbyte( 0xCB ); code_putbyte( 0x3E ); }
 			| 	PARLEFT IX OPADD expression PARRIGHT 				{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3E ); }
 			| 	PARLEFT IY OPADD expression PARRIGHT 				{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3E ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x38 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x39 ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3A ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3B ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3C ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3D ); }
+			|	PARLEFT IX OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3F ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA B		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x38 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA C		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x39 ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA D		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3A ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA E		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3B ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA H		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3C ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA L		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3D ); }
+			|	PARLEFT IY OPADD expression PARRIGHT COMMA A		{ code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $4 ); code_putbyte( 0x3F ); }
 	;
 	rescommand:	INTEGER COMMA reg8							{ code_putbyte( 0xCB ); code_putbyte( ($1<<3)|$3|128  );   }
 			| 	INTEGER COMMA PARLEFT HL PARRIGHT 			{ code_putbyte( 0xCB ); code_putbyte( ($1<<3)|128|4|2 ); }
 			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|4|2 ); } 
-			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|4|2 ); }  
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|4|2 ); }  	
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA B { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA C { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|1 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA D { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|2 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA E { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|3 ); } 		
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA H { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|4 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA L { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|5 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA A { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|7 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA B { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA C { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|1 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA D { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|2 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA E { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|3 ); } 		
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA H { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|4 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA L { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|5 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA A { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|7 ); } 
+
+			
 	;
 	setcommand:	INTEGER COMMA reg8							{ code_putbyte( 0xCB ); code_putbyte( ($1<<3)|$3|128|64  );   }
 			| 	INTEGER COMMA PARLEFT HL PARRIGHT 			{ code_putbyte( 0xCB ); code_putbyte( ($1<<3)|128|64|4|2 ); }
 			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|4|2 ); } 
 			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|4|2 ); }  
+			
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA B { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA C { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|1 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA D { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|2 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA E { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|3 ); } 		
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA H { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|4 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA L { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|5 ); } 
+			| 	INTEGER COMMA PARLEFT IX OPADD expression2 PARRIGHT COMMA A { code_putbyte( 0xDD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|7 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA B { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA C { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|1 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA D { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|2 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA E { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|3 ); } 		
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA H { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|4 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA L { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|5 ); } 
+			| 	INTEGER COMMA PARLEFT IY OPADD expression2 PARRIGHT COMMA A { code_putbyte( 0xFD ); code_putbyte( 0xCB ); code_putbyte( $6 ); code_putbyte( ($1<<3)|128|64|7 ); } 
 	;
 	bitcommand:	INTEGER COMMA reg8							{ code_putbyte( 0xCB ); code_putbyte( ($1<<3)|$3|64 ) ;}
 			| 	INTEGER COMMA PARLEFT HL PARRIGHT 			{ code_putbyte( 0xCB ); code_putbyte( ($1<<3)|64|6  ); }

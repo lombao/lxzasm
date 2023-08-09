@@ -44,3 +44,15 @@ void generalerror(const char *str)
     exit(EXIT_FAILURE);
 } 
 
+
+
+void undocumentedwarning()
+{
+    generalwarning("Using Undocumented Opcode");
+} 
+
+
+void generalwarning(const char *str)
+{
+    fprintf(stderr,":::WARNING Line number: %d\n     >%s\n      %s\n\n",line_get(),preproc_origline_get(line_get()),str);
+} 

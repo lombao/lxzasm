@@ -39,10 +39,11 @@ If there is anything I can change to improve compatibility, please let me know.
 $ ./lxzasm -h
 LXZ Assembler. Version 0.2
 
-Usage: lxzasm [-v] [ -h] [ -l]  asmfile1 asmfile2 ...
+Usage: lxzasm [-v] [ -h] [ -l] [-u] [-d] asmfile1 asmfile2 ...
 	v:  Show Version
 	h:  Show Help ( this help )
 	d:  Dump all Labels
+	u:  Print Warning if used Undocumented
 	l:  Generate List report
 ```
 
@@ -59,6 +60,13 @@ You can compile more than one assembler file at a time, for instance, using the 
 lxzasm test2.asm test3.asm
 ```
 The order of compilation will be the order you provide the files, so beware if you have added an END directive in any of then because that will interrupt the compilation
+
+### Undocumented opcodes warning
+```
+lxzasm -u test15.asm
+```
+you will get a warning line for each undocumented opcode you are using. But
+it will compile it anyway.
 
 ## SYNTAX
 

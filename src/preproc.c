@@ -42,8 +42,6 @@ char postline[MAX_SIZE_ASM_LINE];
 		exit(EXIT_FAILURE);
 	}
 	
-	//printf("(DEBUG) Input file %s\n",file);
-	
 	if ( fdt == NULL ) {
 		fdt = tmpfile();
 		if ( fdt == NULL) { 
@@ -55,7 +53,6 @@ char postline[MAX_SIZE_ASM_LINE];
 		preproc_origline_add(lineasm);
 		preproc_processline(lineasm,postline);
 		fputs(postline,fdt);
-		//printf("(DEBUG) postline: %s\n",postline);
 	}
 	
 	fclose(fi);
@@ -79,7 +76,10 @@ void preproc_processline(const char * line, char * output) {
 	
 	strcpy(output,line+a);
 	
-	int c; int end = strlen(line)-1;
+	int c; 
+	int end = strlen(line);
+	if ( line[end-1] == '\n' ) { end--; }
+	
 	int literalsingle = FALSE;
 	int literaldouble = FALSE;
 	for(c=a;c<strlen(line);c++) {

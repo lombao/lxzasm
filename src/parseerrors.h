@@ -31,7 +31,9 @@
 
 extern void firstpasserror(const char *str);
 extern void secondpasserror(const char *str);
-
 extern void generalerror(const char *str);
+
+extern void undocumentedwarning();
+extern void generalwarning(const char *str);
 
 #endif

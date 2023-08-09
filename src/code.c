@@ -161,9 +161,9 @@ int list_print() {
 	int k;
 	char codeline[MAX_SIZE_ASM_LINE];
 	
-	printf("       LIST \n");
+	printf("\t\t       LIST \n");
 	printf("================================================================\n");
-	printf("Line Address %11s                  %s\n","Code","Assembler");
+	printf("Line Address  Code                  Assembler\n");
 	for (k=1;k<=preproc_numberlines();k++) {
 			strcpy(codeline,preproc_origline_get(k));
 			

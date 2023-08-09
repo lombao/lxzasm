@@ -7,7 +7,11 @@
 #include "symbols.h" 
 #include "code.h"
 #include "preproc.h"
-   
+ 
+
+/* The documented warning flag */ 
+extern int undocumentedWarning;  
+#define CHECK_UNDOC  if ( undocumentedWarning==TRUE ) { undocumentedwarning(); }
 }
 
 
@@ -158,7 +162,7 @@
 				| AND orcommand			{ } /* same pattern as or */
 				| CP orcommand			{ }	/* same pattern as or */
 				| INC inccommand		{ }
-				| DEC deccommand		{ }
+				| DEC inccommand		{ }  /* same pattern as inc */
 				| ADC adccommand		{ }
 				| ADD addcommand		{ }
 				| SUB subcommand		{ }
@@ -178,19 +182,24 @@
 				| SLA slacommand		{ }
 				| SRA slacommand		{ } /* sra and sla are the same pattern */
 				| SRL slacommand		{ } /* sra and sla are the same pattern */
+				| SLL slacommand		{ CHECK_UNDOC } /* 
 				| RL  slacommand		{ } /* same pattern as sla */
 				| RR  slacommand		{ } /* same pattern as sla */
 				| RRC slacommand		{ } /* same pattern as sla */
 				| RLC slacommand		{ } /* same pattern as sla */
 
 	;
-	slacommand: reg8												{ pc_inc(2); }
-			|	PARLEFT HL PARRIGHT									{ pc_inc(2); }
-			| 	PARLEFT indexreg OPADD expression PARRIGHT 			{ pc_inc(4); }
+	slacommand: reg8															{ pc_inc(2); }
+			|	PARLEFT HL PARRIGHT												{ pc_inc(2); }
+			| 	PARLEFT indexreg OPADD expression PARRIGHT 						{ pc_inc(4); }
+			| 	PARLEFT indexreg OPADD expression PARRIGHT COMMA reg8 			{ pc_inc(4);  CHECK_UNDOC }
+			
 	;
-	bitcommand:	INTEGER COMMA reg8									{ pc_inc(2); }
-			| 	INTEGER COMMA PARLEFT HL PARRIGHT 					{ pc_inc(2); }
-			| 	INTEGER COMMA PARLEFT indexreg OPADD expression2 PARRIGHT { pc_inc(4); } 
+	bitcommand:	INTEGER COMMA reg8												{ pc_inc(2); }
+			| 	INTEGER COMMA PARLEFT HL PARRIGHT 								{ pc_inc(2); }
+			| 	INTEGER COMMA PARLEFT indexreg OPADD expression2 PARRIGHT 		{ pc_inc(4); } 
+			| 	INTEGER COMMA PARLEFT indexreg OPADD expression2 PARRIGHT COMMA reg8	{ pc_inc(4); CHECK_UNDOC  } 
+			
 	;
 	incommand:	reg8 COMMA PARLEFT C PARRIGHT				{  pc_inc(2); }
 			|	reg8 COMMA PARLEFT expression2 PARRIGHT			{  pc_inc(2); }
@@ -241,15 +250,8 @@
 			| 	reg16												{ pc_inc(1); }
 			| 	PARLEFT HL PARRIGHT 								{ pc_inc(1); }
 			|	PARLEFT indexreg OPADD expression PARRIGHT 			{ pc_inc(3); }
-			| 	indexreg 											{ pc_inc(1); }
-			| 	index8reg											{ pc_inc(1); }
-	;
-	deccommand:	reg8												{ pc_inc(1); }
-			| 	reg16												{ pc_inc(1); }
-			| 	PARLEFT HL PARRIGHT 								{ pc_inc(1); }
-			|	PARLEFT indexreg OPADD expression PARRIGHT 			{ pc_inc(3); }
-			| 	indexreg 											{ pc_inc(1); }
-			| 	index8reg											{ pc_inc(1); }
+			| 	indexreg 											{ pc_inc(2); }
+			| 	index8reg											{ pc_inc(2); }
 	;
 	adccommand:	A COMMA expression									{ pc_inc(2); }
 			| 	A COMMA reg8										{ pc_inc(1); }
@@ -367,10 +369,10 @@
 	indexreg:		IX
 				|	IY
 	;
-	index8reg:	IXH
-			|	IXL
-			|	IYH
-			|	IYL
+	index8reg:	IXH			{ CHECK_UNDOC }
+			|	IXL			{ CHECK_UNDOC }
+			|	IYH			{ CHECK_UNDOC }
+			|	IYL			{ CHECK_UNDOC }
 	;
 	condflag:	NZ 
 			| 	Z 
