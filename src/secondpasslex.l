@@ -24,6 +24,7 @@ DEFS|DS|ds|defs						{  return DEFS; }
 DEFB|DB|db|defb						{  return DEFB; }
 DEFM|DM|dm|defm						{  return DEFM; }
 DEFW|DW|dw|defw						{  return DEFW; }
+DEFL|DL|dl|defl						{  return DEFL; }
 
 ORG|org							{  return ORG; }
 INCLUDEBIN|includebin					{  return INCBIN; }

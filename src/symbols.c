@@ -35,20 +35,73 @@ int sym_addlabel(const char * label, const int value) {
  char msgerror[100];
  	
 	if (nsymbols == MAX_NUM_LABELS ) {
-		generalerror("Max number of labels and literals reached");
+		generalerror("Max number symbols reached");
 	}
 	
-	 if ( sym_lookuplabel(label) == TRUE ) {
-		sprintf(msgerror,"Label %s already defined",label);
+	 if ( sym_lookupsymbol(label) == TRUE ) {
+		sprintf(msgerror,"LABEL %s name is already in use. Labels cannot be redefined",label);
 		generalerror(msgerror);
 	 }
 	 
 	 strcpy(symbols[nsymbols].literal , label );
 	 symbols[nsymbols].value = value ;
+	 symbols[nsymbols].type = 0;
 	 
 	 nsymbols++;
 	 return TRUE;
 }
+
+
+int sym_addequ(const char * label, const int value) {
+	
+ char msgerror[100];
+ 	
+	if (nsymbols == MAX_NUM_LABELS ) {
+		generalerror("Max number of symbols");
+	}
+	
+	 if ( sym_lookupsymbol(label) == TRUE ) {
+		sprintf(msgerror,"EQU %s name is already in use. Constants cannot be redefined",label);
+		generalerror(msgerror);
+	 }
+	 
+	 strcpy(symbols[nsymbols].literal , label );
+	 symbols[nsymbols].value = value ;
+	 symbols[nsymbols].type = 1;
+	 
+	 nsymbols++;
+	 return TRUE;
+}
+
+int sym_adddefl(const char * label, const int value) {
+	
+ char msgerror[100];
+ 	
+	/* if a defl was already defined, reuse it */
+	for (int a=0; a<nsymbols;a++) {
+		if ( strcmp(label,symbols[a].literal) == TRUE ) {
+			if ( symbols[a].type != 2 ) {
+				sprintf(msgerror,"This variable name %s is already in use as a label or constant",label);
+				generalerror(msgerror);
+			}
+			else {
+				symbols[a].value = value ;
+				return TRUE;
+			}
+		}
+	}
+	 
+	if (nsymbols == MAX_NUM_LABELS ) {
+		generalerror("Max number of symbols reached");
+	}
+	strcpy(symbols[nsymbols].literal , label );
+	symbols[nsymbols].value = value ;
+	symbols[nsymbols].type = 2;
+	 
+	 nsymbols++;
+	 return TRUE;
+}
+
 
 int sym_getvalue(const char * label) {
 	
@@ -63,14 +116,14 @@ int sym_getvalue(const char * label) {
 char * sym_getlabel(const int value) {
 	
 	for (int a=0; a<nsymbols;a++) {
-		if ( symbols[a].value == value ) {
+		if ( symbols[a].value == value && symbols[a].type == 0) {
 			return symbols[a].literal;
 		}
 	}
 	return NULL;
 }
 
-int sym_lookuplabel( const char * label ) {
+int sym_lookupsymbol( const char * label ) {
 	
 	for (int a=0; a<nsymbols;a++) {
 		if ( strcmp(label,symbols[a].literal) == TRUE ) {

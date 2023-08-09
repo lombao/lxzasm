@@ -43,7 +43,7 @@
 /* tokens */
 
 %token EQU ORG ALIGN END INCBIN ENT
-%token DEFS DEFB DEFM DEFW 
+%token DEFS DEFB DEFM DEFW DEFL
 
 %token ENTER DOLAR
 
@@ -119,6 +119,7 @@
 									
 														}
 			|   LITERAL EQU expression					{ /* done in first pass */ }
+			|   LITERAL DEFL expression					{ /* done in first pass */ }
 			|   EQU expression							{ /* done in first pass most likely is LABEL EQU expression */ }
 			|  	ORG INTEGER								{ pc_init($2);	}
 			|	INCBIN	STRING							{ 
@@ -863,7 +864,7 @@
 	relativejump:	INTEGER              						{ $$ = $1 - pc_get()-1;   }	
 			|		LITERAL											{
 																		int k = pc_get();
-																		if ( sym_lookuplabel($1) == TRUE ) {
+																		if ( sym_lookupsymbol($1) == TRUE ) {
 																			int jump = sym_getvalue($1);
 																			int diff = jump - k - 2;
 																			if ( diff > 127 || diff < -128 ) { 
@@ -934,7 +935,7 @@
 	expritem:	INTEGER				{	$$ = $1; }
 		|		OPSUB INTEGER		{	$$ = -$2; }
 		|		LITERAL				{	
-										if ( sym_lookuplabel($1) == TRUE ) {
+										if ( sym_lookupsymbol($1) == TRUE ) {
 											$$ = sym_getvalue($1);
 										}
 										else {

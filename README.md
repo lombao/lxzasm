@@ -36,7 +36,7 @@ If there is anything I can change to improve compatibility, please let me know.
 
 ## How to use it ?
 ```
-LXZ Assembler. Version 0.6
+LXZ Assembler. Version 0.8
 
 Usage: lxzasm [-v] [ -h] [ -l] [-t] [-u] asmfile1 asmfile2 ... 
 	v:  Show Version
@@ -69,7 +69,7 @@ you will get a warning line for each undocumented opcode you are using. But
 it will compile it anyway.
 
 ## SYNTAX
-It tries to acoomodate most of the syntax variants, including intel syntax, for instance, it will accept both
+It tries to acoomodate most of the syntax variants, including intel syntax, for instance, it will accept both upper and lower cases
 ```
 	LD A,B
 	ld a,b
@@ -111,9 +111,10 @@ the existent options
 * ALIGN  		: 	Align the code with next multiple address
 * DEFB ( DW )
 * DEFM ( DM )
-* DEFW ( DW )
+* DEFW ( DW )   
+* DEFL ( DL )   :   Similar to EQU , but instead a constant, is a variable
 * END			:   Ends compilation
-* EQU			
+* EQU			:   Define a constant
 * ORG
 * INCLUDEBIN ( INCBIN )
 

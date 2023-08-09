@@ -24,15 +24,22 @@
 #include <stdint.h>
 #include "defs.h"
 
+
+/* type 0 is a LABEL, 1 is an EQU and 2 is a DEFL */
 struct symtab {
   uint16_t 		value;
   char 			literal[MAX_SIZE_LITERAL];
+  int type;
 };
 
 //------------------------------------------
 
-extern int sym_lookuplabel( const char * label );
+extern int sym_lookupsymbol( const char * label );
+
 extern int sym_addlabel(const char * label, const int value);
+extern int sym_adddefl(const char * label, const int value);
+extern int sym_addequ(const char * label, const int value);
+
 extern int sym_dumplabels( );
 extern int sym_getvalue(const char * label);
 extern char * sym_getlabel(const int value);

@@ -45,7 +45,7 @@ extern int undocumentedWarning;
 %token ENTER DOLAR
 
 %token EQU ORG ALIGN END INCBIN ENT
-%token DEFS DEFB DEFM DEFW
+%token DEFS DEFB DEFM DEFW DEFL
 
 
 %token IXH IXL IYH IYL
@@ -105,7 +105,7 @@ extern int undocumentedWarning;
 		| LITERAL ENTER							{ firstpasserror("Syntax Error: Unknown instruction"); }
 		| LABEL instruction ENTER				{ sym_addlabel($1,pc_get_last()); }
 		| LABEL directive ENTER					{ sym_addlabel($1,pc_get_last()); }
-		| LABEL EQU	expression ENTER			{ sym_addlabel($1,$3); }	
+		| LABEL EQU	expression ENTER			{ sym_addequ($1,$3); }	
 		| LABEL ENTER							{ sym_addlabel($1,pc_get()); }
 		| ENTER									{ }	
 	;
@@ -116,7 +116,8 @@ extern int undocumentedWarning;
 			|   DEFM	STRING							{ pc_inc( strlen($2)); }
 			|  	ENT										{ /* we ignore this directive */ }
 			|	DEFW	expression						{ pc_inc(2); }	
-			|   LITERAL EQU expression					{ sym_addlabel($1,$3); }
+			|   LITERAL EQU expression					{ sym_addequ($1,$3); }
+			|   LITERAL DEFL expression					{ sym_adddefl($1,$3); }	
 			|	ORG	INTEGER								{ pc_init($2); }
 			|	INCBIN	STRING							{ pc_inc( preproc_include_bin($2,NULL)); }
 			|   ALIGN   expression	{ 
@@ -362,7 +363,7 @@ extern int undocumentedWarning;
 	expritem:	INTEGER				{	$$ = $1;  }
 		|		OPSUB INTEGER		{ 	$$ = -$2; }
 		|		LITERAL				{	
-										if ( sym_lookuplabel($1) == TRUE ) {
+										if ( sym_lookupsymbol($1) == TRUE ) {
 											$$ = sym_getvalue($1);
 										}
 										else {
