@@ -44,7 +44,7 @@ extern int undocumentedWarning;
 
 %token ENTER DOLAR
 
-%token EQU ORG ALIGN END INCBIN
+%token EQU ORG ALIGN END INCBIN ENT
 %token DEFS DEFB DEFM DEFW
 
 
@@ -114,6 +114,7 @@ extern int undocumentedWarning;
 			| 	DEFS	expression COMMA expression		{ pc_inc($2); }
 			|   DEFB	listexpr						{ pc_inc($2); }
 			|   DEFM	STRING							{ pc_inc( strlen($2)); }
+			|  	ENT										{ /* we ignore this directive */ }
 			|	DEFW	expression						{ pc_inc(2); }	
 			|   LITERAL EQU expression					{ sym_addlabel($1,$3); }
 			|	ORG	INTEGER								{ pc_init($2); }
@@ -141,7 +142,6 @@ extern int undocumentedWarning;
 				| RET					{ pc_inc(1); }
 				| RETN					{ pc_inc(2); }
 				| RETI					{ pc_inc(2); }
-				| RST					{ pc_inc(1); }	
 				| EXX					{ pc_inc(1); }
 				| INI					{ pc_inc(2); }
 				| INIR					{ pc_inc(2); }
@@ -156,6 +156,7 @@ extern int undocumentedWarning;
 				| LDI					{ pc_inc(2); }
 				| LDIR					{ pc_inc(2); }
 				| NEG					{ pc_inc(2); }
+				| RST rstcommand		{  }	
 				| LD  ldcommand			{ }
 				| OR orcommand			{ }
 				| XOR orcommand			{ } /* same pattern as or */
@@ -188,6 +189,8 @@ extern int undocumentedWarning;
 				| RRC slacommand		{ } /* same pattern as sla */
 				| RLC slacommand		{ } /* same pattern as sla */
 
+	;
+	rstcommand:	INTEGER															{ pc_inc(1); }
 	;
 	slacommand: reg8															{ pc_inc(2); }
 			|	PARLEFT HL PARRIGHT												{ pc_inc(2); }

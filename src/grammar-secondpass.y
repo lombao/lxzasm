@@ -42,7 +42,7 @@
 
 /* tokens */
 
-%token EQU ORG ALIGN END INCBIN
+%token EQU ORG ALIGN END INCBIN ENT
 %token DEFS DEFB DEFM DEFW 
 
 %token ENTER DOLAR
@@ -105,6 +105,7 @@
 
 	;
 	directive: 		END					{ return 0;}
+			|  	ENT										{ /* we ignore this directive */ }
 			|	DEFS	expression						{ for(int a=0;a<$2;a++) { code_putbyte(0x00); }  }
 			|	DEFS	expression COMMA expression		{ for(int a=0;a<$2;a++) { code_putbyte($4); }  }
 			|   DEFM	STRING							{ for(int a=0;a<(int)strlen($2);a++) {code_putbyte($2[a]); } }

@@ -35,6 +35,8 @@ INCBIN						{  return INCBIN; }
 INC							{  return INC; }
 DEC							{  return DEC; }
 
+ENT							{ return ENT; }
+
 HALT						{  return HALT; }
 NOP							{  return NOP; }
 DI							{  return DI; }
@@ -161,12 +163,12 @@ M					{ return M; }
 								return INTEGER;
 							 }
 
-0([A-F0-9]){1,4}H      		{ 
+0([A-F0-9]){1,4}[Hh]      		{ 
 								secondpasslval.normal =  (int) strtol(yytext, NULL, 16); 
 								return INTEGER;
 							 }
 							 
-([A-F0-9]){1,4}H      		{ 
+([A-F0-9]){1,4}[Hh]      		{ 
 								secondpasslval.normal =  (int) strtol(yytext, NULL, 16); 
 								return INTEGER;
 							 }
@@ -206,6 +208,12 @@ M					{ return M; }
 '[^\n']+'   		{
 						if ( strlen(yytext) >= MAX_SIZE_LITERAL ) {
 									secondpasserror("Literal too big");
+						}
+						strncpy(secondpasslval.literal,yytext+1,strlen(yytext)-1); secondpasslval.literal[strlen(yytext)-2]=0x0;return STRING; 
+					}
+\/[^\n\/]+\/   		{
+						if ( strlen(yytext) >= MAX_SIZE_LITERAL ) {
+									firstpasserror("Literal too big");
 						}
 						strncpy(secondpasslval.literal,yytext+1,strlen(yytext)-1); secondpasslval.literal[strlen(yytext)-2]=0x0;return STRING; 
 					}

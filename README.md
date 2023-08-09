@@ -89,7 +89,14 @@ it will compile it anyway.
    LD BC,$-2
 ```
 
-
+### Strings
+You can define Strings using single quote, double quote or /, the three
+following are equivalent
+```
+	DEFM "This is a string text"
+	DEFM 'This is a string text"
+	DEFM /This is a string text/
+```
 
 ## Directives and Pseudo instructions
 Please in the folder doc a more detailed description, this is just a list of
@@ -103,7 +110,7 @@ the existent options
 * ORG
 * INCLUDEBIN ( INCBIN )
 * The $ Pointer
-
+* ENT ( this will be ignored, just for compat with Zeus Assembler )
 
 
 
