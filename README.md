@@ -36,15 +36,15 @@ If there is anything I can change to improve compatibility, please let me know.
 
 ## How to use it ?
 ```
-$ ./lxzasm -h
-LXZ Assembler. Version 0.2
+LXZ Assembler. Version 0.6
 
-Usage: lxzasm [-v] [ -h] [ -l] [-u] [-d] asmfile1 asmfile2 ...
+Usage: lxzasm [-v] [ -h] [ -l] [-t] [-u] asmfile1 asmfile2 ... 
 	v:  Show Version
 	h:  Show Help ( this help )
-	d:  Dump all Labels
-	u:  Print Warning if used Undocumented
+	t:  Dump all Labels
+	u:  Print Warning if using undocumented opcodes
 	l:  Generate List report
+
 ```
 
 ### The basic compilation
@@ -76,11 +76,13 @@ it will compile it anyway.
    LD HL, #4000
    LD HL, 0x4000
    LD HL, 4000H
+   LD HL, $4000
 ```
 
 ### Binary
 ```
    LD A,00010000b
+   LD A,%00010000
 ```
 
 ### Using the $ Pointer
@@ -101,16 +103,21 @@ following are equivalent
 ## Directives and Pseudo instructions
 Please in the folder doc a more detailed description, this is just a list of
 the existent options
-* ALIGN
+* ALIGN  		: 	Align the code with next multiple address
 * DEFB ( DW )
 * DEFM ( DM )
 * DEFW ( DW )
-* END
-* EQU
+* END			:   Ends compilation
+* EQU			
 * ORG
 * INCLUDEBIN ( INCBIN )
-* The $ Pointer
-* ENT ( this will be ignored, just for compat with Zeus Assembler )
+
+These directives do not perform any action, but they will not trigger any error.
+The reason is compatibility with code written for other compilers
+* ENT
+
+These are special variables
+* $  : This contains the current Program Counter address
 
 
 
@@ -130,6 +137,7 @@ This is a collection of online sources of info I've found about the Z80
 * https://pasmo.speccy.org
 * https://www.amstrad.es/doku.php?id=publicaciones:revistas:mh_amstrad_semanal:mh_amstrad_semanal_indice
 * https://clrhome.org/table/
+* https://worldofspectrum.net/pub/sinclair/games-info/z/Zeus.pdf  ( Zeus Assembler )
 
 
 ### TODO list

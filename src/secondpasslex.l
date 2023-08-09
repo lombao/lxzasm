@@ -162,6 +162,10 @@ M					{ return M; }
 								secondpasslval.normal =  (int) strtol(yytext+1, NULL, 16); 
 								return INTEGER;
 							 }
+$([A-F0-9]){1,4}      		{ 
+								secondpasslval.normal =  (int) strtol(yytext+1, NULL, 16); 
+								return INTEGER;
+							 }
 
 0([A-F0-9]){1,4}[Hh]      		{ 
 								secondpasslval.normal =  (int) strtol(yytext, NULL, 16); 
@@ -188,7 +192,9 @@ M					{ return M; }
 							}
 					
 
-
+%[01][01][01][01][01][01][01][01] 	{ 
+										secondpasslval.normal = strtol(yytext,NULL,2); return INTEGER; 
+									}
 
 [01][01][01][01][01][01][01][01]b 	{ 
 										secondpasslval.normal = strtol(yytext,NULL,2); return INTEGER; 
