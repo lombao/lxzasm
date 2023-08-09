@@ -28,8 +28,9 @@
 extern int code_init();
 extern int code_putbyte(const uint8_t value);
 extern int code_putword(const uint16_t value);
-extern int code_output(char * file);
 
+extern int code_output(char * file);
+extern int code_output_bin(char * file);
 
 extern int line_increase();
 extern int line_get();
@@ -39,7 +40,7 @@ extern int pc_init(const int value);
 extern int pc_inc(const int increase);
 extern int pc_get();
 extern int pc_get_last();
-
+extern int pc_reset();
 
 extern int list_print();
 

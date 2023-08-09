@@ -1,4 +1,4 @@
-VERSION=0.8
+VERSION=0.9
 
 CFLAGS = -g  -Wall -Wextra -O2 -DLXZASMVERSION="\"$(VERSION)\""
 YFLAGS = -d -Wcounterexamples

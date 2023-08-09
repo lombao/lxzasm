@@ -28,11 +28,14 @@
 
 //----------------------------------------------------------------------
 
-int8_t rom[65535];
+int8_t ram[65535];
 
 /* PC Program Counter */
 int pc = 0;
 int lastpc = 0;
+int minpc = 999999;
+int maxpc = 0;
+
 
 /* lst */
 struct {
@@ -69,7 +72,7 @@ int code_init() {
 
 	int a=0;
 	for(a=0;a<65535;a++) {
-		rom[a]=0x0;
+		ram[a]=0x0;
 	}
 	return TRUE;
 }
@@ -80,7 +83,7 @@ int code_putbyte(const uint8_t value) {
 	
 char hex[3];
 
-	rom[pc_get()] = value;
+	ram[pc_get()] = value;
 	sprintf(hex,"%02X",value);
 
 	int k = line_get();
@@ -102,8 +105,8 @@ int code_putword(const uint16_t value) {
 char hex1[4];
 char hex2[4];
 
-	rom[pc_get()] = value & 0x00FF;
-	rom[pc_get()+1] = value >> 8;
+	ram[pc_get()] = value & 0x00FF;
+	ram[pc_get()+1] = value >> 8;
 	
 	sprintf(hex1,"%02X",value & 0x00FF);
 	sprintf(hex2,"%02X",value >> 8);
@@ -121,29 +124,26 @@ char hex2[4];
 }	
 	
 
-int code_output(char * file) {
-	
-	FILE * fo=fopen(file, "wb+"); 
-	if ( fo == NULL) { 
-		fprintf(stderr,"::: ERROR: I cannot open the file %s to generate the code\n",file);
-		exit(EXIT_FAILURE);
-	}
-	
-	fwrite(rom,65535,1,fo);
-	fclose(fo);
-	return TRUE;
-}
+
 
 //---------------------------------------------------------------------
 int pc_init(const int value) {
 	lastpc = pc;
 	pc = value;
+	
+	if ( minpc > value ) { minpc = value; }
+	if ( maxpc < value ) { maxpc = value; }
+	
 	return pc;
 }
 
 int pc_inc(const int increase) {
 	lastpc = pc;	
 	pc = pc + increase;
+	
+	if ( minpc > pc ) { minpc = pc; }
+	if ( maxpc < pc ) { maxpc = pc; }
+	
 	return pc;
 }
 
@@ -155,33 +155,78 @@ int pc_get_last() {
 	 return lastpc; 
 }
 
+int pc_reset() {
+	pc = 0; 
+	minpc = 99999;
+	maxpc = 0;
+	return TRUE;
+}
 //----------------------------------------------------------------------
 
 int list_print() {
 	
 	int k;
 	char codeline[MAX_SIZE_ASM_LINE];
+	char opcode[MAX_SIZE_ASM_LINE];
+	
 	
 	printf("\t\t       LIST \n");
 	printf("=============================================================\n");
 	printf("Line Address  Code                  Label           Assembler\n");
 	printf("-------------------------------------------------------------\n");
 	for (k=1;k<=preproc_numberlines();k++) {
+		
 			strcpy(codeline,preproc_origline_get(k));
+			strcpy(opcode,listlines[k].opcode);
+			
+			if ( strlen(opcode) > 18 ) { 
+				opcode[17]='.';
+				opcode[18]='.';
+				opcode[19]='.';
+				opcode[19]=0x0;
+				
+			}
 			
 			char * label = sym_getlabel( listlines[k].address );
 			
 			if ( listlines[k].opcode[0] != 0x0 ) {
 				if ( label == NULL ) {
-					printf("%4d  %04X    %-20s                  %-s\n",k,listlines[k].address,listlines[k].opcode,codeline);
+					printf("%4d  %04X    %-20s                  %-s\n",k,listlines[k].address,opcode,codeline);
 				} 
 				else {
-					printf("%4d  %04X    %-20s %-16s %-s\n",k,listlines[k].address,listlines[k].opcode,label,codeline);
+					printf("%4d  %04X    %-20s %-16s %-s\n",k,listlines[k].address,opcode,label,codeline);
 				}
 			}
 	}
 	
 	printf("\nNumer of lines: %d\n\n",preproc_numberlines());
 	
+	return TRUE;
+}
+
+
+//----------------------------------------------------------------------
+int code_output(char * file) {
+	
+	FILE * fo=fopen(file, "wb+"); 
+	if ( fo == NULL) { 
+		fprintf(stderr,"::: ERROR: I cannot open the file %s to generate the code\n",file);
+		exit(EXIT_FAILURE);
+	}
+	
+	fwrite(ram,65535,1,fo);
+	fclose(fo);
+	return TRUE;
+}
+int code_output_bin(char * file) {
+		
+	FILE * fo=fopen(file, "wb+"); 
+	if ( fo == NULL) { 
+		fprintf(stderr,"::: ERROR: I cannot open the file %s to generate the code\n",file);
+		exit(EXIT_FAILURE);
+	}
+	
+	fwrite(&ram[minpc],maxpc-minpc,1,fo);
+	fclose(fo);
 	return TRUE;
 }

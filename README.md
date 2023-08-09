@@ -36,14 +36,17 @@ If there is anything I can change to improve compatibility, please let me know.
 
 ## How to use it ?
 ```
-LXZ Assembler. Version 0.8
+LXZ Assembler. Version 0.9
 
-Usage: lxzasm [-v] [ -h] [ -l] [-t] [-u] asmfile1 asmfile2 ... 
+Usage: lxzasm [-v] [ -h] [ -l] [-t] [-u] [-o <type>] asmfile1 [asmfile2 ...] 
 	v:  Show Version
 	h:  Show Help ( this help )
 	t:  Dump all Labels
 	u:  Print Warning if using undocumented opcodes
 	l:  Generate List report
+	o <type>:  Type of output: 
+            bin:  	A binary file with only the bytes generated, no headers, no padding
+            flat:  A binary file of 64K, this is the default option
 
 ```
 
@@ -52,7 +55,7 @@ The simplest compilation would be passing just an assembler file like this:
 ```
 lxzasm test1.asm
 ```
-This will generate a file named "output.ronm" which is a 64Kb binary file containing the flat memory with the compiled code inside
+This will generate a file named "z80.bin" which is a 64Kb binary file containing the flat memory with the compiled code inside
 
 ### Combining more than one file
 You can compile more than one assembler file at a time, for instance, using the examples in tests folder you could
@@ -67,6 +70,12 @@ lxzasm -u test15.asm
 ```
 you will get a warning line for each undocumented opcode you are using. But
 it will compile it anyway.
+
+### Output
+The code generated will be in a file named "z80.bin", but this file might have different formats
+* flat: this is the default, this is a 64K direct dump
+* bin: this is a bin output but only of the generated code, no padding, no headers. 
+
 
 ## SYNTAX
 It tries to acoomodate most of the syntax variants, including intel syntax, for instance, it will accept both upper and lower cases
@@ -104,6 +113,14 @@ following are equivalent
 	DEFM 'This is a string text"
 	DEFM /This is a string text/
 ```
+
+
+### Symbols
+There are 3 types of symbols
+* Constants: defined using EQU
+* Variables: defined using DEFL
+* Labels: defined using labels ( .i.e:  label1: ld a,b ) 
+
 
 ## Directives and Pseudo instructions
 Please in the folder doc a more detailed description, this is just a list of
@@ -144,6 +161,7 @@ This is a collection of online sources of info I've found about the Z80
 * https://www.amstrad.es/doku.php?id=publicaciones:revistas:mh_amstrad_semanal:mh_amstrad_semanal_indice
 * https://clrhome.org/table/
 * https://worldofspectrum.net/pub/sinclair/games-info/z/Zeus.pdf  ( Zeus Assembler )
+* https://worldofspectrum.org/faq/reference/z80format.htm
 
 
 ### TODO list

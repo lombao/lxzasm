@@ -50,12 +50,17 @@ void showVersion();
 /* Print usage */
 void showUsage() {
 	 fprintf(stderr,"LXZ Assembler. Version %s\n\n",LXZASMVERSION); 
-	 fprintf(stderr,"Usage: lxzasm [-v] [ -h] [ -l] [-t] [-u] asmfile1 asmfile2 ... \n");
+	 fprintf(stderr,"Usage: lxzasm [-v] [ -h] [ -l] [-t] [-u] [-o <type>] asmfile1 [asmfile2 ...] \n");
 	 fprintf(stderr,"	v:  Show Version\n");
 	 fprintf(stderr,"	h:  Show Help ( this help )\n");	
 	 fprintf(stderr,"	t:  Dump all Labels\n");
 	 fprintf(stderr,"	u:  Print Warning if using undocumented opcodes\n");	 
 	 fprintf(stderr,"	l:  Generate List report\n");
+	 fprintf(stderr,"	o <type>:  Type of output: \n");
+	 fprintf(stderr,"            bin:  	A binary file with only the bytes generated, no headers, no padding\n");
+	 fprintf(stderr,"            flat:  A binary file of 64K, this is the default option\n");
+	 
+	 
 	 	
 	  
 }
@@ -81,6 +86,7 @@ int main(int argc, char *argv[]) {
     int opt;
     int printLabels = FALSE;
     int printList 	= FALSE;
+	char * outputtype = NULL;
 
 	while ((opt = getopt(argc, argv, "o:ultvh")) != -1) {
 		switch (opt) {
@@ -101,6 +107,9 @@ int main(int argc, char *argv[]) {
 			case 'u': 
 				undocumentedWarning = TRUE;
 				break;
+			case 'o':
+				outputtype = optarg;
+				break;	
 			default: /* '?' */
 				fprintf(stderr,"Unknown option %i",opt); 
 				showUsage();
@@ -130,7 +139,7 @@ int main(int argc, char *argv[]) {
 	
 	/* reset line counter */
 	line_reset();
-	pc_init(0);
+	pc_reset();
 //	printf("**** First pass complete\n");
 	
     /* second pass */
@@ -148,9 +157,16 @@ int main(int argc, char *argv[]) {
 		sym_dumplabels();
 	}
     
-    /* */
-    code_output("output.rom");
-    
+    /* output */
+    if (outputtype==NULL) {
+		    code_output("z80.bin");
+	}
+	else {
+		if (strcmp(outputtype,"bin") == 0) { code_output_bin("z80.bin"); } 
+		else {
+			if (strcmp(outputtype,"flat") == 0) { code_output("z80.bin"); } 	
+		}
+	}
     
 } 
 
