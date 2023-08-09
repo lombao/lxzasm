@@ -31,6 +31,7 @@ extern int code_putword(const uint16_t value);
 
 extern int code_output(char * file);
 extern int code_output_bin(char * file);
+extern int code_output_hex(char * file);
 
 extern int line_increase();
 extern int line_get();

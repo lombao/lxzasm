@@ -59,6 +59,9 @@ void showUsage() {
 	 fprintf(stderr,"	o <type>:  Type of output: \n");
 	 fprintf(stderr,"            bin:  	A binary file with only the bytes generated, no headers, no padding\n");
 	 fprintf(stderr,"            flat:  A binary file of 64K, this is the default option\n");
+	 fprintf(stderr,"            hex:   Intel HEX Format\n");
+	 
+	 
 	 
 	 
 	 	
@@ -165,6 +168,13 @@ int main(int argc, char *argv[]) {
 		if (strcmp(outputtype,"bin") == 0) { code_output_bin("z80.bin"); } 
 		else {
 			if (strcmp(outputtype,"flat") == 0) { code_output("z80.bin"); } 	
+			else {
+				if (strcmp(outputtype,"hex") == 0) { code_output_hex("z80.hex"); } 	
+				else {
+					fprintf(stderr, "Output format: %s  it is not supported\n",outputtype);
+					exit(EXIT_FAILURE);
+				}
+			}
 		}
 	}
     

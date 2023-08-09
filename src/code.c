@@ -38,16 +38,25 @@ int maxpc = 0;
 
 
 /* lst */
+int line=1;
+
 struct {
 	int line;
 	int address;
 	char * code;
 	char opcode[256];
 } listlines[MAX_NUM_ASM_LINES];
-int numlistlines=0;
 
-/* line */
-int line=1;
+
+/*hex output*/
+struct {
+	char start;
+	char bytecount[3];
+	char address[5];
+	char type[3];
+	char data[600];
+	char chksum[3];
+} hexlines[MAX_NUM_ASM_LINES];
 
 
 //*********************************************************************/
@@ -90,9 +99,13 @@ char hex[3];
 		
 	if ( listlines[k].opcode[0] == 0x0 ) {
 			listlines[k].address = pc_get();
+			sprintf(hexlines[k].address,"%04X",pc_get());
+			strcpy(hexlines[k].type,"00");
+			hexlines[k].start = ':';
 	}
-	strcat(listlines[k].opcode,hex); 	
-	
+	strcat(listlines[k].opcode,hex); 
+	strcat(hexlines[k].data,hex);	
+	sprintf(hexlines[k].bytecount,"%02X", ( (uint8_t)strlen(hexlines[k].data) / 2) );	
 	
 	pc_inc(1);
 	return TRUE;
@@ -227,6 +240,50 @@ int code_output_bin(char * file) {
 	}
 	
 	fwrite(&ram[minpc],maxpc-minpc,1,fo);
+	fclose(fo);
+	return TRUE;
+}
+
+
+/* output in Intel HEX format https://en.wikipedia.org/wiki/Intel_HEX */
+int code_output_hex(char * file) {
+	
+ char postline[MAX_SIZE_ASM_LINE];
+ char hexchksum[3];
+ char auxcode[3];
+ 	
+	FILE * fo=fopen(file, "wa+"); 
+	if ( fo == NULL) { 
+		fprintf(stderr,"::: ERROR: I cannot open the file %s to generate the code\n",file);
+		exit(EXIT_FAILURE);
+	}
+	
+	for(int r=0;r<=preproc_numberlines();r++) {
+		if ( hexlines[r].start != ':' ) { continue; }
+		
+		strcpy(postline,":");
+		strcat(postline,hexlines[r].bytecount);
+		strcat(postline,hexlines[r].address);
+		strcat(postline,hexlines[r].type);
+		strcat(postline,hexlines[r].data);
+		
+		unsigned int chksum = 0;
+		/* checksum, ignoring the initial : start byte */
+		for(int a=1;a<strlen(postline);a=a+2) {
+			strncpy(auxcode,&postline[a],2);
+			auxcode[2]=0x0;
+			chksum += strtol(auxcode,NULL,16);
+		}		
+		sprintf(hexchksum,"%02X", (uint8_t)( ((~chksum)+1)&0xFF ) );
+		hexchksum[2]=0x0;
+		strcat(postline,hexchksum);
+		strcat(postline,"\n");	
+		fputs(postline,fo);
+	}
+
+    /* end of file */
+    fputs(":00000001FF\n",fo);
+    
 	fclose(fo);
 	return TRUE;
 }

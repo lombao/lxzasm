@@ -162,6 +162,7 @@ This is a collection of online sources of info I've found about the Z80
 * https://clrhome.org/table/
 * https://worldofspectrum.net/pub/sinclair/games-info/z/Zeus.pdf  ( Zeus Assembler )
 * https://worldofspectrum.org/faq/reference/z80format.htm
+* https://en.wikipedia.org/wiki/Intel_HEX
 
 
 ### TODO list
@@ -172,4 +173,4 @@ This is a collection of online sources of info I've found about the Z80
 * What about (IX-d) ??? How to deal with negative offsets ? c'2 ?
 * be more specific and document the max size of a label
 * allow the foramt of <literal> directive , so we can accept "labels" without the semicolon
-
+* although HEX format output has been implemented, not proper testing has been made
