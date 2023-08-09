@@ -1,4 +1,4 @@
-VERSION=0.10
+VERSION=0.11
 
 CFLAGS = -g  -Wall -Wextra -O2 -DLXZASMVERSION="\"$(VERSION)\""
 YFLAGS = -d -Wcounterexamples
@@ -23,7 +23,7 @@ symbols.o: symbols.c defs.h symbols.h
 parseerrors.o: parseerrors.c defs.h parseerrors.h
 		$(CC) -c $^ -Wall 
 
-code.o: code.c code.h
+code.o: code.c code.h defs.h
 		$(CC) -c $^ -Wall 
 
 lex.firstpass.c:	firstpasslex.l grammar-firstpass.tab.h

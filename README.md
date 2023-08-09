@@ -130,7 +130,7 @@ There are 3 types of symbols
 ## Directives and Pseudo instructions
 Please in the folder doc a more detailed description, this is just a list of
 the existent options
-* ALIGN  		: 	Align the code with next multiple address
+* ALIGN <expression> 		: 	Align the code with next multiple address
 * DEFB ( DW )
 * DEFM ( DM )
 * DEFW ( DW )   
@@ -139,10 +139,14 @@ the existent options
 * EQU			:   Define a constant
 * ORG
 * INCLUDEBIN ( INCBIN )
-
+* HIGH <expression> : Returns the Most Significate byte of the expression ( see test19.asm )
+* LOW <expression>  : Return the Least significate byte of the expression ( see test19.asm )
+			
 These directives do not perform any action, but they will not trigger any error.
 The reason is compatibility with code written for other compilers
-* ENT
+* ENT <value>
+* ASEG
+* TITLE <string>
 
 These are special variables
 * $  : This contains the current Program Counter address

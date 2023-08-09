@@ -17,9 +17,13 @@
 [ \t]*					{ /* eat up whitespace */   }
 \n						{  return ENTER; }
 
+ASEG|aseg						{  return ASEG; }
 EQU|equ                   		{  return EQU; }
 ALIGN|align						{  return ALIGN; }
 END|end							{  return END; }
+TITLE|title|.title				{ return TITLE; }
+HIGH|high						{ return HIGH; }
+LOW|low							{ return LOW; }
 DEFS|DS|ds|defs						{  return DEFS; }
 DEFB|DB|db|defb						{  return DEFB; }
 DEFM|DM|dm|defm						{  return DEFM; }

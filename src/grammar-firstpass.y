@@ -44,7 +44,7 @@ extern int undocumentedWarning;
 
 %token ENTER DOLAR
 
-%token EQU ORG ALIGN END INCBIN ENT
+%token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW
 %token DEFS DEFB DEFM DEFW DEFL
 
 
@@ -94,6 +94,10 @@ extern int undocumentedWarning;
 %token OPADD OPSUB OPMUL OPDIV
 
 
+%left OPMUL OPDIV
+%left OPADD OPSUB
+%left HIGH LOW
+
 %%
     program:  	lines			{	}
     ;
@@ -116,6 +120,8 @@ extern int undocumentedWarning;
 			|   DEFM	STRING							{ pc_inc( strlen($2)); }
 			|  	ENT		expression						{ /* we ignore this directive */ }	
 			|  	ENT										{ /* we ignore this directive */ }
+			|  	ASEG									{ /* we ignore this directive */ }	
+			|   TITLE   STRING						    { /* we ignore this directive */ }
 			|	DEFW	expression						{ pc_inc(2); }	
 			|   LITERAL EQU expression					{ sym_addequ($1,$3); }
 			|   LITERAL DEFL expression					{ sym_adddefl($1,$3); }	
@@ -337,6 +343,8 @@ extern int undocumentedWarning;
 		|	expression OPMUL expritem			{ $$ = $1 * $3; }
 		|	expression OPDIV expritem			{ $$ = $1 / $3; }
 		|	PARLEFT expression PARRIGHT			{ $$ = $2; }
+		|   HIGH expression						{ $$ = $2 >> 8; }
+		|   LOW expression						{ $$ = $2 & 0x00FF; }
 	;
 	expression2: expritem						{ $$ = $1; }
 		|	expression2 OPADD expritem			{ $$ = $1 + $3; }

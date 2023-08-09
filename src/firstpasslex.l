@@ -18,10 +18,13 @@
 \n						{   return ENTER; }
 
 
+ASEG|aseg						{  return ASEG; }
 EQU|equ                   		{  return EQU; }
 ALIGN|align						{  return ALIGN; }
-END|end								{  return END; }
-
+END|end							{  return END; }
+HIGH|high						{ return HIGH; }
+LOW|low							{ return LOW; }
+TITLE|title|.title				{ return TITLE; }
 DEFS|DS|ds|defs					{  return DEFS; }
 DEFB|DB|db|defb						{  return DEFB; }
 DEFM|DM|dm|defm						{  return DEFM; }

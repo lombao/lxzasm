@@ -42,7 +42,7 @@
 
 /* tokens */
 
-%token EQU ORG ALIGN END INCBIN ENT
+%token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW
 %token DEFS DEFB DEFM DEFW DEFL
 
 %token ENTER DOLAR
@@ -92,6 +92,11 @@
 %token OPADD OPSUB OPMUL OPDIV
 
 
+%left OPMUL OPDIV
+%left OPADD OPSUB
+%left HIGH LOW
+
+
 %%
     program:  	lines    	  			{  	}
     ;
@@ -106,6 +111,8 @@
 	directive: 		END					{ return 0;}
 			|  	ENT		expression						{ /* we ignore this directive */ }	
 			|  	ENT										{ /* we ignore this directive */ }
+			|  	ASEG									{ /* we ignore this directive */ }	
+			|   TITLE   STRING						    { /* we ignore this directive */ }
 			|	DEFS	expression						{ for(int a=0;a<$2;a++) { code_putbyte(0x00); }  }
 			|	DEFS	expression COMMA expression		{ for(int a=0;a<$2;a++) { code_putbyte($4); }  }
 			|   DEFM	STRING							{ for(int a=0;a<(int)strlen($2);a++) {code_putbyte($2[a]); } }
@@ -913,6 +920,9 @@
 		|	expression OPMUL expritem			{ $$ = $1 * $3; }
 		|	expression OPDIV expritem			{ $$ = $1 / $3; }
 		|	PARLEFT expression PARRIGHT			{ $$ = $2; }
+		|   HIGH expression						{ $$ = $2 >> 8; }
+		|   LOW expression						{ $$ = $2 & 0x00FF; }
+
 	;
 	expression2: expritem						{ $$ = $1; }
 		|	expression2 OPADD expritem			{ $$ = $1 + $3; }
