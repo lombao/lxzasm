@@ -50,11 +50,11 @@ void showVersion();
 /* Print usage */
 void showUsage() {
 	 fprintf(stderr,"LXZ Assembler. Version %s\n\n",LXZASMVERSION); 
-	 fprintf(stderr,"Usage: lxzasm [-v] [ -h] [ -l]  asmfile1 asmfile2 ... \n");
+	 fprintf(stderr,"Usage: lxzasm [-v] [ -h] [ -l] [-t] [-u] asmfile1 asmfile2 ... \n");
 	 fprintf(stderr,"	v:  Show Version\n");
 	 fprintf(stderr,"	h:  Show Help ( this help )\n");	
-	 fprintf(stderr,"	d:  Dump all Labels\n");
-	 fprintf(stderr,"	u:  Print Warning if used Undocumented\n");	 
+	 fprintf(stderr,"	t:  Dump all Labels\n");
+	 fprintf(stderr,"	u:  Print Warning if using undocumented opcodes\n");	 
 	 fprintf(stderr,"	l:  Generate List report\n");
 	 	
 	  
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
     int printLabels = FALSE;
     int printList 	= FALSE;
 
-	while ((opt = getopt(argc, argv, "o:ulvh")) != -1) {
+	while ((opt = getopt(argc, argv, "o:ultvh")) != -1) {
 		switch (opt) {
 			case 'v':
 				showVersion();
@@ -142,7 +142,6 @@ int main(int argc, char *argv[]) {
 //	printf("**** Second pass complete\n");
 	if ( printList ==  TRUE ) {
 		list_print();
-		sym_dumplabels();
 	}
 
 	if ( printLabels ==  TRUE ) {

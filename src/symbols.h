@@ -35,7 +35,6 @@ extern int sym_lookuplabel( const char * label );
 extern int sym_addlabel(const char * label, const int value);
 extern int sym_dumplabels( );
 extern int sym_getvalue(const char * label);
-
-
+extern char * sym_getlabel(const int value);
 
 #endif

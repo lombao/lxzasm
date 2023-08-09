@@ -24,6 +24,7 @@
 #include "code.h"
 #include "parseerrors.h"
 #include "preproc.h"
+#include "symbols.h"
 
 //----------------------------------------------------------------------
 
@@ -162,13 +163,21 @@ int list_print() {
 	char codeline[MAX_SIZE_ASM_LINE];
 	
 	printf("\t\t       LIST \n");
-	printf("================================================================\n");
-	printf("Line Address  Code                  Assembler\n");
+	printf("=============================================================\n");
+	printf("Line Address  Code                  Label           Assembler\n");
+	printf("-------------------------------------------------------------\n");
 	for (k=1;k<=preproc_numberlines();k++) {
 			strcpy(codeline,preproc_origline_get(k));
 			
+			char * label = sym_getlabel( listlines[k].address );
+			
 			if ( listlines[k].opcode[0] != 0x0 ) {
-				printf("%4d  %04X    %-20s => %-s\n",k,listlines[k].address,listlines[k].opcode,codeline);
+				if ( label == NULL ) {
+					printf("%4d  %04X    %-20s                  %-s\n",k,listlines[k].address,listlines[k].opcode,codeline);
+				} 
+				else {
+					printf("%4d  %04X    %-20s %-16s %-s\n",k,listlines[k].address,listlines[k].opcode,label,codeline);
+				}
 			}
 	}
 	

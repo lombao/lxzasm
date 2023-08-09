@@ -6,9 +6,9 @@ for i in test*.asm; do
     cmp output.rom $i.output
     if [ $? -eq 0 ];
     then
-    	echo "**** $i 	PASS"
+    	echo -e "**** $i    \t\t PASS"
     else
-    	echo "**** $i 	FAIL"
+    	echo -e "**** $i    \t\t FAIL"
     fi
 
     

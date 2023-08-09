@@ -60,6 +60,16 @@ int sym_getvalue(const char * label) {
 	return -999999;
 }
 
+char * sym_getlabel(const int value) {
+	
+	for (int a=0; a<nsymbols;a++) {
+		if ( symbols[a].value == value ) {
+			return symbols[a].literal;
+		}
+	}
+	return NULL;
+}
+
 int sym_lookuplabel( const char * label ) {
 	
 	for (int a=0; a<nsymbols;a++) {
@@ -70,6 +80,9 @@ int sym_lookuplabel( const char * label ) {
 	return FALSE;
 	
 }
+
+
+
 
 int sym_dumplabels( ) { 
 	
