@@ -467,6 +467,7 @@
 			|	L COMMA PARLEFT C PARRIGHT					{  code_putbyte( 0xED ); code_putbyte( 0x68 ); }
 			|	A COMMA PARLEFT C PARRIGHT					{  code_putbyte( 0xED ); code_putbyte( 0x78 ); }	
 			|	PARLEFT C PARRIGHT							{  code_putbyte( 0xED ); code_putbyte( 0x70 ); }
+			|   PARLEFT expression2 PARRIGHT COMMA A		{  code_putbyte( 0xD3 ); code_putbyte( $2 ); }
 	;
 	ldcommand:	A COMMA A											{ code_putbyte( 0x7F ); }
 			|	A COMMA B											{ code_putbyte( 0x78 ); }

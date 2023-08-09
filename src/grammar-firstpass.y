@@ -208,6 +208,8 @@ extern int undocumentedWarning;
 	outcommand:	reg8 COMMA PARLEFT expression2 PARRIGHT		{ pc_inc(2); }
 			|	reg8 COMMA PARLEFT C PARRIGHT				{ pc_inc(2); }	
 			|	PARLEFT C PARRIGHT							{ pc_inc(2); }
+			|	PARLEFT expression2 PARRIGHT COMMA A		{ pc_inc(2); }
+			
 	;
 	ldcommand:	reg8 COMMA reg8										{ pc_inc(1); }
 			| 	reg8 COMMA expression2 								{ pc_inc(2); }

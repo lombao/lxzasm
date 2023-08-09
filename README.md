@@ -129,3 +129,4 @@ This is a collection of online sources of info I've found about the Z80
 * include file
 * macros
 * create an option to normalize/pretty the assembler source code
+* output txz and dat

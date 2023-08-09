@@ -164,6 +164,11 @@ M					{ return M; }
 								firstpasslval.normal =  (int) strtol(yytext+1, NULL, 16); 
 								return INTEGER;
 							 }
+
+0([A-F0-9]){1,4}H      		{ 
+								firstpasslval.normal =  (int) strtol(yytext, NULL, 16); 
+								return INTEGER;
+							 }
 							 
 ([A-F0-9]){1,4}H      		{ 
 								firstpasslval.normal =  (int) strtol(yytext, NULL, 16); 
