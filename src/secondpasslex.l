@@ -17,133 +17,125 @@
 [ \t]*					{ /* eat up whitespace */   }
 \n						{  return ENTER; }
 
-EQU                   		{  return EQU; }
-ALIGN						{  return ALIGN; }
-END							{  return END; }
-DEFS						{  return DEFS; }
-DS							{  return DEFS; }
-DEFB						{  return DEFB; }
-DB							{  return DEFB; }
-DEFM						{  return DEFM; }
-DM							{  return DEFM; }
-DEFW						{  return DEFW; }
-DW							{  return DEFW; }
-ORG							{  return ORG; }
-INCLUDEBIN					{  return INCBIN; }
-INCBIN						{  return INCBIN; }
+EQU|equ                   		{  return EQU; }
+ALIGN|align						{  return ALIGN; }
+END|end							{  return END; }
+DEFS|DS|ds|defs						{  return DEFS; }
+DEFB|DB|db|defb						{  return DEFB; }
+DEFM|DM|dm|defm						{  return DEFM; }
+DEFW|DW|dw|defw						{  return DEFW; }
 
-INC							{  return INC; }
-DEC							{  return DEC; }
+ORG|org							{  return ORG; }
+INCLUDEBIN|includebin					{  return INCBIN; }
+INCBIN|incbin						{  return INCBIN; }
 
-ENT							{ return ENT; }
+INC|inc							{  return INC; }
+DEC|dec							{  return DEC; }
 
-HALT						{  return HALT; }
-NOP							{  return NOP; }
-DI							{  return DI; }
-EI							{  return EI; }
+ENT|ent							{ return ENT; }
+
+HALT|halt						{  return HALT; }
+NOP|nop							{  return NOP; }
+DI|di							{  return DI; }
+EI|ei							{  return EI; }
 
 
-LDIR						{ return LDIR; }
-LDI							{ return LDI; }
-LD							{  return LD; }
+LDIR|ldir						{ return LDIR; }
+LDI|ldi							{ return LDI; }
+LD|ld							{  return LD; }
 
-PUSH		{ return PUSH; }
-POP			{ return POP; }
+SCF|scf			{ return SCF; }
 
-SCF			{ return SCF; }
+PUSH|push		{ return PUSH; }
+POP|pop			{ return POP; }
 
-XOR			{  return XOR; }
-AND			{  return AND; }
-OR			{  return OR; }
-NEG			{  return NEG; }
+XOR|xor			{  return XOR; }
+AND|and			{  return AND; }
+OR|or			{  return OR; }
+NEG|neg			{  return NEG; }
+ADC|adc			{  return ADC; }
+ADD|add			{  return ADD; }
+SUB|sub			{  return SUB; }
+SBC|sbc			{  return SBC; }
 
-ADC			{  return ADC; }
-ADD			{  return ADD; }
-SUB			{  return SUB; }
-SBC			{  return SBC; }
+RST|rst			{ return RST; }
+RETN|retn		{ return RETN; }
+RETI|reti		{ return RETI; }
+DJNZ|djnz		{  return DJNZ; }
+JR|jr			{ return JR; }
+RET|ret			{ return RET; }
+JP|jp			{ return JP; }
+CALL|call		{ return CALL; }
 
+RLCA|rlca		{ return RLCA; }
+RRCA|rrca		{ return RRCA; }
+RRC|rrc			{ return RRC; }
+RR|rr			{ return RR;  }
+RL|rl			{ return RL;  }
+RLA|rla			{ return RLA; }
+RLC|rlc			{ return RLC; }
+SLL|sll			{ return SLL; }
+SRA|sra			{ return SRA; }
+SRL|srl    		{ return SRL; }
+SLA|sla			{ return SLA; }
+BIT|bit			{ return BIT; }
+RES|res			{ return RES; }
+SET|set			{ return SET; }
 
-RST			{ return RST; }
-RETN		{ return RETN; }
-RETI		{ return RETI; }
-DJNZ		{  return DJNZ; }
-JR			{ return JR; }
-RET			{ return RET; }
-JP			{ return JP; }
-CALL		{ return CALL; }
+CPIR|cpir		{ return CPIR; }
+CPI|cpi			{ return CPI; }
+CP|cp			{ return CP; }
+CPDR|cpdr		{ return CPDR; }
+CPD|cpd			{ return CPD; }
 
-RLCA		{ return RLCA; }
-RRCA		{ return RRCA; }
-RRC			{ return RRC; }
-RR			{ return RR;  }
-RL			{ return RL;  }
-RLA			{ return RLA; }
-RLC			{ return RLC; }
+CCF|ccf			{ return CCF; }
 
-SLL			{ return SLL; }
-SRA			{ return SRA; }
-SRL    		{ return SRL; }
-SLA			{ return SLA; }
+IXH|ixh			{  return IXH; }
+IXL|ixl			{  return IXL; }
+IYH|iyh			{  return IYH; }
+IYL|iyl			{  return IYL; }
 
-BIT			{ return BIT; }
-RES			{ return RES; }
-SET			{ return SET; }
+INIR|inir		{ return INIR; }
+INI|ini			{ return INI; }
+INDR|indr		{ return INDR; }
+IND|ind			{ return IND; }
+IN|in			{ return IN; }
+OUTI|outi		{ return OUTI; }
+OUTD|outd		{ return OUTD; }
+OTDR|otdr		{ return OTDR; }
+OTIR|otir		{ return OTIR; }
+OUT|out			{ return OUT; }
 
-CPIR		{ return CPIR; }
-CPI			{ return CPI; }
-CP			{ return CP; }
-CPDR		{ return CPDR; }
-CPD			{ return CPD; }
+AF|af			{  return AF; }
+BC|bc			{  return BC; }
+DE|de			{  return DE; }
+HL|hl			{  return HL; }
+IX|ix			{  return IX; }
+IY|iy			{  return IY; }
+AF'|af'			{  return AFPLUS; }
+SP|sp			{  return SP; }
 
-CCF			{ return CCF; }
+EXX|exx			{ return EXX; }
+EX|ex			{ return EX; }
 
-IXH			{  return IXH; }
-IXL			{  return IXL; }
-IYH			{  return IYH; }
-IYL			{  return IYL; }
+A|a					{  return A; }
+F|f					{  return F; }
+B|b					{  return B; }
+C|c					{  return C; }
+D|d					{  return D; }
+E|e					{  return E; }
+H|h					{  return H; }
+L|l					{  return L; }
+I|i					{  return I; }
+R|r					{  return R; }
 
-AF			{  return AF; }
-BC			{  return BC; }
-DE			{  return DE; }
-HL			{  return HL; }
-IX			{  return IX; }
-IY			{  return IY; }
-AF'			{  return AFPLUS; }
-SP			{  return SP; }
-
-INIR		{ return INIR; }
-INI			{ return INI; }
-INDR		{ return INDR; }
-IND			{ return IND; }
-IN			{ return IN; }
-OUTI		{ return OUTI; }
-OUTD		{ return OUTD; }
-OTDR		{ return OTDR; }
-OTIR		{ return OTIR; }
-OUT			{ return OUT; }
-
-EXX			{ return EXX; }
-EX			{ return EX; }
-
-A					{  return A; }
-F					{  return F; }
-B					{  return B; }
-C					{  return C; }
-D					{  return D; }
-E					{  return E; }
-H					{  return H; }
-L					{  return L; }
-I					{  return I; }
-R					{  return R; }
-
-
-NZ					{ return NZ; }
-Z					{ return Z; }
-NC					{ return NC; }
-PO					{ return PO; }
-PE					{ return PE; }
-P					{ return P; }
-M					{ return M; }
+NZ|nz					{ return NZ; }
+Z|z						{ return Z; }
+NC|nc					{ return NC; }
+PO|po					{ return PO; }
+PE|pe					{ return PE; }
+P|p						{ return P; }
+M|m						{ return M; }
 
 ,					{  return COMMA; }
 \)					{  return PARRIGHT; }
@@ -154,30 +146,30 @@ M					{ return M; }
 \/					{  return OPDIV; }
 									
 
-#([A-F0-9]){1,4}      		{ 
+#([A-Fa-f0-9]){1,4}      		{ 
 								secondpasslval.normal =  (int) strtol(yytext+1, NULL, 16); 
 								return INTEGER;
 							 }
-&([A-F0-9]){1,4}      		{ 
+&([A-Fa-f0-9]){1,4}      		{ 
 								secondpasslval.normal =  (int) strtol(yytext+1, NULL, 16); 
 								return INTEGER;
 							 }
-$([A-F0-9]){1,4}      		{ 
+$([A-Fa-f0-9]){1,4}      		{ 
 								secondpasslval.normal =  (int) strtol(yytext+1, NULL, 16); 
 								return INTEGER;
 							 }
 
-0([A-F0-9]){1,4}[Hh]      		{ 
+0([A-Fa-f0-9]){1,4}[Hh]      		{ 
 								secondpasslval.normal =  (int) strtol(yytext, NULL, 16); 
 								return INTEGER;
 							 }
 							 
-([A-F0-9]){1,4}[Hh]      		{ 
+([A-Fa-f0-9]){1,4}[Hh]      		{ 
 								secondpasslval.normal =  (int) strtol(yytext, NULL, 16); 
 								return INTEGER;
 							 }
 							 
-0x([A-F0-9]){1,4}      		{ 
+0x([A-Fa-f0-9]){1,4}      		{ 
 								secondpasslval.normal =  (int) strtol(yytext+2, NULL, 16); 
 								return INTEGER;
 							 }

@@ -69,6 +69,11 @@ you will get a warning line for each undocumented opcode you are using. But
 it will compile it anyway.
 
 ## SYNTAX
+It tries to acoomodate most of the syntax variants, including intel syntax, for instance, it will accept both
+```
+	LD A,B
+	ld a,b
+```
 
 ### Hexadecimal values
 ```
@@ -145,3 +150,7 @@ This is a collection of online sources of info I've found about the Z80
 * macros
 * create an option to normalize/pretty the assembler source code
 * output txz and dat
+* What about (IX-d) ??? How to deal with negative offsets ? c'2 ?
+* be more specific and document the max size of a label
+* allow the foramt of <literal> directive , so we can accept "labels" without the semicolon
+
