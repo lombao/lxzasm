@@ -46,7 +46,8 @@ Usage: lxzasm [-v] [ -h] [ -l] [-t] [-u] [-o <type>] asmfile1 [asmfile2 ...]
 	l:  Generate List report
 	o <type>:  Type of output: 
             bin:  	A binary file with only the bytes generated, no headers, no padding
-            flat:  A binary file of 64K, this is the default option
+            flat:   A binary file of 64K, this is the default option
+            hex:	HEX output format, the file will be named z80.hex
 
 ```
 
@@ -72,10 +73,10 @@ you will get a warning line for each undocumented opcode you are using. But
 it will compile it anyway.
 
 ### Output
-The code generated will be in a file named "z80.bin", but this file might have different formats
+The code generated will be in a file named "z80.bin" for hte binary formats, "z80.hex" for the HEX ascii formats, the options at this moment are
 * flat: this is the default, this is a 64K direct dump
 * bin: this is a bin output but only of the generated code, no padding, no headers. 
-
+* hex: this is the Intel HEX format ( see https://en.wikipedia.org/wiki/Intel_HEX )
 
 ## SYNTAX
 It tries to acoomodate most of the syntax variants, including intel syntax, for instance, it will accept both upper and lower cases
@@ -114,6 +115,10 @@ following are equivalent
 	DEFM /This is a string text/
 ```
 
+### Chars
+```
+	DEFB "T"+&80
+```
 
 ### Symbols
 There are 3 types of symbols

@@ -198,6 +198,11 @@ $([A-Fa-f0-9]){1,4}      		{
 									}
 
 
+
+\"[^\n\"]\"  		{  	secondpasslval.normal = yytext[1]; return CHAR; 	}
+'[^\n']'   			{  	secondpasslval.normal = yytext[1]; return CHAR; 	}
+\/[^\n\/]\/   		{  	secondpasslval.normal = yytext[1]; return CHAR; 	}
+
 \"[^\n\"]+\"  		{  
 						if ( strlen(yytext) >= MAX_SIZE_LITERAL ) {
 									secondpasserror("Literal too big");

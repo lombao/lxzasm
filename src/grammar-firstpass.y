@@ -88,7 +88,7 @@ extern int undocumentedWarning;
 %token <literal> LITERAL
 %token <normal> INTEGER
 %token <literal> STRING
-
+%token <normal> CHAR
 
 %token PARLEFT PARRIGHT
 %token OPADD OPSUB OPMUL OPDIV
@@ -114,6 +114,7 @@ extern int undocumentedWarning;
 			| 	DEFS	expression COMMA expression		{ pc_inc($2); }
 			|   DEFB	listexpr						{ pc_inc($2); }
 			|   DEFM	STRING							{ pc_inc( strlen($2)); }
+			|  	ENT		expression						{ /* we ignore this directive */ }	
 			|  	ENT										{ /* we ignore this directive */ }
 			|	DEFW	expression						{ pc_inc(2); }	
 			|   LITERAL EQU expression					{ sym_addequ($1,$3); }
@@ -371,6 +372,8 @@ extern int undocumentedWarning;
 										}	
 									}
 		|		DOLAR				{ $$ = pc_get(); }
+		|		CHAR				{ $$ = $1;  }
+								
 	;
 	indexreg:		IX
 				|	IY

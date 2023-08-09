@@ -213,6 +213,13 @@ $([A-Fa-f0-9]){1,4}      		{
 									}
 
 
+
+\"[^\n\"]\"  		{  	firstpasslval.normal = yytext[1]; return CHAR; 	}
+'[^\n']'   			{  	firstpasslval.normal = yytext[1]; return CHAR; 	}
+\/[^\n\/]\/   		{  	firstpasslval.normal = yytext[1]; return CHAR; 	}
+
+
+
 \"[^\n\"]+\"  		{  
 						if ( strlen(yytext) >= MAX_SIZE_LITERAL ) {
 									firstpasserror("Literal too big");

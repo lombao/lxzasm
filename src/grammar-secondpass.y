@@ -51,8 +51,6 @@
 %token AF BC DE HL IX IY SP AFPLUS
 %token A F B C D E H L I R 
 
-
-
 %token INC DEC
 %token ADC ADD SUB SBC
 
@@ -88,6 +86,7 @@
 %token <literal> LITERAL
 %token <normal> INTEGER
 %token <literal> STRING
+%token <normal> CHAR
 
 %token PARLEFT PARRIGHT
 %token OPADD OPSUB OPMUL OPDIV
@@ -105,6 +104,7 @@
 
 	;
 	directive: 		END					{ return 0;}
+			|  	ENT		expression						{ /* we ignore this directive */ }	
 			|  	ENT										{ /* we ignore this directive */ }
 			|	DEFS	expression						{ for(int a=0;a<$2;a++) { code_putbyte(0x00); }  }
 			|	DEFS	expression COMMA expression		{ for(int a=0;a<$2;a++) { code_putbyte($4); }  }
@@ -943,6 +943,7 @@
 										}	
 									}
 		|		DOLAR				{ $$ = pc_get(); }
+		|		CHAR				{ $$ = $1;  }
 	;
 	listexpr:	expression						{ $$[1] = (uint8_t)$1; $$[0] = 1; }
 		|		listexpr COMMA expression		{ $$[$$[0]+1] = (uint8_t)$3; $$[0] += 1; }
