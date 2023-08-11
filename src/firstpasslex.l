@@ -222,6 +222,15 @@ $([A-Fa-f0-9]){1,4}      		{
 '[^\n']'   			{  	firstpasslval.normal = yytext[1]; return CHAR; 	}
 \/[^\n\/]\/   		{  	firstpasslval.normal = yytext[1]; return CHAR; 	}
 
+\"\\n\"  		{  	firstpasslval.normal = '\n'; return CHAR; 	}
+'\\n'   		{  	firstpasslval.normal = '\n'; return CHAR; 	}
+\/\\n\/   		{  	firstpasslval.normal = '\n'; return CHAR; 	}
+\"\\t\"  		{  	firstpasslval.normal = '\t'; return CHAR; 	}
+'\\t'   		{  	firstpasslval.normal = '\t'; return CHAR; 	}
+\/\\t\/   		{  	firstpasslval.normal = '\t'; return CHAR; 	}
+
+
+
 
 
 \"[^\n\"]+\"  		{  
