@@ -36,9 +36,6 @@ ORG|org								{  return ORG; }
 INCLUDEBIN|includebin				{  return INCBIN; }
 INCBIN|incbin						{  return INCBIN; }
 
-LDIR|ldir						{ return LDIR; }
-LDI|ldi							{ return LDI; }
-
 INC|inc							{  return INC; }
 DEC|dec							{  return DEC; }
 
@@ -49,9 +46,12 @@ NOP|nop							{  return NOP; }
 DI|di							{  return DI; }
 EI|ei							{  return EI; }
 
-LD|ld						{  return LD; }
+LDIR|ldir						{ return LDIR; }
+LDI|ldi							{ return LDI; }
+LD|ld							{  return LD; }
 
 SCF|scf			{ return SCF; }
+DAA|daa			{ return DAA; }
 
 PUSH|push		{ return PUSH; }
 POP|pop			{ return POP; }

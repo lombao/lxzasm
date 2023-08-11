@@ -50,6 +50,7 @@ LDI|ldi							{ return LDI; }
 LD|ld							{  return LD; }
 
 SCF|scf			{ return SCF; }
+DAA|daa			{ return DAA; }
 
 PUSH|push		{ return PUSH; }
 POP|pop			{ return POP; }

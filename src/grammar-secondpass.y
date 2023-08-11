@@ -68,8 +68,8 @@
 
 %token LDI LDIR
 
-%token SCF
-%token CCF
+%token SCF CCF DAA
+
 
 %token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA RRA
 
@@ -153,6 +153,7 @@
 				| RRA					{ code_putbyte( 0x1F ); }
 				| RLA 					{ code_putbyte( 0x17 ); }
 				| CCF 					{ code_putbyte( 0x3F ); }
+				| DAA					{ code_putbyte( 0x27 ); }
 				| CPIR					{ code_putbyte( 0xED );  code_putbyte( 0xB1 ); }
 				| CPI					{ code_putbyte( 0xED );  code_putbyte( 0xA1 ); }
 				| CPDR					{ code_putbyte( 0xED );  code_putbyte( 0xB9 ); }

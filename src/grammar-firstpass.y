@@ -75,8 +75,8 @@ extern int undocumentedWarning;
 
 %token EX EXX
 
-%token SCF
-%token CCF
+%token SCF CCF DAA
+
 
 %token COMMA
 
@@ -144,6 +144,7 @@ extern int undocumentedWarning;
 				| RRA					{ pc_inc(1); }
 				| RLA					{ pc_inc(1); }
 				| CCF					{ pc_inc(1); }	
+				| DAA					{ pc_inc(1); }	
 				| CPIR					{ pc_inc(2); }
 				| CPI					{ pc_inc(2); }
 				| CPDR					{ pc_inc(2); }
