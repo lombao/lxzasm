@@ -62,7 +62,7 @@ extern int undocumentedWarning;
 
 %token XOR AND OR NEG
 
-%token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA
+%token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA RRA
 
 %token BIT SET RES
 
@@ -141,6 +141,7 @@ extern int undocumentedWarning;
 				| HALT					{ pc_inc(1); }
 				| RLCA					{ pc_inc(1); }
 				| RRCA					{ pc_inc(1); }
+				| RRA					{ pc_inc(1); }
 				| RLA					{ pc_inc(1); }
 				| CCF					{ pc_inc(1); }	
 				| CPIR					{ pc_inc(2); }

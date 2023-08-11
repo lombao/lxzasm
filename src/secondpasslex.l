@@ -74,6 +74,7 @@ CALL|call		{ return CALL; }
 
 RLCA|rlca		{ return RLCA; }
 RRCA|rrca		{ return RRCA; }
+RRA|rra			{ return RRA; }
 RRC|rrc			{ return RRC; }
 RR|rr			{ return RR;  }
 RL|rl			{ return RL;  }

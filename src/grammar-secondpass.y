@@ -71,7 +71,7 @@
 %token SCF
 %token CCF
 
-%token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA
+%token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA RRA
 
 %token BIT SET RES
 
@@ -150,6 +150,7 @@
 				| HALT					{ code_putbyte( 0x76 ); }
 				| RLCA					{ code_putbyte( 0x07 ); }
 				| RRCA					{ code_putbyte( 0x0F ); }
+				| RRA					{ code_putbyte( 0x1F ); }
 				| RLA 					{ code_putbyte( 0x17 ); }
 				| CCF 					{ code_putbyte( 0x3F ); }
 				| CPIR					{ code_putbyte( 0xED );  code_putbyte( 0xB1 ); }
