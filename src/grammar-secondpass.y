@@ -965,7 +965,9 @@
 											$$ = sym_getvalue($1);
 										}
 										else {
-											generalerror("Unknown Literal or Label");
+											char msgerror[500];
+											sprintf(msgerror,"Undefined Label: %s",$1);
+											secondpasserror(msgerror);
 										}	
 									}
 		|		DOLAR				{ $$ = pc_get(); }
