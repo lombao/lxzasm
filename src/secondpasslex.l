@@ -207,7 +207,8 @@ $([A-Fa-f0-9]){1,4}      		{
 										secondpasslval.normal = atoi(yytext); return INTEGER; 
 									}
 
-
+\>\>					{  	return OPSHIFTR; 	}
+\<\<					{  	return OPSHIFTL; 	}
 
 \"[^\n\"]\"  		{  	secondpasslval.normal = yytext[1]; return CHAR; 	}
 '[^\n']'   			{  	secondpasslval.normal = yytext[1]; return CHAR; 	}

@@ -221,7 +221,8 @@ $([A-Fa-f0-9]){1,4}      		{
 										firstpasslval.normal = atoi(yytext); return INTEGER; 
 									}
 
-
+\>\>					{  	return OPSHIFTR; 	}
+\<\<					{  	return OPSHIFTL; 	}
 
 \"[^\n\"]\"  		{  	firstpasslval.normal = yytext[1]; return CHAR; 	}
 '[^\n']'   			{  	firstpasslval.normal = yytext[1]; return CHAR; 	}

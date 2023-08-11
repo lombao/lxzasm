@@ -41,6 +41,8 @@
 %type <array>		listexpr
 
 /* tokens */
+%token PARLEFT PARRIGHT
+%token OPADD OPSUB OPMUL OPDIV OPSHIFTL OPSHIFTR
 
 %token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW
 %token DEFS DEFB DEFM DEFW DEFL
@@ -89,13 +91,10 @@
 %token <literal> STRING
 %token <normal> CHAR
 
-%token PARLEFT PARRIGHT
-%token OPADD OPSUB OPMUL OPDIV
-
-
 %left OPMUL OPDIV
 %left OPADD OPSUB
 %left HIGH LOW
+%left OPSHIFTL OPSHIFTR
 
 
 %%
@@ -923,6 +922,8 @@
 		|	expression OPSUB expritem			{ $$ = $1 - $3; }
 		|	expression OPMUL expritem			{ $$ = $1 * $3; }
 		|	expression OPDIV expritem			{ $$ = $1 / $3; }
+		|	expression OPSHIFTL expritem			{ $$ = $1 << $3; }
+		|	expression OPSHIFTR expritem			{ $$ = $1 >> $3; }
 		|	PARLEFT expression PARRIGHT			{ $$ = $2; }
 		|   HIGH expression						{ $$ = $2 >> 8; }
 		|   LOW expression						{ $$ = $2 & 0x00FF; }
@@ -933,18 +934,29 @@
 		|	expression2 OPSUB expritem			{ $$ = $1 - $3; }
 		|	expression2 OPMUL expritem			{ $$ = $1 * $3; }
 		|	expression2 OPDIV expritem			{ $$ = $1 / $3; }
+		|	expression2 OPSHIFTL expritem			{ $$ = $1 << $3; }
+		|	expression2 OPSHIFTR expritem			{ $$ = $1 >> $3; }
+		
 		|	expression2 OPADD PARLEFT expression2 PARRIGHT			{ $$ = $1 + $4; }
 		|	expression2 OPSUB PARLEFT expression2 PARRIGHT			{ $$ = $1 - $4; }
 		|	expression2 OPMUL PARLEFT expression2 PARRIGHT			{ $$ = $1 * $4; }
 		|	expression2 OPDIV PARLEFT expression2 PARRIGHT			{ $$ = $1 / $4; }
+		|	expression2 OPSHIFTL PARLEFT expression2 PARRIGHT			{ $$ = $1 << $4; }
+		|	expression2 OPSHIFTR PARLEFT expression2 PARRIGHT			{ $$ = $1 >> $4; }
+		
 		|	PARLEFT expression2 PARRIGHT OPADD expritem			{ $$ = $2 + $5; }
 		|	PARLEFT expression2 PARRIGHT OPSUB expritem			{ $$ = $2 - $5; }
 		|	PARLEFT expression2 PARRIGHT OPMUL expritem			{ $$ = $2 * $5; }
 		|	PARLEFT expression2 PARRIGHT OPDIV expritem			{ $$ = $2 / $5; }
+		|	PARLEFT expression2 PARRIGHT OPSHIFTL expritem			{ $$ = $2 << $5; }
+		|	PARLEFT expression2 PARRIGHT OPSHIFTR expritem			{ $$ = $2 >> $5; }
+		
 		|	PARLEFT expression2 PARRIGHT OPADD PARLEFT expression2 PARRIGHT			{ $$ = $2 + $6; }
 		|	PARLEFT expression2 PARRIGHT OPSUB PARLEFT expression2 PARRIGHT			{ $$ = $2 - $6; }
 		|	PARLEFT expression2 PARRIGHT OPMUL PARLEFT expression2 PARRIGHT			{ $$ = $2 * $6; }
 		|	PARLEFT expression2 PARRIGHT OPDIV PARLEFT expression2 PARRIGHT			{ $$ = $2 / $6; }
+		|	PARLEFT expression2 PARRIGHT OPSHIFTL PARLEFT expression2 PARRIGHT			{ $$ = $2 << $6; }
+		|	PARLEFT expression2 PARRIGHT OPSHIFTR PARLEFT expression2 PARRIGHT			{ $$ = $2 >> $6; }
 	;
 	expritem:	INTEGER				{	$$ = $1; }
 		|		OPSUB INTEGER		{	$$ = -$2; }
