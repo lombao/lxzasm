@@ -288,6 +288,7 @@ extern int undocumentedWarning;
 			|	PARLEFT HL PARRIGHT									{ pc_inc(1); }
 			| 	PARLEFT indexreg OPADD expression PARRIGHT 			{ pc_inc(3); }
 			| 	index8reg          									{ pc_inc(2); }
+			|   A COMMA expression									{ firstpasserror("Probably you mean SUB <expression>, rather than SUB A,<expression>"); } 
 	;
 	sbccommand:	A COMMA expression									{ pc_inc(2); }
 			| 	A COMMA reg8										{ pc_inc(1); }
