@@ -47,6 +47,7 @@ extern int undocumentedWarning;
 %token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW
 %token DEFS DEFB DEFM DEFW DEFL
 
+%token MACRO ENDM
 
 %token IXH IXL IYH IYL
 %token AF BC DE HL IX IY SP AFPLUS
@@ -60,7 +61,7 @@ extern int undocumentedWarning;
 %token DI EI LD
 %token HALT NOP
 
-%token XOR AND OR NEG
+%token XOR AND OR NEG CPL
 
 %token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA RRA
 
@@ -103,6 +104,7 @@ extern int undocumentedWarning;
     ;
     lines:  line         	{   line_increase();	}
 		|	lines line   	{ 	line_increase(); 	}
+
 	;	
     line: instruction ENTER						{ }
 		| directive ENTER						{ }
@@ -110,8 +112,13 @@ extern int undocumentedWarning;
 		| LABEL instruction ENTER				{ sym_addlabel($1,pc_get_last()); }
 		| LABEL directive ENTER					{ sym_addlabel($1,pc_get_last()); }
 		| LABEL EQU	expression ENTER			{ sym_addequ($1,$3); }	
+		| LABEL MACRO									{ firstpasserror("MACRO and EDNM Directives are not yet supported"); }
+		| LITERAL MACRO									{ firstpasserror("MACRO and EDNM Directives are not yet supported"); }	
 		| LABEL ENTER							{ sym_addlabel($1,pc_get()); }
 		| ENTER									{ }	
+		| ENDM									{ firstpasserror("MACRO and EDNM Directives are not yet supported"); }
+		| MACRO									{ firstpasserror("MACRO and EDNM Directives are not yet supported"); }
+
 	;
 	directive: 		END									{ return 0;}
 			|	DEFS	expression						{ pc_inc($2); }
@@ -166,6 +173,7 @@ extern int undocumentedWarning;
 				| LDI					{ pc_inc(2); }
 				| LDIR					{ pc_inc(2); }
 				| NEG					{ pc_inc(2); }
+				| CPL					{ pc_inc(1); }	
 				| RST rstcommand		{  }	
 				| LD  ldcommand			{ }
 				| OR orcommand			{ }
@@ -193,12 +201,11 @@ extern int undocumentedWarning;
 				| SLA slacommand		{ }
 				| SRA slacommand		{ } /* sra and sla are the same pattern */
 				| SRL slacommand		{ } /* sra and sla are the same pattern */
-				| SLL slacommand		{ CHECK_UNDOC } /* 
-				| RL  slacommand		{ } /* same pattern as sla */
-				| RR  slacommand		{ } /* same pattern as sla */
+				| SLL slacommand		{ CHECK_UNDOC } 
+				| RR slacommand			{ } /* same pattern as sla */
 				| RRC slacommand		{ } /* same pattern as sla */
 				| RLC slacommand		{ } /* same pattern as sla */
-
+				| RL slacommand			{ }
 	;
 	rstcommand:	INTEGER															{ pc_inc(1); }
 	;
@@ -325,7 +332,7 @@ extern int undocumentedWarning;
 	;
 	reg8:		A
 			|	F
-			| 	B
+			| 	B			
 			|	C
 			|	D
 			|	E

@@ -30,6 +30,8 @@ DEFB|DB|db|defb						{  return DEFB; }
 DEFM|DM|dm|defm						{  return DEFM; }
 DEFW|DW|dw|defw						{  return DEFW; }
 DEFL|DL|dl|defl						{  return DEFL; }
+MACRO|macro							{  return MACRO; }
+ENDM|endm							{  return ENDM; }
 
 
 ORG|org								{  return ORG; }
@@ -55,6 +57,9 @@ DAA|daa			{ return DAA; }
 
 PUSH|push		{ return PUSH; }
 POP|pop			{ return POP; }
+
+CPL|cpl			{ return CPL; }
+
 
 XOR|xor			{  return XOR; }
 AND|and			{  return AND; }

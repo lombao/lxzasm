@@ -16,14 +16,16 @@
  *
  */
 
+#include <string.h>
 
 #include "preproc.h"
 #include "parseerrors.h"
+
 //----------------------------------------------------------------------
 
 
 void preproc_processline(const char * line, char * output);
-
+void preproc_checkline(const char * line);
 
 //----------------------------------------------------------------------
 char * origlines[MAX_SIZE_ASM_LINE];
@@ -52,6 +54,8 @@ char postline[MAX_SIZE_ASM_LINE];
 	while ( fgets( lineasm ,MAX_SIZE_ASM_LINE,fi) != NULL ) {
 		preproc_origline_add(lineasm);
 		preproc_processline(lineasm,postline);
+		// printf("Postline: %s\n",postline);
+		preproc_checkline(postline);
 		fputs(postline,fdt);
 	}
 	
@@ -63,6 +67,7 @@ char postline[MAX_SIZE_ASM_LINE];
 
 
 //----------------------------------------------------------------------
+// this purges the line of comments
 void preproc_processline(const char * line, char * output) {
 	
 	int a=0;
@@ -109,7 +114,24 @@ void preproc_processline(const char * line, char * output) {
 	
 }
 
-
+//----------------------------------------------------------------------
+// check if something is not allowed
+void preproc_checkline(const char * line) {
+  char msgerror[MAX_SIZE_ASM_LINE+100];
+  	
+	if ( strncmp("end:",line,4) == 0 ||	strncmp("END:",line,4) == 0 ) {
+			sprintf(msgerror,"Line: >%s\t END is a reserved token, cannot be used as Label, Constant or Variable.\n",line);
+			fprintf(stderr,msgerror);
+			exit(EXIT_FAILURE);	
+	}
+	
+	if ( strncmp("ret:",line,4) == 0 ||	strncmp("RET:",line,4) == 0 ) {
+			sprintf(msgerror,"Line: >%s\t END is a reserved token, cannot be used as Label, Constant or Variable.\n",line);
+			fprintf(stderr,msgerror);
+			exit(EXIT_FAILURE);	
+	}
+		
+}
 
 //---------------------------------------------------------------------
 void preproc_origline_add(const char * line) {

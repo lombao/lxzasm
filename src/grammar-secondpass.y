@@ -45,6 +45,8 @@
 %token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW
 %token DEFS DEFB DEFM DEFW DEFL
 
+%token MACRO ENDM
+
 %token ENTER DOLAR
 
 %token IXH IXL IYH IYL
@@ -59,7 +61,7 @@
 %token DI EI LD
 %token HALT NOP
 
-%token XOR AND OR NEG
+%token XOR AND OR NEG CPL
 
 %token CP
 %token CPI CPIR CPD CPDR
@@ -69,7 +71,6 @@
 %token LDI LDIR
 
 %token SCF CCF DAA
-
 
 %token RLCA RRCA RLA RLC SLA SLL SRL RR RL RRC SRA RRA
 
@@ -172,7 +173,8 @@
 				| SCF 					{ code_putbyte( 0x37 ); }
 				| LDI					{ code_putbyte( 0xED );  code_putbyte( 0xA0 ); }
 				| LDIR					{ code_putbyte( 0xED );  code_putbyte( 0xB0 ); }		
-				| NEG					{ code_putbyte( 0xED );  code_putbyte( 0x44 ); }			
+				| NEG					{ code_putbyte( 0xED );  code_putbyte( 0x44 ); }
+				| CPL					{ code_putbyte( 0x2F ); }				
 				| LD  ldcommand			{ }
 				| AND andcommand		{ }
 				| XOR xorcommand		{ }
