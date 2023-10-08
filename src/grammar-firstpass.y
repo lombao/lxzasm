@@ -12,6 +12,8 @@
 /* The documented warning flag */ 
 extern int undocumentedWarning;  
 #define CHECK_UNDOC  if ( undocumentedWarning==TRUE ) { undocumentedwarning(); }
+
+
 }
 
 
@@ -29,7 +31,7 @@ extern int undocumentedWarning;
   #define YY_DECL int firstpasslex ()
   // Declare the scanner.
   YY_DECL;
-
+  
 }
 
 /* We want verbose level of errors */
@@ -46,10 +48,8 @@ extern int undocumentedWarning;
 
 %token ENTER DOLAR
 
-%token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW
+%token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW LIMIT
 %token DEFS DEFB DEFM DEFW DEFL
-
-%token MACRO ENDM
 
 %token IXH IXL IYH IYL
 %token AF BC DE HL IX IY SP AFPLUS
@@ -80,7 +80,6 @@ extern int undocumentedWarning;
 
 %token SCF CCF DAA
 
-
 %token COMMA
 
 %token NZ Z NC PO PE P M
@@ -107,17 +106,12 @@ extern int undocumentedWarning;
 	;	
     line: instruction ENTER						{ }
 		| directive ENTER						{ }
-		| LITERAL ENTER							{ firstpasserror("Syntax Error: Unknown instruction"); }
+		| LITERAL ENTER							{ char msgerror[500]; sprintf(msgerror,"Syntax Error: Unknown instruction:%s",$1); firstpasserror(msgerror); }
 		| LABEL instruction ENTER				{ sym_addlabel($1,pc_get_last()); }
 		| LABEL directive ENTER					{ sym_addlabel($1,pc_get_last()); }
 		| LABEL EQU	expression ENTER			{ sym_addequ($1,$3); }	
-		| LABEL MACRO									{ firstpasserror("MACRO and EDNM Directives are not yet supported"); }
-		| LITERAL MACRO									{ firstpasserror("MACRO and EDNM Directives are not yet supported"); }	
 		| LABEL ENTER							{ sym_addlabel($1,pc_get()); }
 		| ENTER									{ }	
-		| ENDM									{ firstpasserror("MACRO and EDNM Directives are not yet supported"); }
-		| MACRO									{ firstpasserror("MACRO and EDNM Directives are not yet supported"); }
-
 	;
 	directive: 		END									{ return 0;}
 			|	DEFS	expression						{ pc_inc($2); }
@@ -131,7 +125,8 @@ extern int undocumentedWarning;
 			|	DEFW	expression						{ pc_inc(2); }	
 			|   LITERAL EQU expression					{ sym_addequ($1,$3); }
 			|   LITERAL DEFL expression					{ sym_adddefl($1,$3); }	
-			|	ORG	INTEGER								{ pc_init($2); }
+			|	ORG		INTEGER							{ pc_init($2); }
+			| 	LIMIT	INTEGER							{ pc_set_limit($2); }
 			|	INCBIN	STRING							{ pc_inc( preproc_include_bin($2,NULL)); }
 			|   ALIGN   expression	{ 
 										int pc = pc_get();
@@ -220,7 +215,7 @@ extern int undocumentedWarning;
 			| 	INTEGER COMMA PARLEFT indexreg OPADD expression2 PARRIGHT COMMA reg8	{ pc_inc(4); CHECK_UNDOC  } 
 			
 	;
-	incommand:	reg8 COMMA PARLEFT C PARRIGHT				{  pc_inc(2); }
+	incommand:	reg8 COMMA PARLEFT C PARRIGHT					{  pc_inc(2); }
 			|	reg8 COMMA PARLEFT expression2 PARRIGHT			{  pc_inc(2); }
 			|	PARLEFT C PARRIGHT								{  pc_inc(2); }		
 	;
@@ -230,10 +225,10 @@ extern int undocumentedWarning;
 			|	PARLEFT expression2 PARRIGHT COMMA A		{ pc_inc(2); }
 			
 	;
-	ldcommand:	reg8 COMMA reg8										{ pc_inc(1); }
-			| 	reg8 COMMA expression2 								{ pc_inc(2); }
-			| 	reg8 COMMA PARLEFT reg16 PARRIGHT    				{ pc_inc(1); }	
-			|	reg8 COMMA PARLEFT expression2 PARRIGHT				{ pc_inc(3); }	
+	ldcommand:	reg8 COMMA reg8											{ pc_inc(1); }
+			| 	reg8 COMMA expression2 									{ pc_inc(2); }
+			| 	reg8 COMMA PARLEFT reg16 PARRIGHT    					{ pc_inc(1); }	
+			|	reg8 COMMA PARLEFT expression2 PARRIGHT					{ pc_inc(3); }	
 			|	reg8 COMMA PARLEFT indexreg OPADD expression PARRIGHT	{ pc_inc(3); }				
 			| 	PARLEFT reg16 PARRIGHT COMMA reg8					{ pc_inc(1); }
 			| 	PARLEFT reg16 PARRIGHT COMMA expression2			{ pc_inc(2); }
@@ -256,10 +251,8 @@ extern int undocumentedWarning;
 			|	PARLEFT expression2 PARRIGHT COMMA HL					{ pc_inc(3); } 			
 			|	PARLEFT expression2 PARRIGHT COMMA BC					{ pc_inc(4); } 			
 			|	PARLEFT expression2 PARRIGHT COMMA DE					{ pc_inc(4); } 			
-			|	PARLEFT expression2 PARRIGHT COMMA SP					{ pc_inc(4); } 			
-			
-
-
+			|	PARLEFT expression2 PARRIGHT COMMA SP					{ pc_inc(4); } 		
+			|   LITERAL													{ char msgerror[500]; sprintf(msgerror,"Syntax Error on LD opcode. Unknown: %s",$1); firstpasserror(msgerror); }	
 	;
 	orcommand: 	reg8												{ pc_inc(1); }
 			|	expression											{ pc_inc(2); }
@@ -351,8 +344,8 @@ extern int undocumentedWarning;
 		|	expression OPSUB expritem			{ $$ = $1 - $3; }
 		|	expression OPMUL expritem			{ $$ = $1 * $3; }
 		|	expression OPDIV expritem			{ $$ = $1 / $3; }
-		|	expression OPSHIFTL expritem			{ $$ = $1 << $3; }
-		|	expression OPSHIFTR expritem			{ $$ = $1 >> $3; }
+		|	expression OPSHIFTL expritem		{ $$ = $1 << $3; }
+		|	expression OPSHIFTR expritem		{ $$ = $1 >> $3; }
 		|	PARLEFT expression PARRIGHT			{ $$ = $2; }
 		|   HIGH expression						{ $$ = $2 >> 8; }
 		|   LOW expression						{ $$ = $2 & 0x00FF; }
@@ -369,22 +362,22 @@ extern int undocumentedWarning;
 		|	expression2 OPSUB PARLEFT expression2 PARRIGHT			{ $$ = $1 - $4; }
 		|	expression2 OPMUL PARLEFT expression2 PARRIGHT			{ $$ = $1 * $4; }
 		|	expression2 OPDIV PARLEFT expression2 PARRIGHT			{ $$ = $1 / $4; }
-		|	expression2 OPSHIFTL PARLEFT expression2 PARRIGHT			{ $$ = $1 << $4; }
-		|	expression2 OPSHIFTR PARLEFT expression2 PARRIGHT			{ $$ = $1 >> $4; }
+		|	expression2 OPSHIFTL PARLEFT expression2 PARRIGHT		{ $$ = $1 << $4; }
+		|	expression2 OPSHIFTR PARLEFT expression2 PARRIGHT		{ $$ = $1 >> $4; }
 		
 		|	PARLEFT expression2 PARRIGHT OPADD expritem			{ $$ = $2 + $5; }
 		|	PARLEFT expression2 PARRIGHT OPSUB expritem			{ $$ = $2 - $5; }
 		|	PARLEFT expression2 PARRIGHT OPMUL expritem			{ $$ = $2 * $5; }
 		|	PARLEFT expression2 PARRIGHT OPDIV expritem			{ $$ = $2 / $5; }
-		|	PARLEFT expression2 PARRIGHT OPSHIFTL expritem			{ $$ = $2 << $5; }
-		|	PARLEFT expression2 PARRIGHT OPSHIFTR expritem			{ $$ = $2 >> $5; }
+		|	PARLEFT expression2 PARRIGHT OPSHIFTL expritem		{ $$ = $2 << $5; }
+		|	PARLEFT expression2 PARRIGHT OPSHIFTR expritem		{ $$ = $2 >> $5; }
 		
 		|	PARLEFT expression2 PARRIGHT OPADD PARLEFT expression2 PARRIGHT			{ $$ = $2 + $6; }
 		|	PARLEFT expression2 PARRIGHT OPSUB PARLEFT expression2 PARRIGHT			{ $$ = $2 - $6; }
 		|	PARLEFT expression2 PARRIGHT OPMUL PARLEFT expression2 PARRIGHT			{ $$ = $2 * $6; }
 		|	PARLEFT expression2 PARRIGHT OPDIV PARLEFT expression2 PARRIGHT			{ $$ = $2 / $6; }
-		|	PARLEFT expression2 PARRIGHT OPSHIFTL PARLEFT expression2 PARRIGHT			{ $$ = $2 << $6; }
-		|	PARLEFT expression2 PARRIGHT OPSHIFTR PARLEFT expression2 PARRIGHT			{ $$ = $2 >> $6; }
+		|	PARLEFT expression2 PARRIGHT OPSHIFTL PARLEFT expression2 PARRIGHT		{ $$ = $2 << $6; }
+		|	PARLEFT expression2 PARRIGHT OPSHIFTR PARLEFT expression2 PARRIGHT		{ $$ = $2 >> $6; }
 		
 	;
 	listexpr:	expression						{ $$ = ($1 > 0xFF)?2:1; }
@@ -423,3 +416,4 @@ extern int undocumentedWarning;
 			| 	P
 			| 	M
 	;
+	

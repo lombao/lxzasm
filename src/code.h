@@ -42,6 +42,7 @@ extern int pc_inc(const int increase);
 extern int pc_get();
 extern int pc_get_last();
 extern int pc_reset();
+extern int pc_set_limit(const int value);
 
 extern int list_print();
 

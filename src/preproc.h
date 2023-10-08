@@ -26,15 +26,14 @@
 #include "defs.h"
 
 
-
-
 // Functions
 extern FILE * preproc_proc(const char * file);
-
 extern void preproc_origline_add(const char * line);
 extern char * preproc_origline_get(const int line);
-
 extern int preproc_numberlines();
-
 extern int preproc_include_bin(const char * file, uint8_t * buffer);
+
+void aux_string_compress(char * src);
+
+
 #endif

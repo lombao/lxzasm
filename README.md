@@ -91,6 +91,7 @@ It tries to acoomodate most of the syntax variants, including intel syntax, for 
    LD HL, #4000
    LD HL, 0x4000
    LD HL, 4000H
+   LD HL, 4000h
    LD HL, $4000
 ```
 
@@ -128,28 +129,81 @@ There are 3 types of symbols
 
 
 ## Directives and Pseudo instructions
-Please in the folder doc a more detailed description, this is just a list of
-the existent options
-* ALIGN <expression> 		: 	Align the code with next multiple address
-* DEFB ( DW )
-* DEFM ( DM )
-* DEFW ( DW )   
-* DEFL ( DL )   :   Similar to EQU , but instead a constant, is a variable
-* END			:   Ends compilation
-* EQU			:   Define a constant
-* ORG
-* INCLUDEBIN ( INCBIN )
-* HIGH <expression> : Returns the Most Significate byte of the expression ( see test19.asm )
-* LOW <expression>  : Return the Least significate byte of the expression ( see test19.asm )
-			
-These directives do not perform any action, but they will not trigger any error.
-The reason is compatibility with code written for other compilers
-* ENT <value>
-* ASEG
-* TITLE <string>
 
-These are special variables
-* $  : This contains the current Program Counter address
+### ALIGN
+Align the code to the next multiple value of the parameter. For instance, if
+the current PC ( program counter ) value is 9 and you use "align 2", the PC is modified to
+become 10 ( the next multiple of 2 after 9 is 10 ). 
+
+   ALIGN 10; Change the PC to next multiplie of 10 
+
+
+### DEFS (DS)
+Define space: It sets a number of bytes in compilation time  with an specified value, or 0 if no parameter is given.
+The command can be either DEFS or DS, the following examples produce the same result, 10 consective bytes with value 0
+
+   DS 10   ; This will set 10 consecutive bytes with value 0
+   DS 10,0 ; This is the same as before
+   DEFS 10,0x0 ; This sets 10 bytes witgh value 0x07
+   
+
+### DEFB (DB)
+Define Byte: It sets a number of bytes with the specified values separated by comma. 
+The comand can be either DEFB or DB, see some examples :
+
+  DB 10,34,0x34 ; This sets 3 consecutive bytes with the values 10, 34 and 0x34
+  DEFB 0 ; This sets one single byte with value 0, it would be synomyn to DS 1
+  
+### DEFM (DM)
+Define Message. Sets ASCII values of a given string. The comand can be either DEFM or DM.
+The following example will store in memory the ascii values of the string "This is a message".
+
+  DM "This is a message" ; This will set one byte for each ASCII value or each letter of the message
+    
+### DEFW ( DW )
+Define Word. This wiill declare a word ( 2 bytes ) , note LSB will be first, MSB second.
+ 
+  DW &7800 ; Set the consecutive values: 0x00 and 0x78 ( hexadecimal ) 
+		
+### ORG
+Origin. It sets the initial value of the PC. By default the PC is 0, with ORG you 
+can define a different starting value. If exists, it must be the first code line otherwise will throw an error
+
+	ORG &4000 ; This will set the initial PC in the hex value 0x4000
+
+### LIMIT
+It seems a memory limit, if the compilation produces code places in an address beyond that value, 
+the compilation will thrown out an error
+
+  LIMIT C000H
+
+
+### INCLUDEBIN (INCBIN)
+This allows you to include some binary file content into the code.
+
+    INLCUDEBIN "image.8bit"
+    
+
+### HIGH and LOW <expression> 
+Returns the Most Significate byte ( HIGH ) or the Least Significative byte ( LOW ) of a given expression. See test19.asm
+for an example:
+
+	DB HIGH LABEL1 ; this will set in memory the most significative byte of the expression LABEL1
+    DB LOW LABEL1 ; 
+    
+### Non implemented Directorives:    			
+These directives do not perform any action, but they will not trigger any syntax error either. 
+The reason is compatibility with code written for other compilers, so it is a way to tell the compiler
+to ignore these completely and keep compiling
+
+	* ENT <value>
+	* ASEG
+	* TITLE <string>
+
+### The special PC Pointer $ 
+This this the PC counter, you can use it to show the current PC value, see test13.asm for one example of use
+
+	LD HL,$
 
 
 
@@ -174,12 +228,4 @@ This is a collection of online sources of info I've found about the Z80
 * https://en.wikipedia.org/wiki/Intel_HEX
 
 
-### TODO list
-* include file
-* macros
-* create an option to normalize/pretty the assembler source code
-* output txz and dat
-* What about (IX-d) ??? How to deal with negative offsets ? c'2 ?
-* be more specific and document the max size of a label
-* allow the foramt of <literal> directive , so we can accept "labels" without the semicolon
-* although HEX format output has been implemented, not proper testing has been made
+

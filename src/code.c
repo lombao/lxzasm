@@ -35,6 +35,7 @@ int pc = 0;
 int lastpc = 0;
 int minpc = 999999;
 int maxpc = 0;
+int pclimit = -1;
 
 
 /* lst */
@@ -92,6 +93,7 @@ int code_putbyte(const uint8_t value) {
 	
 char hex[3];
 
+
 	ram[pc_get()] = value;
 	sprintf(hex,"%02X",value);
 
@@ -117,6 +119,7 @@ int code_putword(const uint16_t value) {
 	
 char hex1[4];
 char hex2[4];
+
 
 	ram[pc_get()] = value & 0x00FF;
 	ram[pc_get()+1] = value >> 8;
@@ -151,13 +154,34 @@ int pc_init(const int value) {
 }
 
 int pc_inc(const int increase) {
+	
 	lastpc = pc;	
 	pc = pc + increase;
 	
 	if ( minpc > pc ) { minpc = pc; }
 	if ( maxpc < pc ) { maxpc = pc; }
 	
+	if ( pclimit > 0 ) {
+		if ( maxpc > pclimit ) {
+			char msgerror[500];
+			sprintf(msgerror,"The PC in this line has exceeded the LIMIT set in thsi program. The LIMIT set is: %04XH",pclimit);
+			generalerror(msgerror);
+		}
+	}
+	
 	return pc;
+}
+
+int pc_set_limit(const int value) {
+	
+	pclimit = value;
+	if ( pclimit <= pc ) {
+		fprintf(stderr,"::: ERROR: The Limit is set below or equal the current PC\n");
+		exit(EXIT_FAILURE);
+	}
+	return pclimit;
+	
+	
 }
 
 int pc_get() {

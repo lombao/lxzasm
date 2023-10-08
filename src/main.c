@@ -57,15 +57,11 @@ void showUsage() {
 	 fprintf(stderr,"	u:  Print Warning if using undocumented opcodes\n");	 
 	 fprintf(stderr,"	l:  Generate List report\n");
 	 fprintf(stderr,"	o <type>:  Type of output: \n");
-	 fprintf(stderr,"            bin:  	A binary file with only the bytes generated, no headers, no padding ( z80.bin )\n");
-	 fprintf(stderr,"            flat:  A binary file of 64K, this is the default option  ( z80.bin )\n");
-	 fprintf(stderr,"            hex:   Intel HEX Format, the output file will be named ( z80.hex )\n");
+	 fprintf(stderr,"            bin:	A binary file with only the bytes generated, no headers, no padding ( z80.bin )\n");
+	 fprintf(stderr,"            flat:	A binary file of 64K, this is the default option  ( z80.bin )\n");
+	 fprintf(stderr,"            hex:	Intel HEX Format, the output file will be named ( z80.hex )\n");
 	 
-	 
-	 
-	 
-	 	
-	  
+	 	  
 }
 
 

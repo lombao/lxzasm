@@ -1,4 +1,5 @@
 ORG 0x100
+LIMIT 200h
 LD A,A
 LD B,A
 LD L,B

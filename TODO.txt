@@ -1,0 +1,20 @@
+MACROS
+=============
+Macros are not yet implemented
+
+INCLUDE 
+=============
+To implement the include to be able to create programs with more than one
+source file
+
+
+OUTPUT DAT & TXZ Formats
+==================
+To add the output formats DAT and TXZ
+
+
+* What about (IX-d) ??? How to deal with negative offsets ? c'2 ?
+* be more specific and document the max size of a label
+* allow the format of <literal> directive , so we can accept "labels" without the semicolon
+
+

@@ -1,4 +1,4 @@
-VERSION=0.14
+VERSION=0.16
 
 CFLAGS = -g  -Wall -Wextra -O2 -DLXZASMVERSION="\"$(VERSION)\""
 YFLAGS = -d -Wcounterexamples
@@ -8,7 +8,7 @@ YACC = bison
 CC = gcc
 
 all:	lxzasm
-lxzasm:	main.o preproc.o grammar-firstpass.tab.o grammar-secondpass.tab.o lex.firstpass.o lex.secondpass.o symbols.o parseerrors.o code.o
+lxzasm:	main.o preproc.o grammar-firstpass.tab.o grammar-secondpass.tab.o lex.firstpass.o lex.secondpass.o symbols.o parseerrors.o code.o 
 		$(CC) -o $@ -Wall -O3 $^ 
 
 preproc.o: preproc.c preproc.h
@@ -22,7 +22,7 @@ symbols.o: symbols.c defs.h symbols.h
 		
 parseerrors.o: parseerrors.c defs.h parseerrors.h
 		$(CC) -c $^ -Wall 
-
+		
 code.o: code.c code.h defs.h
 		$(CC) -c $^ -Wall 
 

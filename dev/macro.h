@@ -17,43 +17,26 @@
  */
  
  
-#ifndef __LXZASM_DEFS
-#define __LXZASM_DEFS 1 
+#ifndef __LXZASM_MACRO
+#define __LXZASM_MACRO 1
 
 #include <stdlib.h>
-#include <string.h>
- 
-/* General definitions */
-  
-/* This one define the maximun size of a file name */
-#define MAX_SIZE_FILE_NAME 100
-
-/* Max size of an asm line */ 
-#define MAX_SIZE_ASM_LINE 500
-#define MAX_NUM_ASM_LINES 15000
-
-/* Max size of addressable memory */
-#define MAX_SIZE_RAM 65535
+#include <stdio.h>
+#include <stdint.h>
+#include "defs.h"
 
 
-/* This is the max size of a literal ( variable or other label ) */
-#define MAX_SIZE_LITERAL 128
-
-/* This is the max num of labels, variables and constants in the whole program */
-#define MAX_NUM_LABELS 500
-
-
-/* */
-#define MAX_SIZE_NAME_MACRO MAX_SIZE_LITERAL
-#define MAX_NUMBER_LINES_MACRO 100
-#define MAX_MACRO_NUM_PARAMS 10
-#define MAX_NUM_MACROS 100
+// Functions
 
 
 
-/* */
-#define FALSE 1
-#define TRUE 0
+void macro_addmacro_v1(const char * line);
+void macro_addline(const char * line);
+void macro_commit();
+int macro_lookup(const char * name);
+int macro_detect(const char  * line);
+char * macro_getline(const int m, const int l);
+int macro_lookupparameter(const int m,const char * param);
 
 
 #endif

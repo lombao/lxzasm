@@ -5,18 +5,18 @@
 #include "grammar-firstpass.tab.h"
 #include "code.h"
 
+
 %}
 
-%option nounput
 %option noinput
 %option noyywrap
+%option nounput
 %option prefix="firstpass"
 
 %%
 
 [ \t]*					{ /* eat up whitespace */   }
-\n						{   return ENTER; }
-
+\n						{  return ENTER; } 
 
 ASEG|aseg						{  return ASEG; }
 EQU|equ                   		{  return EQU; }
@@ -25,14 +25,12 @@ END|end							{  return END; }
 HIGH|high						{ return HIGH; }
 LOW|low							{ return LOW; }
 TITLE|title|.title				{ return TITLE; }
-DEFS|DS|ds|defs					{  return DEFS; }
+DEFS|DS|ds|defs					{ return DEFS; }
+LIMIT|limit						{ return LIMIT; }
 DEFB|DB|db|defb						{  return DEFB; }
 DEFM|DM|dm|defm						{  return DEFM; }
 DEFW|DW|dw|defw						{  return DEFW; }
 DEFL|DL|dl|defl						{  return DEFL; }
-MACRO|macro							{  return MACRO; }
-ENDM|endm							{  return ENDM; }
-
 
 ORG|org								{  return ORG; }
 INCLUDEBIN|includebin				{  return INCBIN; }

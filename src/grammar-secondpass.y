@@ -44,10 +44,8 @@
 %token PARLEFT PARRIGHT
 %token OPADD OPSUB OPMUL OPDIV OPSHIFTL OPSHIFTR
 
-%token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW
+%token EQU ORG ALIGN END INCBIN ENT ASEG TITLE HIGH LOW LIMIT
 %token DEFS DEFB DEFM DEFW DEFL
-
-%token MACRO ENDM
 
 %token ENTER DOLAR
 
@@ -129,6 +127,7 @@
 			|   LITERAL DEFL expression					{ /* done in first pass */ }
 			|   EQU expression							{ /* done in first pass most likely is LABEL EQU expression */ }
 			|  	ORG INTEGER								{ pc_init($2);	}
+			| 	LIMIT	INTEGER							{ pc_set_limit($2); }
 			|	INCBIN	STRING							{ 
 																uint8_t incbin[65535]; 
 																int k = preproc_include_bin($2,incbin);
@@ -988,3 +987,4 @@
              | H    { $$ = 4; }
              | L    { $$ = 5; }
      ;
+	

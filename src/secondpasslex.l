@@ -4,63 +4,64 @@
 #include <string.h>
 #include "grammar-secondpass.tab.h"
 #include "code.h"
+#include "preproc.h"
 
 %}
 
-%option nounput
 %option noinput
 %option noyywrap
+%option nounput
 %option prefix="secondpass"
+
 
 %%
 
-[ \t]*					{ /* eat up whitespace */   }
-\n						{  return ENTER; }
+[ \t]*							{ /* eat up whitespace */   }
+\n								{  return ENTER; }
 
 ASEG|aseg						{  return ASEG; }
 EQU|equ                   		{  return EQU; }
-ALIGN|align						{  return ALIGN; }
-END|end							{  return END; }
-TITLE|title|.title				{ return TITLE; }
-HIGH|high						{ return HIGH; }
-LOW|low							{ return LOW; }
-DEFS|DS|ds|defs						{  return DEFS; }
-DEFB|DB|db|defb						{  return DEFB; }
-DEFM|DM|dm|defm						{  return DEFM; }
-DEFW|DW|dw|defw						{  return DEFW; }
-DEFL|DL|dl|defl						{  return DEFL; }
-MACRO|macro							{  return MACRO; }
-ENDM|endm							{  return ENDM; }
+ALIGN|align						{    return ALIGN; }
+END|end							{    return END; }
+TITLE|title|.title				{    return TITLE; }
+HIGH|high						{   return HIGH; }
+LOW|low							{   return LOW; }
+DEFS|DS|ds|defs						{    return DEFS; }
+DEFB|DB|db|defb						{    return DEFB; }
+DEFM|DM|dm|defm						{    return DEFM; }
+DEFW|DW|dw|defw						{   return DEFW; }
+DEFL|DL|dl|defl						{    return DEFL; }
+LIMIT|limit						{ return LIMIT; }
 
-ORG|org							{  return ORG; }
-INCLUDEBIN|includebin					{  return INCBIN; }
-INCBIN|incbin						{  return INCBIN; }
+ORG|org									{    return ORG; }
+INCLUDEBIN|includebin					{    return INCBIN; }
+INCBIN|incbin							{    return INCBIN; }
 
-INC|inc							{  return INC; }
-DEC|dec							{  return DEC; }
+INC|inc							{    return INC; }
+DEC|dec							{    return DEC; }
 
-ENT|ent							{ return ENT; }
+ENT|ent							{    return ENT; }
 
-HALT|halt						{  return HALT; }
-NOP|nop							{  return NOP; }
-DI|di							{  return DI; }
-EI|ei							{  return EI; }
+HALT|halt						{    return HALT; }
+NOP|nop							{    return NOP; }
+DI|di							{    return DI; }
+EI|ei							{    return EI; }
 
 
-LDIR|ldir						{ return LDIR; }
-LDI|ldi							{ return LDI; }
-LD|ld							{  return LD; }
+LDIR|ldir						{   return LDIR; }
+LDI|ldi							{   return LDI; }
+LD|ld							{    return LD; }
 
-SCF|scf			{ return SCF; }
-DAA|daa			{ return DAA; }
+SCF|scf			{   return SCF; }
+DAA|daa			{   return DAA; }
 
-PUSH|push		{ return PUSH; }
-POP|pop			{ return POP; }
+PUSH|push		{   return PUSH; }
+POP|pop			{   return POP; }
 
-CPL|cpl			{ return CPL; }
+CPL|cpl			{   return CPL; }
 
-XOR|xor			{  return XOR; }
-AND|and			{  return AND; }
+XOR|xor			{    return XOR; }
+AND|and			{    return AND; }
 OR|or			{  return OR; }
 NEG|neg			{  return NEG; }
 ADC|adc			{  return ADC; }

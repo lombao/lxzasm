@@ -20,9 +20,11 @@
 
 #include "preproc.h"
 #include "parseerrors.h"
+#include "symbols.h"
+
+
 
 //----------------------------------------------------------------------
-
 
 void preproc_processline(const char * line, char * output);
 void preproc_checkline(const char * line);
@@ -189,4 +191,29 @@ int k = 0;
 	}
 	fclose(fr);
 	return k;
+}
+
+
+//----------------------------------------------------------------------
+//======================================================================
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+// Given an string it will remove the blank spaces and compress the string
+void aux_string_compress(char * src) {
+	
+int a = 0;
+	
+	if ( src[0]==0x0 ) return;
+	
+	for(a=0;a<strlen(src);a++) {
+		if (src[a]==' ' || src[a]=='\t') {
+			int k;
+			for(k=a;k<strlen(src)-1;k++) {
+				src[k]=src[k+1];
+			}
+			src[k]=0x0;
+			aux_string_compress(&src[a]);
+			return;
+		}
+	}	
 }
